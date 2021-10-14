@@ -75,3 +75,10 @@ gem 'kaminari'
 
 # Flexible authentication based on Warden
 gem 'devise'
+gem 'devise-i18n'
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+# TODO: enroll social networks and create apps (https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview)
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+gem 'omniauth-twitter'

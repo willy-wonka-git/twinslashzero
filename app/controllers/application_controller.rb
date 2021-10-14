@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::Base
-  # before_action :authenticate_user!
+  # before_filter :authenticate_user!, except => [:show, :index]
 end
