@@ -37,6 +37,7 @@ Layout/DotPosition:
 # SupportedStyles: empty_lines, no_empty_lines
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
+    - 'spec/**/*'
     - 'db/schema.rb'
 
 # Offense count: 43
@@ -162,3 +163,10 @@ Layout/EmptyLines:
 Style/NumericLiterals:
   Exclude:
     - 'db/schema.rb'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/helpers/users/omniauth_callbacks_helper.rb'
