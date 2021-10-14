@@ -135,3 +135,30 @@ Style/StringLiterals:
 # SupportedStyles: percent, brackets
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+Style/CommentAnnotation:
+  Exclude:
+    - 'Guardfile'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Guardfile'
+
+Style/PercentLiteralDelimiters:
+  Exclude:
+    - 'Guardfile'
+
+Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/devise.rb'
+
+Layout/EmptyLines:
+    Exclude:
+    - 'db/migrate/**/*'
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'

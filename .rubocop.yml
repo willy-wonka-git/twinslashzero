@@ -1,6 +1,2 @@
 inherit_from:
   - .rubocop_basic.yml
-
-Documentation:
-  Enabled: false
-  

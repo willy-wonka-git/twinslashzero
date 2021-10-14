@@ -72,3 +72,6 @@ gem 'jquery-rails'
 
 # Paginator
 gem 'kaminari'
+
+# Flexible authentication based on Warden
+gem 'devise'

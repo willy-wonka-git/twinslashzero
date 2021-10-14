@@ -1,0 +1,18 @@
+%h3.card-title.mb-4 Sign up
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "row gy-3" }) do |f|
+  = render "devise/shared/error_messages", resource: resource
+  .field
+    = f.label :email, class: "form-label"
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+  .field
+    = f.label :password, class: "form-label"
+    - if @minimum_password_length
+      %em
+        (#{@minimum_password_length} characters minimum)
+    = f.password_field :password, autocomplete: "new-password", class: "form-control"
+  .field
+    = f.label :password_confirmation, class: "form-label"
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+  .actions.d-grid
+    = f.submit "Sign up", class: "btn btn-primary"
+= render "devise/shared/links"

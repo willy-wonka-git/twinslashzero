@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= full_title(yield(:title))
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body{ :style => "backgroud-color: #e9ecef" }
+    .container.content{ :style => "height: 70vh" }
+      .row.h-100.align-items-center
+        .col-4.offset-4.card.py-4
+          - if notice
+            .alert.alert-info
+              = notice
+          - if alert
+            .alert.alert-danger
+              = alert
+          .card-body
+            = yield
+        .d-flex.justify-content-center
+          %a.btn.btn-secondary.my-3{:href => "/"} Home  
+  }
+      
