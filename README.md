@@ -4,9 +4,6 @@
 
 # TODO
 
-* Локализация ru/en
-	генерация локализаций
-	проверка devise
 * модель "пользователь" [Devise](https://github.com/heartcombo/devise)
 	- Авторизация через соцсети [1](https://habr.com/ru/post/142128/) [2](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
 * формы simple_form 
