@@ -21,6 +21,6 @@
           .card-body
             = yield
         .d-flex.justify-content-center
-          %a.btn.btn-secondary.my-3{:href => "/"} Home  
+          = link_to t("home"), root_path, class: "btn btn-secondary my-3"
   }
       

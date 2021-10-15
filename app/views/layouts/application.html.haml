@@ -4,6 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title= full_title(yield(:title))
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %link{:href => "https://img.icons8.com/ios-glyphs/30/000000/line.png", :rel => "alternate icon", :type => "image/png"}
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -11,17 +12,25 @@
   %body
     %nav.navbar.sticky-top.navbar-light.bg-light
       .container-fluid
-        %a.navbar-brand{:href => "/"} Home  
+        = link_to t("home"), root_path, class: "navbar-brand"
         %ul.navbar-nav.me-auto
+        .hstack.gap-1
+          - I18n.available_locales.each do |item|
+            - if item != I18n.locale
+              %a.lang{:href => '/' + item.to_s}
+                = image_tag('locale/' + item.to_s + '.png')
+              .vr
         - if user_signed_in?
-          %span.navbar-text.me-2 Logged in as 
-          = succeed "." do
+          %span.navbar-text.me-2= t('logged_in_as') 
+          = succeed "" do
             %strong= current_user.email
-          = link_to "Edit profile", edit_user_registration_path, :class => 'nav-link'
-          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'
+          = link_to t("edit_profile"), edit_user_registration_path, :class => 'nav-link'
+          .vr.small
+          = link_to t("logout"), destroy_user_session_path, method: :delete, :class => 'nav-link'
         - else
-          = link_to "Sign up", new_user_registration_path, :class => 'nav-link'
-          = link_to "Login", new_user_session_path, :class => 'nav-link'
+          = link_to t("devise.registrations.new.sign_up"), new_user_registration_path, :class => 'nav-link'
+          .vr.small
+          = link_to t("devise.sessions.new.sign_in"), new_user_session_path, :class => 'nav-link'
 
     .container-fluid.w-100.my-3
       - if notice

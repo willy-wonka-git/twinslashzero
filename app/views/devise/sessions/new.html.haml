@@ -1,4 +1,4 @@
-%h3.card-title.mb-4 Log in
+%h3.card-title.mb-4= t('devise.sessions.new.sign_in')
 = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "row gy-3" }) do |f|
   .field
     = f.label :email, class: "form-label"
@@ -11,5 +11,5 @@
       = f.check_box :remember_me, class: "form-check-input"
       = f.label :remember_me, class: "form-check-label"
   .actions.d-grid
-    = f.submit "Log in", class: "btn btn-primary"
+    = f.submit t('devise.sessions.new.sign_in'), class: "btn btn-primary"
 = render "devise/shared/links"

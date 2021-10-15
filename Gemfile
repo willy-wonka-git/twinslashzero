@@ -72,6 +72,7 @@ gem 'jquery-rails'
 
 # Paginator
 gem 'kaminari'
+gem 'kaminari-i18n'
 
 # Flexible authentication based on Warden
 gem 'devise'
@@ -83,3 +84,5 @@ gem 'omniauth-github'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'omniauth-twitter'
+
+gem 'rails-i18n', '~> 6.0.0'

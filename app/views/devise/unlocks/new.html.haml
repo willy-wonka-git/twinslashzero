@@ -1,9 +1,9 @@
-%h3.card-title.mb-4 Resend unlock instructions
+%h3.card-title.mb-4= t("devise.unlocks.new.resend_unlock_instructions")
 = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: "row gy-3" }) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :email, class: "form-label"
     = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
   .actions.d-grid
-    = f.submit "Resend unlock instructions", class: "btn btn-primary"
+    = f.submit ("devise.unlocks.new.resend_unlock_instructions"), class: "btn btn-primary"
 = render "devise/shared/links"

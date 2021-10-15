@@ -6,5 +6,8 @@ Rails.application.routes.draw do
     get 'omniauth_callbacks/facebook'
   end
   devise_for :users
-  root 'welcome#index'
+  get '/:locale' => 'welcome#index'
+  scope "(:locale)", locale: /en|ru/ do
+    root 'welcome#index'
+  end
 end
