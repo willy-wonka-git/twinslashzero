@@ -1,3 +1,4 @@
+# require 'pry'
 class ApplicationController < ActionController::Base
   around_action :switch_locale
 
@@ -6,7 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   def switch_locale(&action)
-    locale = params[:locale] || I18n.default_locale
+    locale = I18n.default_locale
+    if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym) then
+      locale = params[:locale]
+    end  
+    # binding.pry
     I18n.with_locale(locale, &action)
   end
 end

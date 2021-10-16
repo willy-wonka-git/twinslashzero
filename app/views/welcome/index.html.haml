@@ -4,5 +4,8 @@
   The time is now: #{Time.now}
 %p= t "hello"
 %p= I18n.locale
+%hr
+%p= I18n.available_locales
+%hr
 %p= t('hello2')
 = request.original_url

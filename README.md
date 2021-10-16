@@ -2,10 +2,12 @@
 
 [Original task](https://docs.google.com/document/d/1390ZczB-uCVaH0bsxH0qKALk1YQAeK9yta7LalW1hvo/edit#heading=h.800vgi95v9ga)
 
+[Demo on Heroku](https://blooming-journey-21325.herokuapp.com/)
+
 # TODO
 
 * модель "пользователь" [Devise](https://github.com/heartcombo/devise)
-	- Авторизация через соцсети [1](https://habr.com/ru/post/142128/) [2](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
+	- Авторизация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
 * формы simple_form 
 * модель "объявление" (сортировка, фильтр, пейджинг)
 * модель "тип объявления" 
