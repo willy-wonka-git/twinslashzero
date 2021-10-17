@@ -1,4 +1,5 @@
 en:
+  welcome: "Welcome!"
   home: "Home"
   edit_profile: "Edit profile"
   logout: "Logout"
@@ -7,3 +8,4 @@ en:
   delete: "Delete"
   edit: "Edit"
   update: "Update"
+  logged_in_as: "Logged in as:"

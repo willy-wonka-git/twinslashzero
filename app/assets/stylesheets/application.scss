@@ -1,7 +1,18 @@
+/*
+ *= require_tree .
+ *= require_self
+*/
+
 @import "bootstrap";
 
 .content {
 	padding-top: 20px;
+}
+
+.devise {
+	a {
+		text-decoration: none;
+	}
 }
 
 .lang {

@@ -1,4 +1,5 @@
 ru:
+  welcome: "Добро пожаловать!"
   home: "Главная"
   edit_profile: "Изменить"
   logout: "Выйти"
@@ -7,4 +8,4 @@ ru:
   delete: "Удалить"
   edit: "Изменить"
   update: "Обновить"
-    
+  logged_in_as: "Пользователь:"

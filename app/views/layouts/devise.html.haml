@@ -1,24 +1,13 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title= full_title(yield(:title))
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  %body{ :style => "backgroud-color: #e9ecef" }
+    = render "layouts/head"
+  %body.bg-light
     .container.content{ :style => "height: 70vh" }
       .row.h-100.align-items-center
         .col-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.card.py-4
-          - if notice
-            .alert.alert-info
-              = notice
-          - if alert
-            .alert.alert-danger
-              = alert
-          .card-body
+          = render "layouts/notice"
+          .card-body.devise
             = yield
         .d-flex.justify-content-center
           = link_to t("home"), root_path, class: "btn btn-secondary my-3"

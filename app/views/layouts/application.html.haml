@@ -1,43 +1,10 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title= full_title(yield(:title))
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-    = favicon_link_tag asset_path('favicon.ico')
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = render "layouts/head"
   %body
-    %nav.navbar.sticky-top.navbar-light.bg-light
-      .container-fluid
-        = link_to t("home"), root_path, class: "navbar-brand"
-        %ul.navbar-nav.me-auto
-        .hstack.gap-1
-          - I18n.available_locales.each do |item|
-            - if item != I18n.locale
-              %a.lang{:href => '/' + item.to_s}
-                = image_tag('locale/' + item.to_s + '.png')
-              .vr
-        - if user_signed_in?
-          %span.navbar-text.me-2= t('logged_in_as') 
-          = succeed "" do
-            %strong= current_user.email
-          = link_to t("edit_profile"), edit_user_registration_path, :class => 'nav-link'
-          .vr.small
-          = link_to t("logout"), destroy_user_session_path, method: :delete, :class => 'nav-link'
-        - else
-          = link_to t("devise.registrations.new.sign_up"), new_user_registration_path, :class => 'nav-link'
-          .vr.small
-          = link_to t("devise.sessions.new.sign_in"), new_user_session_path, :class => 'nav-link'
-
+    = render "layouts/navbar"
     .container-fluid.w-100.my-3
-      - if notice
-        .alert.alert-info
-          = notice
-      - if alert
-        .alert.alert-danger
-          = alert
+      = render "layouts/notice"
     .container-fluid.content
       = yield

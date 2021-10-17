@@ -6,14 +6,20 @@
 
 # TODO
 
-* модель "пользователь" [Devise](https://github.com/heartcombo/devise)
-	- Авторизация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
-* формы simple_form 
-* модель "объявление" (сортировка, фильтр, пейджинг)
-* модель "тип объявления" 
+* Акутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
+
+* Теория по гемам simple_form, enumerize, cancancan, nested_form
+* Юзер
+	- ник (индекс)
+	- ФИО
+
+* модель "тип объявления" CRUD 
+* модель "объявление" (CRUD, сортировка, фильтр, пейджинг)
+
 * модель "теги объявления" (автокомплит, несколько, https://select2.org/) 
 	- поиск (ransack)
 	- удалять теги без объявлений (cron)
+
 * модель "статус объявления" (state_machine || aasm)
 	- "черновик" - не виден в ленте, можно изменять
 	- "новая" 
@@ -23,6 +29,7 @@
 	- "опубликовано"
 	- "архив" - после 3х дней публикации в 23:50
 	- автор может перевести "архив" в "черновик"
+
 * Роли юзеров admin, user, guest (enumerize + cancancan || pundit)
 	- юзер 
 		менять ФИО, пароль (не роль)
