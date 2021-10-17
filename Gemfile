@@ -70,6 +70,9 @@ gem 'haml-rails', '~> 2.0'
 gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
 
+gem 'simple_form'
+gem 'enumerize'
+
 # Paginator
 gem 'kaminari'
 gem 'kaminari-i18n'

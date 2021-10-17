@@ -6,12 +6,15 @@
 
 # TODO
 
-* Акутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
+* Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
 
-* Теория по гемам simple_form, enumerize, cancancan, nested_form
-* Юзер
-	- ник (индекс)
-	- ФИО
+* Добавить фио, ник, роль, location, about.
+	- Настроить форму просмотра и редактирования (от роли)
+	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
+	https://stackoverflow.com/questions/25223919/rails-devise-customize-the-create-method
+	- Менять ФИО, пароль
+
+* Теория по гемам simple_form, cancancan, nested_form
 
 * модель "тип объявления" CRUD 
 * модель "объявление" (CRUD, сортировка, фильтр, пейджинг)
@@ -32,11 +35,9 @@
 
 * Роли юзеров admin, user, guest (enumerize + cancancan || pundit)
 	- юзер 
-		менять ФИО, пароль (не роль)
 		создает\редактирует черновик
 		удалять
 	- админ
-		менять ФИО, пароль
 		удалять тип объяв, если нет ни одного
 		создавать тип объяв
 		добавлять\удалять\редактировать пользователя

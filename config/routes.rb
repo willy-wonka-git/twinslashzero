@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   end
   devise_for :users
 
-  resources :users
-
   get '/:locale' => 'welcome#index'
   scope "(:locale)", locale: /en|ru/ do
+    get '/user/:id' => 'users#show', as: 'user'
+    get '/users' => 'users#index'
     root 'welcome#index'
   end
 end

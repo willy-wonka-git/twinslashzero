@@ -1,15 +1,8 @@
 %h3.card-title.mb-4= t('devise.sessions.new.sign_in')
-= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "row gy-3" }) do |f|
-  .field
-    = f.label :email, class: "form-label"
-    = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
-  .field
-    = f.label :password, class: "form-label"
-    = f.password_field :password, autocomplete: "current-password", class: "form-control"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me, class: "form-check-input"
-      = f.label :remember_me, class: "form-check-label"
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "row gy-3" }) do |f|
+  = f.input :email, autofocus: true, required: true, autocomplete: "email"
+  = f.input :password, autocomplete: "current-password", required: true
+  = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
   .actions.d-grid
-    = f.submit t('devise.sessions.new.sign_in'), class: "btn btn-primary"
+    = f.button :submit, t('devise.sessions.new.sign_in'), class: "btn-primary"
 = render "devise/shared/links"
