@@ -62,7 +62,6 @@ end
 group :development do
   gem 'pry-rails'
   gem 'rubocop-rails'
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 gem 'haml-rails', '~> 2.0'
@@ -90,3 +89,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-twitter'
 
 gem 'rails-i18n', '~> 6.0.0'
+
+gem 'faker'
+
+gem 'cancancan'

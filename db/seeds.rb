@@ -19,9 +19,9 @@ admin.save!
   )
   user.save!
 
-# users = User.order(:created_at).take(6)
-# rand(1...15).times do
-#   content = Faker::Lorem.sentence(word_count:15)
-#   users.each { |user| user.diaries.create!(content: body) }
-# end
+  # users = User.order(:created_at).take(6)
+  # rand(1...15).times do
+  #   content = Faker::Lorem.sentence(word_count:15)
+  #   users.each { |user| user.diaries.create!(content: body) }
+  # end
 end

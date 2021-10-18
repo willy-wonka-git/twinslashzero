@@ -188,3 +188,6 @@ Style/Lambda:
   Exclude:
     - 'config/initializers/simple_form_bootstrap.rb'
     
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/application_controller.rb'

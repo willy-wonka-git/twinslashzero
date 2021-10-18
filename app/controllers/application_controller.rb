@@ -11,12 +11,21 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
     I18n.with_locale(locale, &action)
   end
-  
+
   protected
-  
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_in)  { |u| u.permit(  :nickname, :fullname, :decription, :email, :password, :password_confirmation) }
-      devise_parameter_sanitizer.permit(:sign_up)  { |u| u.permit(  :nickname, :fullname, :decription, :email, :password, :password_confirmation) }
-      devise_parameter_sanitizer.permit(:account_update)  { |u| u.permit(  :nickname, :fullname, :decription, :email, :password, :password_confirmation, :current_password) }
-    end  
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in) do |u|
+      u.permit(:nickname, :fullname, :decription, :email,
+               :password, :password_confirmation)
+    end
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:nickname, :fullname, :decription, :email,
+               :password, :password_confirmation)
+    end
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:nickname, :fullname, :decription,
+               :email, :password, :password_confirmation, :current_password)
+    end
+  end
 end

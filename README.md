@@ -6,25 +6,19 @@
 
 # TODO
 
-- карточка пользователя
-- указать ник при регистрации
-- при изменении добавить фио, ник, описание
-
 * Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
 	https://stackoverflow.com/questions/25223919/rails-devise-customize-the-create-method
 
-* Теория по гемам cancancan, nested_form
-
-
-
+* Теория по гемам cancancan, state_machine, nested_form
 
 * модель "тип объявления" CRUD 
-* модель "объявление" (CRUD, сортировка, фильтр, пейджинг)
 
-* модель "теги объявления" (автокомплит, несколько, https://select2.org/) 
+* модель "теги объявления" [1](https://www.sitepoint.com/tagging-scratch-rails/) [2](https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9) (автокомплит, несколько, https://select2.org/) 
 	- поиск (ransack)
-	- удалять теги без объявлений (cron)
+	- удалять теги без объявлений (cron или админу)
+
+* модель "объявление" (CRUD, сортировка, фильтр) // time_ago_in_words(post.created_at)
 
 * модель "статус объявления" (state_machine || aasm)
 	- "черновик" - не виден в ленте, можно изменять
