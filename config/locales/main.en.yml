@@ -9,3 +9,12 @@ en:
   edit: "Edit"
   update: "Update"
   logged_in_as: "Logged in as:"
+  headline:
+    notice: "Notice"
+    danger: "Danger"
+    success: "Success"
+    error: "Error"
+    info: "Information"
+  users:
+    users: "Users"
+    all_users: "All users"  

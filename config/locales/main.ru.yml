@@ -9,3 +9,12 @@ ru:
   edit: "Изменить"
   update: "Обновить"
   logged_in_as: "Пользователь:"
+  headline:
+    notice: "Сообщение"
+    danger: "Предупреждение"
+    success: "Успешно"
+    error: "Ошибка"
+    info: " Информация"
+  users:
+    users: "Пользователи"
+    all_users: "Все пользователи"  

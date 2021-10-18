@@ -3,7 +3,13 @@
     = link_to t("home"), root_path, class: "navbar-brand"
     .collapse.navbar-collapse.justify-content-end
       %ul.navbar-nav
-        .hstack.gap-1
+        %li.nav-item= link_to t("users.users"), users_path, :class => 'nav-link'
+        .vr
+        %li.nav-item
+          %a.nav-link{ href: "https://github.com/willy-wonka-git/twinslashzero", target: "_blank" }
+            = image_tag('github-24.png')
+        .vr
+        .hstack
           - I18n.available_locales.each do |item|
             - if item != I18n.locale
               = link_to image_tag('locale/' + item.to_s + '.png'), root_path[0..-3] + item.to_s, class: "lang"
@@ -11,7 +17,7 @@
         - if user_signed_in?
           / %li.nav-item.span.navbar-text.me-2= t('logged_in_as') 
           / = succeed "" do
-          %li.nav-item= link_to current_user.email, user_path(current_user), :class => 'nav-link'
+          %li.nav-item= link_to current_user.email, current_user, :class => 'nav-link'
           %li.nav-item.vr.small
           %li.nav-item= link_to t("logout"), destroy_user_session_path, method: :delete, :class => 'nav-link'
         - else

@@ -69,6 +69,7 @@ gem 'haml-rails', '~> 2.0'
 
 gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
+gem 'inline_svg', '~> 1.7'
 
 gem 'simple_form'
 gem 'enumerize'

@@ -1,12 +1,19 @@
-/*
- *= require_tree .
- *= require_self
-*/
+@import "bootstrap/functions";
+@import "bootstrap/variables";
 
 @import "bootstrap";
 
+// App sections
+@import "application/flash";
+@import "application/footer";
+
+// Components
+@import "components/alert";
+@import "components/icon";
+
+
 .content {
-	padding-top: 20px;
+	padding: 20px;
 }
 
 .devise {
@@ -15,17 +22,16 @@
 	}
 }
 
-.lang {
-	min-width: 20px;
-}
-
 .vr {
 	margin-left: 12px;
 	margin-right: 12px;
+	.small {
+		opacity: 0.1;
+	    height: 30px;
+	    margin-top: 5px;
+	}
 }
 
-.vr.small {
-	opacity: 0.1;
-    height: 30px;
-    margin-top: 5px;
+h1 {
+	padding-bottom: 24px
 }

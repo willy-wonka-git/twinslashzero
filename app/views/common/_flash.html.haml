@@ -1,0 +1,22 @@
+- if flash.any?
+  .app-flash
+    - flash.each do |type, body|
+      - _type = type
+      - if _type.to_s == "notice" then 
+        - _type = :success
+      - next unless %w(warning success notice error info danger).include?(type.to_s)
+      = content_tag :div, class: "alert alert-#{_type} alert-flash" do
+        .container
+          .d-flex
+            .flex-shrink-0
+              = icon_svg("alerts/#{_type}.svg", class: "icon icon-3x")
+            .flex-grow-1.ms-3
+              = content_tag(:h6, t("headline.#{_type}"), class: "text-uppercase text-reset my-1")
+              - if body.kind_of?(Array)
+                %ul.mb-0
+                  - body.each do |message|
+                    = content_tag(:li, message)
+              - else
+                %p.mb-0= body
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button", onclick: "event.target.parentElement.parentElement.parentElement.innerHTML = null"}
+      - end if body.present?

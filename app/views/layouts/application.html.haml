@@ -4,7 +4,7 @@
     = render "layouts/head"
   %body
     = render "layouts/navbar"
-    .container-fluid.w-100.my-3
-      = render "layouts/notice"
+    = render "common/flash"
     .container-fluid.content
       = yield
+    = render "common/footer"
