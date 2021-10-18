@@ -6,15 +6,18 @@
 
 # TODO
 
-* Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
+- карточка пользователя
+- указать ник при регистрации
+- при изменении добавить фио, ник, описание
 
-* Добавить фио, ник, роль, location, about.
-	- Настроить форму просмотра и редактирования (от роли)
+* Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
 	https://stackoverflow.com/questions/25223919/rails-devise-customize-the-create-method
-	- Менять ФИО, пароль
 
-* Теория по гемам simple_form, cancancan, nested_form
+* Теория по гемам cancancan, nested_form
+
+
+
 
 * модель "тип объявления" CRUD 
 * модель "объявление" (CRUD, сортировка, фильтр, пейджинг)
@@ -60,3 +63,5 @@
 * запросы squeel 
 * Публикация объявлений и архив cron - rake + whenever
 * админка https://administrate-demo.herokuapp.com/authentication https://github.com/thoughtbot/administrate
+
+* Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)

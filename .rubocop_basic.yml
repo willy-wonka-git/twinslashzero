@@ -145,6 +145,7 @@ Metrics/BlockLength:
   Exclude:
     - 'Guardfile'
     - 'config/environments/**/*'    
+    - 'config/initializers/**/*'    
 
 Style/PercentLiteralDelimiters:
   Exclude:
@@ -155,11 +156,13 @@ Documentation:
 
 Layout/LineLength:
   Exclude:
-    - 'config/initializers/devise.rb'
+    - 'config/initializers/**/*'
+    - 'app/helpers/icon_helper.rb'
 
 Layout/EmptyLines:
     Exclude:
     - 'db/migrate/**/*'
+    - 'config/initializers/simple_form_bootstrap.rb'
 
 Style/NumericLiterals:
   Exclude:
@@ -171,3 +174,17 @@ Style/ClassAndModuleChildren:
     - 'test/**/*'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
     - 'app/helpers/users/omniauth_callbacks_helper.rb'
+
+Layout/HashAlignment:
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/initializers/simple_form.rb'
+
+Lint/UnusedBlockArgument:
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+
+Style/Lambda:
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    

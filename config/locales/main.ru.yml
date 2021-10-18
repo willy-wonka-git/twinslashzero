@@ -1,20 +1,32 @@
 ru:
-  welcome: "Добро пожаловать!"
-  home: "Главная"
-  edit_profile: "Изменить"
-  logout: "Выйти"
-  create: "Создать"
-  read: "Читать"
-  delete: "Удалить"
-  edit: "Изменить"
-  update: "Обновить"
+  welcome: Добро пожаловать!
+  home: Главная
+  edit_profile: Изменить
+  logout: Выйти
+  create: Создать
+  read: Читать
+  delete: Удалить
+  edit: Изменить
+  update: Обновить
   logged_in_as: "Пользователь:"
   headline:
-    notice: "Сообщение"
-    danger: "Предупреждение"
-    success: "Успешно"
-    error: "Ошибка"
-    info: " Информация"
+    notice: Сообщение
+    danger: Предупреждение
+    success: Успешно
+    error: Ошибка
+    info:  Информация
   users:
-    users: "Пользователи"
-    all_users: "Все пользователи"  
+    user: Пользователь
+    users: Пользователи
+    all_users: Все пользователи
+    nickname: Имя пользователя
+    fullname: ФИО
+    email: Email
+    role: Роль
+    description: Описание
+  enumerize:
+    user:
+      roles:
+        guest: Гость
+        user: Пользователь
+        admin: Администратор

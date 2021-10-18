@@ -1,20 +1,32 @@
 en:
-  welcome: "Welcome!"
-  home: "Home"
-  edit_profile: "Edit profile"
-  logout: "Logout"
-  create: "Create"
-  read: "Read"
-  delete: "Delete"
-  edit: "Edit"
-  update: "Update"
+  welcome: Welcome!
+  home: Home
+  edit_profile: Edit profile
+  logout: Logout
+  create: Create
+  read: Read
+  delete: Delete
+  edit: Edit
+  update: Update
   logged_in_as: "Logged in as:"
   headline:
-    notice: "Notice"
-    danger: "Danger"
-    success: "Success"
-    error: "Error"
-    info: "Information"
+    notice: Notice
+    danger: Danger
+    success: Success
+    error: Error
+    info: Information
   users:
-    users: "Users"
-    all_users: "All users"  
+    user: User
+    users: Users
+    all_users: All users
+    nickname: Nickname
+    fullname: Fullname
+    email: Email
+    role: Role
+    description: Description
+  enumerize:
+    user:
+      roles:
+        guest: Guest
+        user: User
+        admin: Administrator

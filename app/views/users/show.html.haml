@@ -1,5 +1,17 @@
-= provide(:title, @user.email)
-= @user.id 
-= @user.email
+= provide(:title, @user.nickname)
+%h1= t("users.user") + ": " + @user.nickname
+
+%dl.row
+  %dt.col-sm-3= t("id")
+  %dd.col-sm-9= @user.id
+  %dt.col-sm-3= t("users.fullname")
+  %dd.col-sm-9= @user.fullname
+  %dt.col-sm-3= t("users.email")
+  %dd.col-sm-9= @user.email
+  %dt.col-sm-3= t("users.role")
+  %dd.col-sm-9= @user.role
+  %dt.col-sm-3= t("users.description")
+  %dd.col-sm-9= @user.description
+
 - if current_user == @user
-	= link_to t("edit_profile"), edit_user_registration_path, :class => 'btn btn-primary'
+  = link_to t("edit_profile"), edit_user_registration_path, :class => 'btn btn-primary'

@@ -10,10 +10,11 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
+    labels:
+      defaults:
+        nickname: 'Nickname'
+        fullname: 'Fullname'
+        description: 'Description'
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'
