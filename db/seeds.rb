@@ -1,15 +1,14 @@
 # Create user admin
-admin = User.new(
+admin = User.create(
   nickname: "admin",
   role: "admin",
   email: "admin@gmail.com",
   password: "111111"
 )
-admin.save!
 
 # Create users
 80.times do
-  user = User.new(
+  user = User.create(
     nickname: Faker::Internet.user_name,
     fullname: Faker::Name.name,
     role: "user",
@@ -17,7 +16,6 @@ admin.save!
     password: Faker::Internet.password,
     description: Faker::Lorem.paragraph
   )
-  user.save!
 
   # users = User.order(:created_at).take(6)
   # rand(1...15).times do
