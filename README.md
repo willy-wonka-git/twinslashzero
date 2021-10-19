@@ -6,11 +6,12 @@
 
 # TODO
 
-- добавить теги
-- настроить и локализовать формы тегов
-- добавить объявления
-	- теги
+* Объявления
+	- доделать работу тегов (ajax автокомплит)
 	- картинки
+
+* "картинки" объявления (превью 100х100, nested_form)
+	- облако cloudinary.com/documentation
 
 * Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
@@ -18,9 +19,8 @@
 
 * Теория по гемам cancancan, state_machine || aasm, nested_form
 
-* модель "теги объявления" [1](https://www.sitepoint.com/tagging-scratch-rails/) [2](https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9) (автокомплит, несколько, https://select2.org/) 
+* Фильтр и сортировка объявлений
 	- поиск (ransack)
-	- удалять теги без объявлений (cron или админу)
 
 * модель "объявление" (CRUD, сортировка, фильтр) // time_ago_in_words(post.created_at)
 
@@ -45,15 +45,12 @@
 		не может создавать\редактировать объявы
 		может удалить объяву
 
-* генерация сидов - faker
-
 * модерация - причина отклонения (обязательное)
 	- история статуса: кто / когда / статус / комментарий (если отклонено)
 	- ajax
 	- история правок статуса на странице объявления (админ и автор)
 
-* "картинки" объявления (превью 100х100, nested_form)
-	- облако cloudinary.com/documentation
+* удалять теги без объявлений (cron или админу вручную)
 
 * тесты rspec (capybara, factory_bot)
 	приемочные тесты turnip (браузер) 
