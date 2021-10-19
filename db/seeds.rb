@@ -26,14 +26,19 @@
 #   )
 # end
 
-# Create posts
-users = User.order('RANDOM()').take(10)
-rand(1...10).times do
-  users.each { |user| Post.create!(
-    author: user,
-    category: PostCategory.order('RANDOM()').first,
-    title: Faker::Lorem.sentence(word_count:12),
-    content: Faker::Lorem.sentence(word_count:30)
-    )
-  }
-end
+# # Create posts
+# users = User.order('RANDOM()').take(10)
+# rand(1...10).times do
+#   users.each { |user| Post.create!(
+#     author: user,
+#     category: PostCategory.order('RANDOM()').first,
+#     title: Faker::Lorem.sentence(word_count:12),
+#     content: Faker::Lorem.sentence(word_count:30)
+#     )
+#   }
+# end
+
+20.times do
+  Tag.create(name: Faker::Superhero.power)
+  Tag.create(name: Faker::Food.fruits)
+end  

@@ -12,6 +12,10 @@
 %p
   %b= t("posts.content")
   = @post.content
+%p
+  %b= t("tags")
+  %small
+    = raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
 
 = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
 = link_to t("back"), posts_path, class: "btn btn-secondary"

@@ -21,6 +21,7 @@ en:
   created_at: Created
   category: Category
   content: Content
+  tags: Tags
   welcome: 
     title: Advert board
     header_html: Welcome to the our Advert&nbsp;board!

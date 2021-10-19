@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/users' => 'users#index'
     resources :post_categories
     resources :posts, path: 'adv'
+    get 'tags/:tag', to: 'posts#index', as: :tag
     root 'welcome#index'
   end
 end

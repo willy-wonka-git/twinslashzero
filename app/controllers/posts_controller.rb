@@ -1,11 +1,11 @@
-require 'pry'
-
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :desc).page params[:page]
+    # @posts = Post.order(created_at: :desc).page params[:page]
+    @posts = params[:tag] ? Post.tagged_with(params[:tag]) : Post.all
+    @posts = @posts.order(created_at: :desc).page params[:page]
   end
 
   # GET /posts/1 or /posts/1.json
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author = current_user
-    @post.category = PostCategory.find(@post.category_id)
+    @post.category = PostCategory.find(@post.category_id) if @post.category_id
 
     respond_to do |format|
       if @post.save
@@ -69,6 +69,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:category_id, :title, :content)
+      params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
     end
 end

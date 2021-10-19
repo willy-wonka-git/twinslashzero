@@ -21,6 +21,7 @@ ru:
   created_at: Создан
   category: Категория
   content: Содержание
+  tags: Теги
   welcome: 
     title: Доска объявлений
     header_html: Добро пожаловать на наш Advert&nbsp;board!
