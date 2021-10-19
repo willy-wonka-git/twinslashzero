@@ -1,12 +1,12 @@
-= provide(:title, t("welcome"))
-%h2 Hello World
-%p
-  The time is now: #{Time.now}
-%hr
-%p= I18n.locale
-%hr
-%p= I18n.available_locales
-%hr
-= request.original_url
-- 40.times do
-  %p= t('welcome')
+= provide(:title, t("welcome.title"))
+.d-flex.text-center{style: "height: 70vh"}
+  .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
+    .mb-auto
+    %main.px-3
+      %h1= t("welcome.header_html")
+      %p.lead= t("welcome.description_html")
+      %p.lead
+      %a.btn-lg.btn-secondary.fw-bold{:href => post_categories_path } 
+        = t("welcome.all_categories")
+    .mt-auto
+

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|ru/ do
     get '/user/:id' => 'users#show', as: 'user'
     get '/users' => 'users#index'
+    resources :post_categories
     root 'welcome#index'
   end
 end

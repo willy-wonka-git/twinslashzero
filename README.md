@@ -6,13 +6,19 @@
 
 # TODO
 
+- добавить теги
+- настроить и локализовать формы тегов
+- добавить объявления
+	- автор
+	- категория
+	- теги
+	- картинки
+
 * Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
 	https://stackoverflow.com/questions/25223919/rails-devise-customize-the-create-method
 
-* Теория по гемам cancancan, state_machine, nested_form
-
-* модель "тип объявления" CRUD 
+* Теория по гемам cancancan, state_machine || aasm, nested_form
 
 * модель "теги объявления" [1](https://www.sitepoint.com/tagging-scratch-rails/) [2](https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9) (автокомплит, несколько, https://select2.org/) 
 	- поиск (ransack)

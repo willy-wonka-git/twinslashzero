@@ -1,0 +1,25 @@
+%h1= t("posts.categories.title")
+
+= paginate @post_categories, outer_window: 3, window: 1, class: "mb-2"
+
+%table.table
+  %thead
+    %tr
+      %th= t("title")
+      %th= t("description")
+      %th
+      %th
+
+  %tbody
+    - @post_categories.each do |post_category|
+      %tr
+        %td= link_to post_category.title, post_category
+        %td= post_category.description
+        %td= link_to t("edit"), edit_post_category_path(post_category)
+        %td= link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
+
+%br
+
+= link_to t("add"), new_post_category_path, class: "btn btn-success"
+
+= paginate @post_categories, outer_window: 3, window: 1, class: "mb-2"

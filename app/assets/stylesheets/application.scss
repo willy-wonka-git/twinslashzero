@@ -3,6 +3,8 @@
 
 @import "bootstrap";
 
+@import "welcome";
+
 // App sections
 @import "application/flash";
 @import "application/footer";
@@ -14,12 +16,6 @@
 
 .content {
 	padding: 20px;
-}
-
-.devise {
-	a {
-		text-decoration: none;
-	}
 }
 
 .vr {
@@ -34,4 +30,8 @@
 
 h1 {
 	padding-bottom: 24px
+}
+
+a {
+	text-decoration: none;
 }

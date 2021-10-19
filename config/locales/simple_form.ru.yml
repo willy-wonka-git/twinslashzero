@@ -9,9 +9,10 @@ ru:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Пожалуйста, просмотрите проблемы ниже:"
+      default_message: "Пожалуйста, проверьте проблемы:"
     labels:
       defaults:
-        nickname: 'Имя пользователя'
-        fullname: 'ФИО'
-        description: 'Описание'
+        nickname: Имя пользователя
+        fullname: ФИО
+        description: Описание
+        title: Наименование

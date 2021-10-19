@@ -1,14 +1,28 @@
 ru:
-  welcome: Добро пожаловать!
   home: Главная
   edit_profile: Изменить
   logout: Выйти
+  add: Добавить
   create: Создать
   read: Читать
   delete: Удалить
   edit: Изменить
   update: Обновить
+  save: Сохранить
   logged_in_as: "Пользователь:"
+  title: Наименование
+  description: Описание
+  comment: Комментарий
+  add_comment: Добавить комментарий
+  back: Назад
+  show: Смотреть
+  destroy: Удалить
+  are_you_sure: Вы уверены?
+  welcome: 
+    title: Доска объявлений
+    header_html: Добро пожаловать на наш Advert&nbsp;board!
+    description_html: Тестовое задание на Ruby/Rails&nbsp;developer
+    all_categories: Все категории
   headline:
     notice: Сообщение
     danger: Предупреждение
@@ -24,6 +38,12 @@ ru:
     email: Email
     role: Роль
     description: Описание
+  posts:
+    categories:
+      show: Категории  
+      new: Новая категория
+      edit: Редактировать категорию
+      title: Список категорий
   enumerize:
     user:
       roles:

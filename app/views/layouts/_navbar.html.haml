@@ -3,6 +3,7 @@
     = link_to t("home"), root_path, class: "navbar-brand"
     .collapse.navbar-collapse.justify-content-end
       %ul.navbar-nav
+        %li.nav-item= link_to t("posts.categories.show"), post_categories_path, :class => 'nav-link'
         %li.nav-item= link_to t("users.users"), users_path, :class => 'nav-link'
         .vr
         %li.nav-item

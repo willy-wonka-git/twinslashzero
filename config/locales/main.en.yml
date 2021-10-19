@@ -1,14 +1,28 @@
 en:
-  welcome: Welcome!
   home: Home
   edit_profile: Edit profile
   logout: Logout
+  add: Add
   create: Create
   read: Read
   delete: Delete
   edit: Edit
   update: Update
+  save: Save
   logged_in_as: "Logged in as:"
+  title: Title
+  description: Description
+  comment: Comment
+  add_comment: Add comment
+  back: Back
+  show: Show
+  destroy: Destroy
+  are_you_sure: Are you sure?
+  welcome: 
+    title: Advert board
+    header_html: Welcome to the our Advert&nbsp;board!
+    description_html: Test work for Ruby/Rails&nbsp;developer
+    all_categories: All categories
   headline:
     notice: Notice
     danger: Danger
@@ -24,6 +38,12 @@ en:
     email: Email
     role: Role
     description: Description
+  posts:
+    categories:
+      show: Categories
+      new: New category
+      edit: Edit category
+      title: Listing categories
   enumerize:
     user:
       roles:
