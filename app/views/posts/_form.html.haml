@@ -6,6 +6,7 @@
     = f.input :category_id, label: t("category"), required: true, collection: PostCategory.all.collect {|c| [c.title, c.id]}
     = f.input :title
     = f.input :content, label: t("content")
-
+    = f.input :tag_ids, as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
+    
   .form-actions
     = f.button :submit, t("save"), class: "btn btn-primary my-2"

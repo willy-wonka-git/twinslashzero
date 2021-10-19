@@ -70,6 +70,12 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'inline_svg', '~> 1.7'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3' 
+  # Library for multiple select and autocompletion
+  gem 'rails-assets-chosen'
+end
+
 gem 'simple_form'
 gem 'enumerize'
 
