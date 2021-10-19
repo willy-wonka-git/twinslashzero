@@ -1,6 +1,7 @@
 %h1= t("posts.categories.title")
 
-= paginate @post_categories, outer_window: 3, window: 1, class: "mb-2"
+= render "common/add", link: new_post_category_path
+= render "common/paging", resource: @post_categories
 
 %table.table
   %thead
@@ -20,6 +21,5 @@
 
 %br
 
-= link_to t("add"), new_post_category_path, class: "btn btn-success"
-
-= paginate @post_categories, outer_window: 3, window: 1, class: "mb-2"
+= render "common/paging", resource: @post_categories
+= render "common/add", link: new_post_category_path

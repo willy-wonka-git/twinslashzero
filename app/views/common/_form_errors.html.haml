@@ -1,0 +1,6 @@
+= f.error_notification
+= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+- if f.object.errors.any?
+  %ul{class: "text-danger mx-2"}
+    - f.object.errors.full_messages.each do |message|
+      %li= message

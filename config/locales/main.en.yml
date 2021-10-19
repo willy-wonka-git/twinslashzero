@@ -18,11 +18,15 @@ en:
   show: Show
   destroy: Destroy
   are_you_sure: Are you sure?
+  created_at: Created
+  category: Category
+  content: Content
   welcome: 
     title: Advert board
     header_html: Welcome to the our Advert&nbsp;board!
     description_html: Test work for Ruby/Rails&nbsp;developer
     all_categories: All categories
+    all_adv: All adverts
   headline:
     notice: Notice
     danger: Danger
@@ -39,6 +43,13 @@ en:
     role: Role
     description: Description
   posts:
+    show: Adverts
+    new: New advert
+    edit: Edit advert
+    title: Adverts
+    author: Author
+    category: Category
+    content: Content
     categories:
       show: Categories
       new: New category

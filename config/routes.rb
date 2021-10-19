@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/user/:id' => 'users#show', as: 'user'
     get '/users' => 'users#index'
     resources :post_categories
+    resources :posts, path: 'adv'
     root 'welcome#index'
   end
 end

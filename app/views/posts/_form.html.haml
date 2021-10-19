@@ -1,0 +1,11 @@
+-# frozen_string_literal: true
+
+= simple_form_for(@post) do |f|
+  = render "common/form_errors", f: f
+  .form-inputs
+    = f.input :category_id, label: t("category"), required: true, collection: PostCategory.all.collect {|c| [c.title, c.id]}
+    = f.input :title
+    = f.input :content, label: t("content")
+
+  .form-actions
+    = f.button :submit, t("save"), class: "btn btn-primary my-2"

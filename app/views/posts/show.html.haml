@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b= t("posts.author")
+  = @post.author.nickname
+%p
+  %b= t("posts.category")
+  = @post.category.title
+%p
+  %b= t("posts.title")
+  = @post.title
+%p
+  %b= t("posts.content")
+  = @post.content
+
+= link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
+= link_to t("back"), posts_path, class: "btn btn-secondary"

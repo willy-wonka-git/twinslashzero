@@ -1,0 +1,6 @@
+%h1= t("posts.edit")
+
+= render 'form'
+
+= link_to t("show"), @post, class: "btn btn-secondary"
+= link_to t("back"), posts_path, class: "btn btn-secondary"

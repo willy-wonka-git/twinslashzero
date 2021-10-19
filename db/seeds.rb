@@ -6,6 +6,14 @@
 #   password: "111111"
 # )
 
+# # Create categories
+# 12.times do
+#   post_category = PostCategory.create(
+#     title: Faker::Hobby.activity,
+#     description: Faker::Lorem.paragraph
+#   )
+# end  
+
 # # Create users
 # 80.times do
 #   user = User.create(
@@ -16,18 +24,16 @@
 #     password: Faker::Internet.password,
 #     description: Faker::Lorem.paragraph
 #   )
-
-#   # users = User.order(:created_at).take(6)
-#   # rand(1...15).times do
-#   #   content = Faker::Lorem.sentence(word_count:15)
-#   #   users.each { |user| user.diaries.create!(content: body) }
-#   # end
 # end
 
-# Create categories
-80.times do
-  post_category = PostCategory.create(
-    title: Faker::Hobby.activity,
-    description: Faker::Lorem.paragraph
-  )
-end  
+# Create posts
+users = User.order('RANDOM()').take(10)
+rand(1...10).times do
+  users.each { |user| Post.create!(
+    author: user,
+    category: PostCategory.order('RANDOM()').first,
+    title: Faker::Lorem.sentence(word_count:12),
+    content: Faker::Lorem.sentence(word_count:30)
+    )
+  }
+end

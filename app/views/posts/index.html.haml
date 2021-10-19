@@ -1,0 +1,29 @@
+%h1= t("posts.title")
+
+= render "common/add", link: new_post_path
+= render "common/paging", resource: @posts
+
+%table.table
+  %thead
+    %tr
+      %th= t("posts.title")
+      %th= t("posts.category")
+      %th= t("posts.author")
+      %th= t("created_at")
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= link_to post.title, post_path(post)
+        %td= post.category.title
+        %td= post.author.nickname
+        %td= time_ago_in_words(post.created_at)
+        %td= link_to t("edit"), edit_post_path(post)
+        %td= link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") }
+
+%br
+
+= render "common/paging", resource: @posts
+= render "common/add", link: new_post_path

@@ -18,11 +18,15 @@ ru:
   show: Смотреть
   destroy: Удалить
   are_you_sure: Вы уверены?
+  created_at: Создан
+  category: Категория
+  content: Содержание
   welcome: 
     title: Доска объявлений
     header_html: Добро пожаловать на наш Advert&nbsp;board!
     description_html: Тестовое задание на Ruby/Rails&nbsp;developer
     all_categories: Все категории
+    all_adv: Все объявления
   headline:
     notice: Сообщение
     danger: Предупреждение
@@ -39,6 +43,13 @@ ru:
     role: Роль
     description: Описание
   posts:
+    show: Объявления
+    new: Новое объявление
+    edit: Изменить объявление
+    title: Объявления
+    author: Автор
+    category: Категория
+    content: Содержание
     categories:
       show: Категории  
       new: Новая категория
