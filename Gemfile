@@ -71,7 +71,7 @@ gem 'jquery-rails'
 gem 'inline_svg', '~> 1.7'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3' 
+  gem 'rails-assets-tether', '>= 1.3.3'
   # Library for multiple select and autocompletion
   gem 'rails-assets-chosen'
 end

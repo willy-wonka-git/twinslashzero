@@ -3,19 +3,19 @@ require 'rails_helper'
 RSpec.describe "posts/index", type: :view do
   before(:each) do
     assign(:posts, [
-      Post.create!(
-        author: "",
-        category: "",
-        title: "Title",
-        content: "MyText"
-      ),
-      Post.create!(
-        author: "",
-        category: "",
-        title: "Title",
-        content: "MyText"
-      )
-    ])
+             Post.create!(
+               author: "",
+               category: "",
+               title: "Title",
+               content: "MyText"
+             ),
+             Post.create!(
+               author: "",
+               category: "",
+               title: "Title",
+               content: "MyText"
+             )
+           ])
   end
 
   it "renders a list of posts" do

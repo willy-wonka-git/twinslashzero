@@ -13,4 +13,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable
+
+  def posts
+    Post.published.where(author: self)
+  end 
 end

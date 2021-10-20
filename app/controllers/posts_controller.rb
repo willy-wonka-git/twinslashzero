@@ -1,16 +1,15 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts or /posts.json
   def index
     # @posts = Post.order(created_at: :desc).page params[:page]
     @posts = params[:tag] ? Post.tagged_with(params[:tag]) : Post.all
-    @posts = @posts.order(created_at: :desc).page params[:page]
+    @posts = @posts.published.page params[:page]
   end
 
   # GET /posts/1 or /posts/1.json
-  def show
-  end
+  def show; end
 
   # GET /posts/new
   def new
@@ -19,14 +18,12 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    @post.author = current_user
-    @post.category = PostCategory.find(@post.category_id) if @post.category_id
+    set_post_defaults
 
     respond_to do |format|
       if @post.save
@@ -62,13 +59,19 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
-    end
+  def set_post_defaults
+    @post.author = current_user
+    @post.category = PostCategory.find(@post.category_id) if @post.category_id
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+  end
 end

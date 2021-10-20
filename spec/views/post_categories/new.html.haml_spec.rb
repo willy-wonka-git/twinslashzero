@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "post_categories/new", type: :view do
   before(:each) do
     assign(:post_category, PostCategory.new(
-      title: "MyString",
-      description: "MyText"
-    ))
+                             title: "MyString",
+                             description: "MyText"
+                           ))
   end
 
   it "renders new post_category form" do

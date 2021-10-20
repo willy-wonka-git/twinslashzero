@@ -7,7 +7,9 @@
 # TODO
 
 * Объявления
-	- доделать работу тегов (ajax автокомплит)
+	- доделать работу тегов (ajax автокомплит) 
+	[1](https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9)
+	[2](https://stackoverflow.com/questions/34171991/rails-using-ajax-to-fill-jquery-autocomplete)
 	- картинки
 
 * "картинки" объявления (превью 100х100, nested_form)

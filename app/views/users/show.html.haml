@@ -15,3 +15,8 @@
 
 - if current_user == @user
   = link_to t("edit_profile"), edit_user_registration_path, :class => 'btn btn-primary'
+
+%h4.mt-4
+  = t("posts.title")
+  %span.badge.bg-secondary= @user.posts.count
+= render "posts/posts", posts: @user.posts

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "post_categories/edit", type: :view do
   before(:each) do
     @post_category = assign(:post_category, PostCategory.create!(
-      title: "MyString",
-      description: "MyText"
-    ))
+                                              title: "MyString",
+                                              description: "MyText"
+                                            ))
   end
 
   it "renders the edit post_category form" do

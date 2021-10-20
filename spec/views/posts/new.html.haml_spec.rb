@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "posts/new", type: :view do
   before(:each) do
     assign(:post, Post.new(
-      author: "",
-      category: "",
-      title: "MyString",
-      content: "MyText"
-    ))
+                    author: "",
+                    category: "",
+                    title: "MyString",
+                    content: "MyText"
+                  ))
   end
 
   it "renders new post form" do

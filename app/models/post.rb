@@ -1,17 +1,18 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
-	belongs_to :category, class_name: "PostCategory"
+  belongs_to :category, class_name: "PostCategory"
   has_many :taggings
   has_many :tags, through: :taggings
 
-	validates :category, :title, :content, presence: true
-	
+  default_scope -> { order(published_at: :desc, created_at: :desc) }
+
+  validates :category, :title, :content, presence: true
   validates :title, length: { minimum: 5, maximum: 200 }
   validates :content, length: { minimum: 50, maximum: 2000 }
 
   def self.tagged_with(name)
     tag = Tag.find_by(name: name)
-    return tag ? tag.posts : Post.all
+    tag ? tag.posts.published : Post.published
   end
 
   def self.tag_counts
@@ -26,5 +27,9 @@ class Post < ApplicationRecord
     self.tags = names.split(',').map do |n|
       Tag.where(name: n.strip).first_or_create!
     end
+  end
+
+  def self.published
+    self.where.not(published_at: nil)
   end
 end

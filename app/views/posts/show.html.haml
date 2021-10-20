@@ -2,12 +2,12 @@
 
 %p
   %b= t("posts.author")
-  = @post.author.nickname
+  = link_to @post.author.nickname, @post.author
 %p
   %b= t("posts.category")
-  = @post.category.title
+  = link_to @post.category.title, @post.category
 %p
-  %b= t("posts.title")
+  %b= t("title")
   = @post.title
 %p
   %b= t("posts.content")

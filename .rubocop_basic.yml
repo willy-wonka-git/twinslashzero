@@ -142,10 +142,13 @@ Style/CommentAnnotation:
     - 'Guardfile'
 
 Metrics/BlockLength:
+  Max: 30
   Exclude:
+    - 'db/schema.rb'
     - 'Guardfile'
     - 'config/environments/**/*'    
-    - 'config/initializers/**/*'    
+    - 'config/initializers/**/*'
+    - 'spec/**/*'
 
 Style/PercentLiteralDelimiters:
   Exclude:
@@ -189,5 +192,4 @@ Style/Lambda:
     - 'config/initializers/simple_form_bootstrap.rb'
     
 Metrics/MethodLength:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
+  Max: 15
