@@ -22,6 +22,7 @@ en:
   category: Category
   content: Content
   tags: Tags
+  please_log_in: Please login in.
   welcome: 
     title: Advert board
     header_html: Welcome to the our Advert&nbsp;board!

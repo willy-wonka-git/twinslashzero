@@ -22,6 +22,7 @@ ru:
   category: Категория
   content: Содержание
   tags: Теги
+  please_log_in: Пожалуйста, залогиньтесь.
   welcome: 
     title: Доска объявлений
     header_html: Добро пожаловать на наш Advert&nbsp;board!
@@ -48,7 +49,6 @@ ru:
     new: Новое объявление
     edit: Изменить объявление
     title: Объявления
-    title_one: Объявление
     author: Автор
     category: Категория
     content: Содержание

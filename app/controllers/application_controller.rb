@@ -14,18 +14,25 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_in) do |u|
-      u.permit(:nickname, :fullname, :decription, :email,
-               :password, :password_confirmation)
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_in) do |u|
+        u.permit(:nickname, :fullname, :decription, :email,
+                 :password, :password_confirmation)
+      end
+      devise_parameter_sanitizer.permit(:sign_up) do |u|
+        u.permit(:nickname, :fullname, :decription, :email,
+                 :password, :password_confirmation)
+      end
+      devise_parameter_sanitizer.permit(:account_update) do |u|
+        u.permit(:nickname, :fullname, :decription,
+                 :email, :password, :password_confirmation, :current_password)
+      end
     end
-    devise_parameter_sanitizer.permit(:sign_up) do |u|
-      u.permit(:nickname, :fullname, :decription, :email,
-               :password, :password_confirmation)
-    end
-    devise_parameter_sanitizer.permit(:account_update) do |u|
-      u.permit(:nickname, :fullname, :decription,
-               :email, :password, :password_confirmation, :current_password)
-    end
-  end
+
+    def logged_in_user
+      unless user_signed_in?
+        flash[:danger] = t("please_log_in")
+        redirect_to new_user_session_path
+      end
+    end  
 end

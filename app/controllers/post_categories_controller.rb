@@ -1,5 +1,6 @@
 class PostCategoriesController < ApplicationController
   before_action :set_post_category, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :update, :destroy]
 
   # GET /post_categories or /post_categories.json
   def index
