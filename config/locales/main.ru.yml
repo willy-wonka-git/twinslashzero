@@ -49,9 +49,11 @@ ru:
     new: Новое объявление
     edit: Изменить объявление
     title: Объявления
+    title_one: Объявление
     author: Автор
     category: Категория
     content: Содержание
+    can_delete_or_edit_only_yours_adverts: Вы можете редактировать или удалять только свои объявления!
     categories:
       show: Категории  
       new: Новая категория

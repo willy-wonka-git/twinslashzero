@@ -53,6 +53,7 @@ en:
     author: Author
     category: Category
     content: Content
+    can_delete_or_edit_only_yours_adverts: You can edit or delete only yours adverts!
     categories:
       show: Categories
       new: New category

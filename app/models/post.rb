@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   belongs_to :author, class_name: "User"
   belongs_to :category, class_name: "PostCategory"
   has_many :taggings
@@ -30,6 +32,14 @@ class Post < ApplicationRecord
   end
 
   def self.published
-    self.where.not(published_at: nil)
+    where.not(published_at: nil)
+  end
+
+  def self.not_published
+    where(published_at: nil)
+  end
+
+  def time_ago
+    published_at ? time_ago_in_words(published_at) : ''
   end
 end

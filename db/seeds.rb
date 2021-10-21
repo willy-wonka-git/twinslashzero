@@ -43,7 +43,6 @@ rand(1...10).times do
       content: Faker::Lorem.sentence(word_count: 30),
       published_at: rand(1...10).hours.ago
     )
-    hour_publish =+ 1
     # Add tags
     rand(1..4).times do
       Tagging.create!(

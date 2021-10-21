@@ -14,7 +14,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable
 
-  def posts
-    Post.published.where(author: self)
-  end 
+  def posts(current_user)
+    Post.published.where(author: self) if current_user != self
+    Post.where(author: self)
+  end
 end

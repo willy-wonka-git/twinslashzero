@@ -15,7 +15,11 @@
         %td= link_to post.title, post_path(post)
         %td= post.category.title
         %td= post.author.nickname
-        %td= time_ago_in_words(post.published_at)
+        %td= post.time_ago
         %td= post.tag_list
-        %td= link_to t("edit"), edit_post_path(post)
-        %td= link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") }
+        - if post.author == current_user
+          %td= link_to t("edit"), edit_post_path(post)
+          %td= link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") }
+        - else
+          %td
+          %td

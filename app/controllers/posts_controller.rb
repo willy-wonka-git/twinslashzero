@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :create, :update, :destroy]
+  # before_action :logged_in_user, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_action :correct_author, only: [:destroy, :update, :edit]
 
   # GET /posts or /posts.json
   def index
@@ -74,5 +76,13 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+  end
+
+  def correct_author
+    @post = current_user.posts.find_by(id: params[:id])
+    return unless @post.nil?
+
+    flash[:error] = t("posts.can_delete_or_edit_only_yours_adverts")
+    redirect_to request.referrer || current_user
   end
 end

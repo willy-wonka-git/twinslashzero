@@ -19,7 +19,5 @@
         %td= link_to t("edit"), edit_post_category_path(post_category)
         %td= link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
 
-%br
-
 = render "common/paging", resource: @post_categories
 = render "common/add", link: new_post_category_path
