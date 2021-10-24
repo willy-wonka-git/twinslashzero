@@ -9,6 +9,8 @@
     font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
 }
 
+@import 'select2/dist/css/select2'; 
+
 @import "welcome";
 @import "posts";
 @import "tag";
