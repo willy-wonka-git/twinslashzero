@@ -7,13 +7,9 @@
 # TODO
 
 * Объявления
-	- доделать работу тегов (ajax автокомплит) 
-	[1](https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9)
-	[2](https://stackoverflow.com/questions/34171991/rails-using-ajax-to-fill-jquery-autocomplete)
-	- картинки
-
-* "картинки" объявления (превью 100х100, nested_form)
-	- облако cloudinary.com/documentation
+	- "картинки" объявления (превью 100х100, nested_form)
+		- sortable [1](https://github.com/carrierwaveuploader/carrierwave/wiki/How-to%3A-Add%2C-remove-and-reorder-images-using-multiple-file-upload)
+		- облако cloudinary.com/documentation
 
 * Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
@@ -23,8 +19,6 @@
 
 * Фильтр и сортировка объявлений
 	- поиск (ransack)
-
-* модель "объявление" (CRUD, сортировка, фильтр) // time_ago_in_words(post.created_at)
 
 * модель "статус объявления" (state_machine || aasm)
 	- "черновик" - не виден в ленте, можно изменять
@@ -62,3 +56,15 @@
 * админка https://administrate-demo.herokuapp.com/authentication https://github.com/thoughtbot/administrate
 
 * Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
+
+-------
+- картинки
+	актив рекорд
+	гит / хероку
+
+- статус
+- фильтр ранзак
+- доступ канканкан
+- удалять теги без постов
+- крон закрытие объявлений + удаление тегов sequel 
+- админка

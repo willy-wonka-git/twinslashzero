@@ -41,7 +41,7 @@ rand(1...10).times do
       category: PostCategory.order('RANDOM()').first,
       title: Faker::Lorem.sentence(word_count: 12),
       content: Faker::Lorem.sentence(word_count: 30),
-      published_at: rand(1...10).hours.ago
+      published_at: rand(1...90).hours.ago # for test an archiving
     )
     # Add tags
     rand(1..4).times do

@@ -1,13 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  # before_action :logged_in_user, only: [:new, :create, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
   before_action :correct_author, only: [:destroy, :update, :edit]
+  before_action :create_new_tags, only: [:create, :update]
 
   # GET /posts or /posts.json
   def index
-    # @posts = Post.order(created_at: :desc).page params[:page]
-    @posts = params[:tag] ? Post.tagged_with(params[:tag]) : Post.all
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+      @title = params[:tag]
+    else
+      @posts = Post.all
+    end
     @posts = @posts.published.page params[:page]
   end
 
@@ -84,5 +88,15 @@ class PostsController < ApplicationController
 
     flash[:error] = t("posts.can_delete_or_edit_only_yours_adverts")
     redirect_to request.referrer || current_user
+  end
+
+  def create_new_tags
+    params[:post][:tag_ids].each_with_index do |tag_id, index|
+      next unless tag_id.include?("#(new)")
+
+      tag = Tag.find_or_create_by(name: tag_id.sub("#(new)", ""))
+      tag.save unless tag.id
+      params[:post][:tag_ids][index] = tag.id.to_s
+    end
   end
 end

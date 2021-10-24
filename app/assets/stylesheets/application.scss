@@ -1,5 +1,3 @@
-// *= require chosen
-
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 
@@ -12,6 +10,9 @@
 }
 
 @import "welcome";
+@import "posts";
+@import "tag";
+@import "post_categories";
 
 // App sections
 @import "application/flash";

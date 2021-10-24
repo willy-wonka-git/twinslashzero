@@ -14,7 +14,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable
 
-  def posts(current_user)
+  def posts(current_user = nil)
+    # Get only published posts if not author
     Post.published.where(author: self) if current_user != self
     Post.where(author: self)
   end

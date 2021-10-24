@@ -1,4 +1,6 @@
-%h1= t("posts.title")
+%h1
+	= t("posts.title")
+	= @title
 
 = render "common/add", link: new_post_path
 = render "common/paging", resource: @posts

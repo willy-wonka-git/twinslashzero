@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|ru/ do
     get '/user/:id' => 'users#show', as: 'user'
     get '/users' => 'users#index'
-    resources :post_categories
+    resources :post_categories, path: 'categories'
     resources :posts, path: 'adv'
+    get 'tags/search', to: 'tags#search'
     get 'tags/:tag', to: 'posts#index', as: :tag
     root 'welcome#index'
   end
