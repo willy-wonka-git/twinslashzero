@@ -19,6 +19,7 @@ ru:
   destroy: Удалить
   are_you_sure: Вы уверены?
   created_at: Создан
+  id: ID
   category: Категория
   content: Содержание
   tags: Теги

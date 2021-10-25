@@ -24,5 +24,6 @@ module Twinslashzero
     # Include the authenticity token in remote forms.
     config.embed_authenticity_token_in_remote_forms = true
     config.serve_static_assets = true    
+    config.i18n.available_locales = [:en, :ru]
   end
 end

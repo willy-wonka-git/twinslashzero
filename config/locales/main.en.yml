@@ -19,6 +19,7 @@ en:
   destroy: Destroy
   are_you_sure: Are you sure?
   created_at: Created
+  id: ID
   category: Category
   content: Content
   tags: Tags
