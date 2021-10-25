@@ -1,22 +1,29 @@
 class User < ApplicationRecord
   extend Enumerize
 
+  enumerize :role, in: [:guest, :user, :admin], default: :user
+  has_many :posts, dependent: :destroy
+  has_one_attached :avatar
+
   validates :nickname, presence: true, length: { minimum: 5, maximum: 30 }, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 200 }
+  validates :avatar, content_type: { in: %w[image/jpeg image/gif image/png],
+                                     message: I18n.t("errors.messages.must_be_valid_image_format") },
+                     size: { less_than: 5.megabytes,
+                             message: I18n.t("errors.messages.should_be_less_than_5mb") }
 
-  enumerize :role, in: [:guest, :user, :admin], default: :user
-
-  has_many :posts, dependent: :destroy
-
-  # Include default devise modules. Others available are:
+  # Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable
 
   def posts(current_user = nil)
-    # Get only published posts if not author
     Post.published.where(author: self) if current_user != self
     Post.where(author: self)
+  end
+
+  def avatar_key
+    avatar.key || :noavatar
   end
 end

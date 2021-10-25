@@ -22,6 +22,8 @@ ru:
   category: Категория
   content: Содержание
   tags: Теги
+  tag_ids: Теги
+  avatar: Аватар
   please_log_in: Пожалуйста, залогиньтесь.
   welcome: 
     title: Доска объявлений
@@ -35,6 +37,30 @@ ru:
     success: Успешно
     error: Ошибка
     info:  Информация
+  errors:
+    messages:
+      content_type_invalid: "имеет неверный тип контента"
+      file_size_out_of_range: "размер %{file_size} за пределами допустимого"
+      limit_out_of_range: "количество превышено"
+      image_metadata_missing: "некорректное изображение"
+      dimension_min_inclusion: "должно быть больше или равно %{width} x %{height} px."
+      dimension_max_inclusion: "должно быть меньше или равно  %{width} x %{height} px."
+      dimension_width_inclusion: "ширина за пределами  %{min} и  %{max} px."
+      dimension_height_inclusion: "высота за пределами %{min} и %{max} px."
+      dimension_width_greater_than_or_equal_to: "ширина должна бить больше или равна %{length} px."
+      dimension_height_greater_than_or_equal_to: "высота должна бить больше или равна %{length} px."
+      dimension_width_less_than_or_equal_to: "ширина должна быть меньше или равна %{length} px."
+      dimension_height_less_than_or_equal_to: "высота должна быть меньше или равна %{length} px."
+      dimension_width_equal_to: "ширина должна быть равна %{length} px."
+      dimension_height_equal_to: "высота должна быть равна %{length} px."
+      aspect_ratio_not_square: "изображение должно быть квадратным"
+      aspect_ratio_not_portrait: "изображение должно быть портретным"
+      aspect_ratio_not_landscape: "изображение должно быть landscape"
+      aspect_ratio_is_not: "разрешение должно быть %{aspect_ratio}"
+      aspect_ratio_unknown: "неизвестное разрешение"
+      must_be_valid_image_format: "неверный формат изображения"  
+      should_be_less_than_5mb: "должно быть меньше 5мб" 
+      is_not_given_between_dimension: "недопустимое разрешение"
   users:
     user: Пользователь
     users: Пользователи

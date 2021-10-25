@@ -161,6 +161,8 @@ Layout/LineLength:
   Exclude:
     - 'config/initializers/**/*'
     - 'app/helpers/icon_helper.rb'
+    - 'config/initializers/**/*'
+    - 'db/migrate/**/*'
 
 Layout/EmptyLines:
     Exclude:
@@ -193,3 +195,10 @@ Style/Lambda:
     
 Metrics/MethodLength:
   Max: 15
+  Exclude:
+    - 'db/migrate/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/**/*'
+    

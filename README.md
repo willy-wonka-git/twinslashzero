@@ -8,6 +8,8 @@
 
 * Объявления
 	- "картинки" объявления (превью 100х100, nested_form)
+		- active storage
+			в гитогнор папку з агрузки
 		- sortable [1](https://github.com/carrierwaveuploader/carrierwave/wiki/How-to%3A-Add%2C-remove-and-reorder-images-using-multiple-file-upload)
 		- облако cloudinary.com/documentation
 

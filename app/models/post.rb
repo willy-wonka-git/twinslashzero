@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :category, class_name: "PostCategory"
   has_many :taggings
   has_many :tags, through: :taggings
+  # has_many_attached :photos
 
   default_scope -> { order(published_at: :desc, created_at: :desc) }
 

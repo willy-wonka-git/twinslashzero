@@ -28,6 +28,8 @@ en:
         nickname: Nickname
         fullname: Fullname
         description: Description
+        tag_ids: Tags
+        avatar: Avatar
     models:
       user:
         one: User

@@ -96,3 +96,7 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'faker'
 
 gem 'cancancan'
+
+gem 'cloudinary'
+gem "mini_magick"
+gem 'active_storage_validations'

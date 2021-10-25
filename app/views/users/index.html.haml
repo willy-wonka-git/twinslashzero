@@ -5,6 +5,7 @@
   %thead
     %tr
       %th{:scope => "id"} #
+      %th{:scope => "avatar"}
       %th{:scope => "nickname"}= t("users.nickname")
       %th{:scope => "fullname"}= t("users.fullname")
       %th{:scope => "email"}= t("users.email")
@@ -14,6 +15,7 @@
     - @users.each do |user|
       %tr
         %th{:scope => "row"}= user.id
+        %td= cl_image_tag(user.avatar_key, width: 32, height: 32, crop: :scale, class: "img-thumbnail")
         %td= link_to user.nickname, user_path(user)
         %td= user.fullname
         %td= user.email

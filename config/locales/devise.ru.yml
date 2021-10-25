@@ -28,6 +28,8 @@ ru:
         nickname: Имя пользователя
         fullname: ФИО
         description: Описание
+        tag_ids: Теги
+        avatar: Аватар
     models:
       user:
         few: Пользователя

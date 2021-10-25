@@ -7,6 +7,8 @@
   = f.input :fullname, autocomplete: "fullname"
   = f.input :email, required: true, autocomplete: "email"
   = t("devise.registrations.edit.currently_waiting_confirmation_for_email", resource.unconfirmed_email) if devise_mapping.confirmable? && resource.pending_reconfirmation?
+  = cl_image_tag(@user.avatar_key, width: 120, height: 120, crop: :scale, class: "img-thumbnail", style: "width: 120px")
+  = f.input :avatar, input_html: { class: "form-control" }
   = f.input :description, as: :text
 
   = f.input :password, autocomplete: "new-password", hint: t("devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it") + ' ' + t("devise.shared.minimum_password_length", count: @minimum_password_length)
