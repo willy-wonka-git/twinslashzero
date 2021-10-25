@@ -6,13 +6,6 @@
 
 # TODO
 
-* Объявления
-	- "картинки" объявления (превью 100х100, nested_form)
-		- active storage
-			в гитогнор папку з агрузки
-		- sortable [1](https://github.com/carrierwaveuploader/carrierwave/wiki/How-to%3A-Add%2C-remove-and-reorder-images-using-multiple-file-upload)
-		- облако cloudinary.com/documentation
-
 * Настроить форму просмотра и редактирования от роли (cancancan)
 	https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Adding_User_Field_and_Customization_Update_Saved.php
 	https://stackoverflow.com/questions/25223919/rails-devise-customize-the-create-method
@@ -60,10 +53,6 @@
 * Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
 
 -------
-- картинки
-	актив рекорд
-	гит / хероку
-
 - статус
 - фильтр ранзак
 - доступ канканкан

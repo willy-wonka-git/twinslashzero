@@ -26,6 +26,7 @@ import 'select2/dist/css/select2.css';
 document.addEventListener('turbolinks:load', function() {
 	selectTags();
 
+	previewAvatar();
 	previewPhotos();
 })
 
@@ -35,6 +36,15 @@ function previewPhotos() {
       $("#current-photos").html('');
       for (var i = 0; i < $(this)[0].files.length; i++) {
         $("#new-photos").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="200px" class="img-thumbnail"/>');
+      }
+  });
+}
+
+function previewAvatar() {
+  $('#user_avatar').change(function(){
+      $("#avatar").html('');
+      for (var i = 0; i < $(this)[0].files.length; i++) {
+        $("#avatar").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="120px" class="img-thumbnail"/>');
       }
   });
 }
