@@ -1,3 +1,10 @@
+# Clear database
+Tagging.all.delete_all
+Tag.all.delete_all
+Post.all.delete_all
+PostCategory.all.delete_all
+User.all.delete_all
+
 # Create user admin
 User.create(
   nickname: "admin",
@@ -33,7 +40,7 @@ end
 end
 
 # Create posts
-users = User.order('RANDOM()').take(10)
+users = User.order('RANDOM()').take(50)
 rand(1...10).times do
   users.each do |user|
     post = Post.create!(

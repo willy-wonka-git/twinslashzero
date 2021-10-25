@@ -1,6 +1,14 @@
 %p#notice= notice
 
 %p
+  %b= t("created_at")
+  = @post.created_at
+
+- if @post.published_at
+  %p
+    %b= t("published_at")
+    = @post.published_at
+%p
   %b= t("posts.author")
   = link_to @post.author.nickname, @post.author
 %p
@@ -16,6 +24,11 @@
   %b= t("tags")
   %small
     = raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
+- if @post.photos.any?
+  %p
+    - @post.photos.each do |photo|
+      %a{ href: cl_image_path(photo.key), target: "_blank" }
+        = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
 
 - if current_user == @post.author then
   = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"

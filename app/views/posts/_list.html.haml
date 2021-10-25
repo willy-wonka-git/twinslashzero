@@ -1,6 +1,7 @@
 %table.table
   %thead
     %tr
+      %th
       %th= t("posts.title_one")
       %th= t("posts.category")
       %th= t("posts.author")
@@ -8,14 +9,19 @@
       %th= t("tags")
       %th
       %th
-
+      %th
   %tbody
     - posts.each do |post|
       %tr
+        %td
+          - if post.photos.any?
+            %a{ href: cl_image_path(post.photos.first.key), target: "_blank" }
+              = cl_image_tag(post.photos.first.key, width: 80)
         %td= link_to post.title, post_path(post)
+        %td
         %td= post.category.title
         %td= post.author.nickname
-        %td= post.time_ago
+        %td{ style: "white-space: nowrap" }= post.time_ago
         %td= post.tag_list
         - if post.author == current_user
           %td= link_to t("edit"), edit_post_path(post)

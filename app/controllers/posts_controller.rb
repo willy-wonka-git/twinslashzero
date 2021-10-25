@@ -46,6 +46,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
+      @post.published_at = Time.now
       if @post.update(post_params)
         format.html { redirect_to @post, notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
@@ -70,6 +71,7 @@ class PostsController < ApplicationController
   def set_post_defaults
     @post.author = current_user
     @post.category = PostCategory.find(@post.category_id) if @post.category_id
+    @post.published_at = Time.now
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -79,7 +81,8 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+    params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids,
+                                 { photos: [] }, :photos)
   end
 
   def correct_author

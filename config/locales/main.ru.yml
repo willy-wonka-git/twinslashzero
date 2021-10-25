@@ -24,8 +24,11 @@ ru:
   content: Содержание
   tags: Теги
   tag_ids: Теги
+  photos: Изображения
   avatar: Аватар
   please_log_in: Пожалуйста, залогиньтесь.
+  created_at: Создано
+  published_at: Опубликовано
   welcome: 
     title: Доска объявлений
     header_html: Добро пожаловать на наш Advert&nbsp;board!

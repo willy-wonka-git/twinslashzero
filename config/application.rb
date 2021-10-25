@@ -23,7 +23,7 @@ module Twinslashzero
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     # Include the authenticity token in remote forms.
     config.embed_authenticity_token_in_remote_forms = true
-    config.serve_static_assets = true    
+    config.serve_static_assets = true
     config.i18n.available_locales = [:en, :ru]
   end
 end

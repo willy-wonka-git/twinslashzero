@@ -24,9 +24,12 @@ en:
   content: Content
   tags: Tags
   tag_ids: Tags
+  photos: Images
   avatar: Avatar
   please_log_in: Please login in.
-  welcome: 
+  created_at: Created at
+  published_at: Published at
+  welcome:
     title: Advert board
     header_html: Welcome to the our Advert&nbsp;board!
     description_html: Test work for Ruby/Rails&nbsp;developer

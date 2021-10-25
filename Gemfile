@@ -100,5 +100,3 @@ gem 'cancancan'
 gem 'cloudinary'
 gem "mini_magick"
 gem 'active_storage_validations'
-
-gem 'rails_12factor', group: :production

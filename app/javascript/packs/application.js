@@ -25,7 +25,19 @@ import 'select2/dist/css/select2.css';
 
 document.addEventListener('turbolinks:load', function() {
 	selectTags();
+
+	previewPhotos();
 })
+
+function previewPhotos() {
+  $('#post_photos').change(function(){
+      $("#new-photos").html('');
+      $("#current-photos").html('');
+      for (var i = 0; i < $(this)[0].files.length; i++) {
+        $("#new-photos").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="200px" class="img-thumbnail"/>');
+      }
+  });
+}
 
 function selectTags() {
 	// Fix: selections do not appear in the order in which they were selected 
