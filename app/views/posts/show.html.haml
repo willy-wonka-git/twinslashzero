@@ -2,12 +2,12 @@
 
 %p
   %b= t("created_at")
-  = @post.created_at
+  = @post.created_at.strftime("%D %H:%M")
 
 - if @post.published_at
   %p
     %b= t("published_at")
-    = @post.published_at
+    = @post.published_at.strftime("%D %H:%M")
 %p
   %b= t("posts.author")
   = link_to @post.author.nickname, @post.author
