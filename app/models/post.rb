@@ -5,13 +5,17 @@ class Post < ApplicationRecord
   belongs_to :category, class_name: "PostCategory"
   has_many :taggings
   has_many :tags, through: :taggings
-  # has_many_attached :photos
+  has_many_attached :photos
 
   default_scope -> { order(published_at: :desc, created_at: :desc) }
 
   validates :category, :title, :content, presence: true
   validates :title, length: { minimum: 5, maximum: 200 }
   validates :content, length: { minimum: 50, maximum: 2000 }
+  validates :photos, content_type: { in: %w[image/jpeg image/gif image/png],
+                                     message: I18n.t("errors.messages.must_be_valid_image_format") },
+                     size: { less_than: 5.megabytes,
+                             message: I18n.t("errors.messages.should_be_less_than_5mb") }
 
   def self.tagged_with(name)
     tag = Tag.find_by(name: name)
