@@ -9,3 +9,7 @@
 
 = link_to t("edit"), edit_post_category_path(@post_category), class: "btn btn-primary mr-2"
 = link_to t("back"), post_categories_path, class: "btn btn-secondary"
+
+= render "common/paging", resource: @posts
+= render "posts/list", posts: @posts
+= render "common/paging", resource: @posts

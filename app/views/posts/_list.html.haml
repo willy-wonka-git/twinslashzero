@@ -18,7 +18,6 @@
             %a{ href: cl_image_path(post.photos.first.key), target: "_blank" }
               = cl_image_tag(post.photos.first.key, width: 80)
         %td= link_to post.title, post_path(post)
-        %td
         %td= post.category.title
         %td= post.author.nickname
         %td{ style: "white-space: nowrap" }= post.time_ago

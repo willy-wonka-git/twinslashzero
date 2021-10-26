@@ -97,6 +97,10 @@ gem 'faker'
 
 gem 'cancancan'
 
+gem 'aasm'
+
 gem 'cloudinary'
 gem "mini_magick"
 gem 'active_storage_validations'
+
+gem 'ransack'
