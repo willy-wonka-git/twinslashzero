@@ -1,0 +1,9 @@
+%h1
+	= t("posts.moderate")
+	= @title
+
+= render "common/paging", resource: @posts
+
+= render "posts/list", posts: @posts
+
+= render "common/paging", resource: @posts

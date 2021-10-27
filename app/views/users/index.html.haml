@@ -11,6 +11,7 @@
       %th{:scope => "email"}= t("users.email")
       %th{:scope => "role"}= t("users.role")
       %th{:scope => "description"}= t("users.description")
+      %th
   %tbody
     - @users.each do |user|
       %tr
@@ -21,4 +22,7 @@
         %td= user.email
         %td= user.role
         %td= user.description
+        %td
+          - if can? :destroy, user
+            = link_to t("destroy"), user, method: :delete, data: { confirm: t("are_you_sure") }
 = paginate @users, outer_window: 3, window: 1, class: "mt-2"

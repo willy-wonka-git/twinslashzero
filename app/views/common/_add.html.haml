@@ -1,3 +1,4 @@
-= link_to link, class: "btn btn-success" do
-	%i.bi.bi-plus-circle
-	= t("add")
+- if current_user.present?
+	= link_to link, class: "btn btn-success" do
+		%i.bi.bi-plus-circle
+		= t("add")

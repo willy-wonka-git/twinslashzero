@@ -12,6 +12,16 @@ User.create(
   email: "admin@gmail.com",
   password: "111111"
 )
+puts 'Created "admin" (email: admin@gmail.com, password: 111111)'
+
+# Create user
+User.create(
+  nickname: "user",
+  role: "user",
+  email: "user@gmail.com",
+  password: "111111"
+)
+puts 'Created "user" (email: user@gmail.com, password: 111111)'
 
 # Create categories
 12.times do

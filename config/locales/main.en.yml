@@ -29,6 +29,9 @@ en:
   please_log_in: Please login in.
   created_at: Created at
   published_at: Published at
+  unauthorized:
+    manage:
+      all: "You have no access to this resource"
   welcome:
     title: Advert board
     header_html: Welcome to the our Advert&nbsp;board!
@@ -80,6 +83,7 @@ en:
     edit: Edit advert
     title: Adverts
     title_one: Advert
+    moderate: Moderate
     author: Author
     category: Category
     content: Content
@@ -89,6 +93,17 @@ en:
       new: New category
       edit: Edit category
       title: Listing categories
+    states:
+      draft: Draft
+      new: New
+      banned: Banned
+      approved: Approved
+      published: Published
+      archived: Archived
+    messages:
+      post_was_successfully_created: Advert was successfully created.
+      post_was_successfully_updated: Advert was successfully updated.
+      post_was_successfully_destroyed: Advert was successfully destroyed.
   enumerize:
     user:
       roles:

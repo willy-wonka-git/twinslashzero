@@ -29,6 +29,9 @@ ru:
   please_log_in: Пожалуйста, залогиньтесь.
   created_at: Создано
   published_at: Опубликовано
+  unauthorized:
+    manage:
+      all: "У вас нет доступа к этому ресурсу"
   welcome: 
     title: Доска объявлений
     header_html: Добро пожаловать на наш Advert&nbsp;board!
@@ -80,6 +83,7 @@ ru:
     edit: Изменить объявление
     title: Объявления
     title_one: Объявление
+    moderate: Модерация
     author: Автор
     category: Категория
     content: Содержание
@@ -89,6 +93,17 @@ ru:
       new: Новая категория
       edit: Редактировать категорию
       title: Список категорий
+    states:
+      draft: Черновик
+      new: Новый
+      banned: Отклонено
+      approved: Одобрено
+      published: Опубликовано
+      archived: В архиве
+    messages:
+      post_was_successfully_created: Объявление было успешно создано.
+      post_was_successfully_updated: Объявление было успешно обновлено.
+      post_was_successfully_destroyed: Объявление было успешно удалено.
   enumerize:
     user:
       roles:

@@ -22,9 +22,8 @@
         %td= post.author.nickname
         %td{ style: "white-space: nowrap" }= post.time_ago
         %td= post.tag_list
-        - if post.author == current_user
-          %td= link_to t("edit"), edit_post_path(post)
-          %td= link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") }
-        - else
-          %td
-          %td
+        %td= t('posts.states.' + post.aasm_state.to_s)
+        %td
+          = link_to t("edit"), edit_post_path(post) if can? :edit, post
+        %td
+          = link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") } if can? :destroy, post

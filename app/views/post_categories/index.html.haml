@@ -1,6 +1,6 @@
 %h1= t("posts.categories.title")
 
-= render "common/add", link: new_post_category_path
+= render "common/add", link: new_post_category_path if can? :create, PostCategory
 = render "common/paging", resource: @post_categories
 
 %table.table
@@ -16,8 +16,9 @@
       %tr
         %td= link_to post_category.title, post_category
         %td= post_category.description
-        %td= link_to t("edit"), edit_post_category_path(post_category)
-        %td= link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
+        - if can? :edit, post_category
+          %td= link_to t("edit"), edit_post_category_path(post_category)
+          %td= link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
 
 = render "common/paging", resource: @post_categories
-= render "common/add", link: new_post_category_path
+= render "common/add", link: new_post_category_path if can? :create, PostCategory

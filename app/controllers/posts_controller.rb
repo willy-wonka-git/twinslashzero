@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
-  before_action :correct_author, only: [:destroy, :update, :edit]
   before_action :create_new_tags, only: [:create, :update]
 
   # GET /posts or /posts.json
@@ -13,6 +13,10 @@ class PostsController < ApplicationController
       @posts = Post.all
     end
     @posts = @posts.published.page params[:page]
+  end
+
+  def moderate
+    @posts = Post.not_moderated.page params[:page]
   end
 
   # GET /posts/1 or /posts/1.json
@@ -34,7 +38,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
+        format.html { redirect_to @post, notice: t("posts.messages.post_was_successfully_created") }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,7 +52,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       @post.published_at = Time.now
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post was successfully updated." }
+        format.html { redirect_to @post, notice: t("posts.messages.post_was_successfully_updated") }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +65,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: t("Post was successfully destroyed.") }
+      format.html { redirect_to posts_url, notice: t("posts.messages.post_was_successfully_destroyed") }
       format.json { head :no_content }
     end
   end
@@ -83,14 +87,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids,
                                  { photos: [] }, :photos)
-  end
-
-  def correct_author
-    @post = current_user.posts.find_by(id: params[:id])
-    return unless @post.nil?
-
-    flash[:error] = t("posts.can_delete_or_edit_only_yours_adverts")
-    redirect_to request.referrer || current_user
   end
 
   def create_new_tags

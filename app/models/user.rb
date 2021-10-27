@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   enumerize :role, in: [:guest, :user, :admin], default: :user
   has_many :posts, dependent: :destroy
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :destroy
 
   validates :nickname, presence: true, length: { minimum: 5, maximum: 30 }, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 200 }
@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def avatar_key
     avatar.key || :noavatar
   end
+
+  def admin?
+    role == :admin
+  end  
 end

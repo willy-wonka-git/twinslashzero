@@ -30,6 +30,6 @@
       %a{ href: cl_image_path(photo.key), target: "_blank" }
         = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
 
-- if current_user == @post.author then
+- if can? :update, @post
   = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
-  = link_to t("back"), posts_path, class: "btn btn-secondary"
+= link_to t("back"), posts_path, class: "btn btn-secondary"

@@ -29,11 +29,4 @@ class ApplicationController < ActionController::Base
                :avatar)
     end
   end
-
-  def logged_in_user
-    return if user_signed_in?
-
-    flash[:danger] = t("please_log_in")
-    redirect_to new_user_session_path
-  end
 end
