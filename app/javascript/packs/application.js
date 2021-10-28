@@ -20,14 +20,22 @@ ActiveStorage.start()
 
 // Select tags with ajax
 import $ from 'jquery';
+import 'bootstrap/dist/js/bootstrap.bundle'
+import 'popper.js/dist/esm/popper'
 import select2 from 'select2';
 import 'select2/dist/css/select2.css';
 
 document.addEventListener('turbolinks:load', function() {
-	selectTags();
+	setTimeout(() => {
+		$('.app-flash').fadeOut(300);
+	}, 4000)
 
+	selectTags();
 	previewAvatar();
 	previewPhotos();
+
+  $('#message').fadeOut(0)
+	changeState();
 })
 
 function previewPhotos() {
@@ -50,9 +58,8 @@ function previewAvatar() {
 }
 
 function selectTags() {
-	// Fix: selections do not appear in the order in which they were selected 
+	// FIX: selections do not appear in the order in which they were selected 
 	// https://github.com/select2/select2/issues/3106
-
   $('#post_tag_ids').select2({
 	  createTag: function (params) {
 	    return {
@@ -82,4 +89,57 @@ function selectTags() {
 	  minimumInputLength: 2,
 	  maximumInputLength: 20
 	})
+}
+
+function changeState() {
+  const links = document.querySelectorAll("#state a[data-remote]");
+  links.forEach((element) => {
+
+    element.addEventListener("ajax:beforeSend", (event, options, v) => {
+  		// TODO: modal
+    	// check reason for ban and reject
+    	if ("reject, ban".indexOf(event.target.dataset.state) != -1) {
+				var reason = prompt("Please enter the reason");
+				if (reason) {
+				  $.post({
+				    url: event.detail[1].url,
+				    data: {
+				    	authenticity_token: $('[name="csrf-token"]')[0].content,
+				    	reason: reason
+				    }
+				  })
+				  .then((data) => {
+				  	setState(data)
+				  });
+				}
+		    event.preventDefault();
+	    }
+    });
+
+    element.addEventListener("ajax:success", (event) => {
+    	setState(event.detail[0])
+    });
+  });	
+}
+
+function setState(data) {
+  var fadeInterval = 300;
+  var message = $('#message');
+
+	$('#current-state').fadeOut(fadeInterval, function() {
+	    $(this).html(data.current_state).fadeIn(fadeInterval);
+	});
+
+	$('#state').fadeOut(fadeInterval, function() {
+	    $(this).html(data.content).fadeIn(fadeInterval);
+	    changeState();
+	});
+
+	message.addClass("alert-success")
+  message.text(data.message)
+	message.fadeIn(fadeInterval)
+	setTimeout(() => {
+  	message.removeClass("alert-success")
+		message.fadeOut(fadeInterval)
+	}, 2000)
 }

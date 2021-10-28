@@ -1,0 +1,6 @@
+#state.dropdown
+  %button.btn.btn-secondary.dropdown-toggle.btn-sm{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button", id: "state-" + post.id.to_s}= t("edit")
+  %ul.dropdown-menu{"aria-labelledby" => "state-" + post.id.to_s}
+    - post.aasm.events(permitted: true).map(&:name).select{ |v| can? v, post }.map(&:to_s).each do |state|
+      %li
+        = link_to t("posts.states." + state), send("post_#{state}_path", post), method: :post, remote: true, type: "button", class: "dropdown-item"

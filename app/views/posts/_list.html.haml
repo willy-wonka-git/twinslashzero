@@ -7,6 +7,8 @@
       %th= t("posts.author")
       %th= t("created_at")
       %th= t("tags")
+      - if User.current_user.admin?
+        %th
       %th
       %th
       %th
@@ -23,6 +25,8 @@
         %td{ style: "white-space: nowrap" }= post.time_ago
         %td= post.tag_list
         %td= t('posts.states.' + post.aasm_state.to_s)
+        - if User.current_user.admin?
+          %td= render "posts/state_dropdown", post: post
         %td
           = link_to t("edit"), edit_post_path(post) if can? :edit, post
         %td

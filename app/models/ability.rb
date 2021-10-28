@@ -8,13 +8,14 @@ class Ability
     can :read, Post
     can :read, PostCategory
     can [:read, :search], Tag
-    cannot :moderate, Post
   
     # permissions for users
     return unless user.present?
 
     can :create, Post
-    can :manage, Post, author: user
+    can [:destroy, :archive], Post, author: user
+    can :edit, Post, author: user, aasm_state: :draft
+    can [:run, :draft, :archive], Post, author: user
     can :create, Tag
   
     # permissions for administrators
@@ -24,6 +25,7 @@ class Ability
     cannot :destroy, User, id: user.id
     cannot [:create, :update], Post
     can :destroy, Post
+    can [:reject, :ban, :approve, :publish, :archive, :draft], Post
     can :moderate, Post
     can :manage, PostCategory
     can :manage, Tag

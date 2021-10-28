@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_current_user
+
   around_action :switch_locale
 
   def default_url_options
@@ -28,5 +30,9 @@ class ApplicationController < ActionController::Base
                :email, :password, :password_confirmation, :current_password,
                :avatar)
     end
+  end
+
+  def set_current_user
+    User.current_user = current_user || User.new({ role: :guest })
   end
 end

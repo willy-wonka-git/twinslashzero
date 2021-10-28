@@ -38,11 +38,20 @@ class Post < ApplicationRecord
   end
 
   def self.published
-    where(aasm_state: :approved)
+    where(aasm_state: :published)
   end
 
   def self.not_moderated
-    where.not(aasm_state: [:banned, :draft, :approved, :archived])
+    # all
+    where(aasm_state: [:new])
+  end
+
+  def created
+    created_at.strftime("%D %H:%M")
+  end
+
+  def published
+    published_at.strftime("%D %H:%M") if published_at
   end
 
   def time_ago
@@ -54,8 +63,6 @@ class Post < ApplicationRecord
   end
 
   aasm do
-    after_all_transitions :log_status_change
-
     state :draft, initial: true, display: I18n.t('posts.states.draft')
     state :new, display: I18n.t('posts.states.new')
     state :banned, display: I18n.t('posts.states.banned')
@@ -64,19 +71,19 @@ class Post < ApplicationRecord
     state :archived, display: I18n.t('posts.states.archived')
 
     event :draft do
-      transitions from: [:new, :approved, :published], to: :draft
+      transitions from: [:new, :approved, :published, :archived], to: :draft, guard: :can_edit? 
     end
 
-    event :moderate do
-      transitions from: :draft, to: :new
+    event :run do
+      transitions from: :draft, to: :new, guard: :can_edit?
     end
 
     event :reject do
-      transitions from: :new, to: :draft, guard: :can_moderate?
-      transitions from: :new, to: :banned, guard: :can_moderate?
+      transitions from: [:new, :approved, :published, :archived], to: :draft, guard: :can_moderate?
     end
 
     event :ban do
+      transitions from: [:new, :approved, :published, :archived], to: :banned, guard: :can_moderate?
     end
 
     event :approve do
@@ -84,23 +91,19 @@ class Post < ApplicationRecord
     end
 
     event :publish do
-      transitions from: :approved, to: :published
-    end
-
-    event :edit do
-      transitions from: [:approved, :published, :archived], to: :draft
+      transitions from: :approved, to: :published, guard: :can_moderate?
     end
 
     event :archive do
-      transitions from: [:approved, :published], to: :archived
+      transitions from: [:approved, :published], to: :archived, guard: :can_moderate? || :can_edit?
     end
   end  
-
-  def log_status_change
-    # puts "Changed from #{aasm.from_state} to #{aasm.to_state} (event: #{aasm.current_event})"
+  
+  def can_moderate?
+    User.current_user.admin?
   end
 
-  def can_moderate?
-    can? :moderate, self
-  end   
+  def can_edit?
+    author == User.current_user
+  end
 end

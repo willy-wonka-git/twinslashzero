@@ -9,6 +9,8 @@ ru:
   edit: Изменить
   update: Обновить
   save: Сохранить
+  count: Количество
+  total: Всего
   logged_in_as: "Пользователь:"
   title: Наименование
   description: Описание
@@ -27,8 +29,8 @@ ru:
   photos: Изображения
   avatar: Аватар
   please_log_in: Пожалуйста, залогиньтесь.
-  created_at: Создано
-  published_at: Опубликовано
+  created: Создано
+  published: Опубликовано
   unauthorized:
     manage:
       all: "У вас нет доступа к этому ресурсу"
@@ -78,6 +80,7 @@ ru:
     role: Роль
     description: Описание
   posts:
+    state: Состояние
     show: Объявления
     new: Новое объявление
     edit: Изменить объявление
@@ -95,11 +98,17 @@ ru:
       title: Список категорий
     states:
       draft: Черновик
-      new: Новый
+      new: Модерация
       banned: Отклонено
       approved: Одобрено
       published: Опубликовано
       archived: В архиве
+      run: На модерацию
+      ban: Заблокировать
+      reject: Отклонить в черновик
+      approve: Одобрить
+      archive: Архивировать
+      publish: Опубликовать
     messages:
       post_was_successfully_created: Объявление было успешно создано.
       post_was_successfully_updated: Объявление было успешно обновлено.

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
   
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :run, :draft, :approve, :ban, :archive, :publish]
   before_action :create_new_tags, only: [:create, :update]
 
   # GET /posts or /posts.json
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
       @posts = Post.tagged_with(params[:tag])
       @title = params[:tag]
     else
-      @posts = Post.all
+      @posts = Post
     end
     @posts = @posts.published.page params[:page]
   end
@@ -70,6 +70,41 @@ class PostsController < ApplicationController
     end
   end
 
+  def run
+    @post.run
+    render save_post
+  end
+
+  def draft
+    @post.draft
+    render save_post
+ end
+
+  def reject
+    @post.reject
+    render save_post
+  end
+
+  def ban
+    @post.ban
+    render save_post
+  end
+
+  def approve
+    @post.approve
+    render save_post
+  end
+
+  def publish
+    @post.publish
+    render save_post
+  end
+
+  def archive
+    @post.archive
+    render save_post
+  end
+
   private
 
   def set_post_defaults
@@ -97,5 +132,17 @@ class PostsController < ApplicationController
       tag.save unless tag.id
       params[:post][:tag_ids][index] = tag.id.to_s
     end
+  end
+
+  def save_post
+    @post.published_at = @post.aasm_state == :published.to_s ? Time.now : nil
+    @post.save
+    {
+      json: { 
+        current_state: I18n.t("posts.states." + @post.aasm.current_state.to_s),
+        message: I18n.t("posts.messages.post_was_successfully_updated"),
+        content: (render_to_string partial: '/posts/state', locals: {post: @post}, layout: false )  
+      }
+    } 
   end
 end

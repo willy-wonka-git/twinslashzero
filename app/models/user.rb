@@ -18,6 +18,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable
 
+  class << self
+    def current_user=(user)
+      Thread.current[:current_user] = user
+    end
+
+    def current_user
+      Thread.current[:current_user]
+    end
+  end
+
   def posts(current_user = nil)
     Post.published.where(author: self) if current_user != self
     Post.where(author: self)

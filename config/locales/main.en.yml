@@ -9,6 +9,8 @@ en:
   edit: Edit
   update: Update
   save: Save
+  count: Count
+  total: Total
   logged_in_as: "Logged in as:"
   title: Title
   description: Description
@@ -27,8 +29,8 @@ en:
   photos: Images
   avatar: Avatar
   please_log_in: Please login in.
-  created_at: Created at
-  published_at: Published at
+  created: Created
+  published: Published
   unauthorized:
     manage:
       all: "You have no access to this resource"
@@ -78,6 +80,7 @@ en:
     role: Role
     description: Description
   posts:
+    state: State
     show: Adverts
     new: New advert
     edit: Edit advert
@@ -95,11 +98,17 @@ en:
       title: Listing categories
     states:
       draft: Draft
-      new: New
+      new: Moderation
       banned: Banned
       approved: Approved
       published: Published
       archived: Archived
+      run: For moderate
+      ban: Block
+      reject: Reject to draft
+      approve: Approve
+      archive: Archive
+      publish: Publish
     messages:
       post_was_successfully_created: Advert was successfully created.
       post_was_successfully_updated: Advert was successfully updated.
