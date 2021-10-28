@@ -14,7 +14,7 @@ class Ability
 
     can :create, Post
     can [:destroy, :archive], Post, author: user
-    can :edit, Post, author: user, aasm_state: :draft
+    can :update, Post, author: user, aasm_state: "draft"
     can [:run, :draft, :archive], Post, author: user
     can :create, Tag
 
