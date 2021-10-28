@@ -31,6 +31,7 @@ en:
   please_log_in: Please login in.
   created: Created
   published: Published
+  ago: "%{time} ago"
   unauthorized:
     manage:
       all: "You have no access to this resource"
@@ -109,6 +110,7 @@ en:
       approve: Approve
       archive: Archive
       publish: Publish
+      history: "%{user} set %{state}"
     messages:
       post_was_successfully_created: Advert was successfully created.
       post_was_successfully_updated: Advert was successfully updated.

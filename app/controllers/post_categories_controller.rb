@@ -1,6 +1,6 @@
 class PostCategoriesController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_post_category, only: [:show, :edit, :update, :destroy]
 
   # GET /post_categories or /post_categories.json

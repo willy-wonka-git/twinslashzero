@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_144202) do
+ActiveRecord::Schema.define(version: 2021_10_28_195927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 2021_10_26_144202) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness",
+                                                    unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -40,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_144202) do
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "post_categories", force: :cascade do |t|
@@ -49,6 +50,17 @@ ActiveRecord::Schema.define(version: 2021_10_26_144202) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["title"], name: "index_post_categories_on_title", unique: true
+  end
+
+  create_table "post_history", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.string "state", null: false
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_post_history_on_post_id"
+    t.index ["user_id"], name: "index_post_history_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -71,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_144202) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_taggings_on_post_id"
-    t.index ["tag_id", "post_id"], name: "index_taggings_on_tag_id_and_post_id"
+    t.index %w[tag_id post_id], name: "index_taggings_on_tag_id_and_post_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
@@ -102,6 +114,8 @@ ActiveRecord::Schema.define(version: 2021_10_26_144202) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "post_history", "posts"
+  add_foreign_key "post_history", "users"
   add_foreign_key "posts", "post_categories", column: "category_id"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "taggings", "posts"

@@ -31,6 +31,7 @@ ru:
   please_log_in: Пожалуйста, залогиньтесь.
   created: Создано
   published: Опубликовано
+  ago: "%{time} назад"
   unauthorized:
     manage:
       all: "У вас нет доступа к этому ресурсу"
@@ -109,6 +110,7 @@ ru:
       approve: Одобрить
       archive: Архивировать
       publish: Опубликовать
+      history: "%{user} -> %{state}"
     messages:
       post_was_successfully_created: Объявление было успешно создано.
       post_was_successfully_updated: Объявление было успешно обновлено.

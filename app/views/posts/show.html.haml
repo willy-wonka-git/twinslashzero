@@ -1,43 +1,48 @@
 %p#notice= notice
 
-%table.table.table-borderles
-  %tr
-    %th= t("posts.state")
-    %td{id: "current-state-" + @post.id.to_s}= t('posts.states.' + @post.aasm_state.to_s)
-  %tr
-    %th= t("created")
-    %td= @post.created
-  - if @post.published
-    %tr
-      %th= t("published")
-      %td= @post.published
-  %tr
-    %th= t("posts.author")
-    %td= link_to @post.author.nickname, @post.author
-  %tr
-    %th= t("posts.category")
-    %td= link_to @post.category.title, @post.category
-  %tr
-    %th= t("title")
-    %td= @post.title
-  %tr
-    %th= t("posts.content")
-    %td= @post.content
-  %tr
-    %th= t("tags")
-    %td
-      %small= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
-- if @post.photos.any?
-  %p
-    - @post.photos.each do |photo|
-      %a{ href: cl_image_path(photo.key), target: "_blank" }
-        = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
+.d-flex
+  .me-2
+    %table.table.table-borderles
+      %tr
+        %th= t("posts.state")
+        %td{id: "current-state-" + @post.id.to_s}= t('posts.states.' + @post.aasm_state.to_s)
+      %tr
+        %th= t("created")
+        %td= @post.created
+      - if @post.published
+        %tr
+          %th= t("published")
+          %td= @post.published
+      %tr
+        %th= t("posts.author")
+        %td= link_to @post.author.nickname, @post.author
+      %tr
+        %th= t("posts.category")
+        %td= link_to @post.category.title, @post.category
+      %tr
+        %th= t("title")
+        %td= @post.title
+      %tr
+        %th= t("posts.content")
+        %td= @post.content
+      %tr
+        %th= t("tags")
+        %td
+          %small= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
+    - if @post.photos.any?
+      %p
+        - @post.photos.each do |photo|
+          %a{ href: cl_image_path(photo.key), target: "_blank" }
+            = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
 
-#state.state-panel.d-flex.my-3
-  = render "posts/state", post: @post
+    #state.state-panel.d-flex.my-3
+      = render "posts/state", post: @post
 
-#message.alert{ role: "alert" }
+    #message.alert{ role: "alert" }
 
-- if can? :update, @post
-  = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
-= link_to t("back"), :back, class: "btn btn-secondary"
+    - if can? :update, @post
+      = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
+    = link_to t("back"), :back, class: "btn btn-secondary"
+  - if @post.author == User.current_user || User.current_user.admin?
+    %div
+      = render "posts/post_history", post_history: @post_history

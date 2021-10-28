@@ -6,9 +6,9 @@ class PostCategory < ApplicationRecord
 
   def posts_published
     Post.published.where(category: self)
-  end  
+  end
 
   def posts
     Post.where(category: self)
-  end  
+  end
 end

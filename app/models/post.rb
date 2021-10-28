@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
   has_many_attached :photos, dependent: :destroy
+  has_many :post_history, dependent: :destroy
 
   default_scope -> { order(published_at: :desc, created_at: :desc) }
 
@@ -43,7 +44,7 @@ class Post < ApplicationRecord
 
   def self.not_moderated
     # all
-    where(aasm_state: [:new])
+    where(aasm_state: [:new, :approved])
   end
 
   def created
@@ -51,7 +52,7 @@ class Post < ApplicationRecord
   end
 
   def published
-    published_at.strftime("%D %H:%M") if published_at
+    published_at&.strftime("%D %H:%M")
   end
 
   def time_ago
@@ -71,7 +72,7 @@ class Post < ApplicationRecord
     state :archived, display: I18n.t('posts.states.archived')
 
     event :draft do
-      transitions from: [:new, :approved, :published, :archived], to: :draft, guard: :can_edit? 
+      transitions from: [:new, :approved, :published, :archived], to: :draft, guard: :can_edit?
     end
 
     event :run do
@@ -97,8 +98,8 @@ class Post < ApplicationRecord
     event :archive do
       transitions from: [:approved, :published], to: :archived, guard: :can_moderate? || :can_edit?
     end
-  end  
-  
+  end
+
   def can_moderate?
     User.current_user.admin?
   end
@@ -109,5 +110,9 @@ class Post < ApplicationRecord
 
   def permitted_states
     aasm.events(permitted: true).map(&:name)
-  end 
+  end
+
+  def post_history
+    PostHistory.where(post: self).limit(10)
+  end
 end

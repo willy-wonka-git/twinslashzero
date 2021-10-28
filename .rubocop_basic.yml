@@ -197,8 +197,13 @@ Metrics/MethodLength:
   Max: 15
   Exclude:
     - 'db/migrate/**/*'
+    - 'app/models/ability.rb'
 
 Metrics/AbcSize:
   Exclude:
     - 'db/migrate/**/*'
-    
+    - 'app/models/ability.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/posts_controller.rb'

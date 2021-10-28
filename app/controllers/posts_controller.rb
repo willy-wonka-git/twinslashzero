@@ -1,8 +1,11 @@
+require "pry"
 class PostsController < ApplicationController
   load_and_authorize_resource
-  
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :run, :draft, :approve, :ban, :archive, :publish]
+
+  before_action :set_post,
+                only: [:show, :edit, :update, :destroy, :run, :draft, :reject, :approve, :ban, :archive, :publish]
   before_action :create_new_tags, only: [:create, :update]
+  after_action :save_post_history, only: [:create, :update, :run, :draft, :reject, :ban, :approve, :archive, :publish]
 
   # GET /posts or /posts.json
   def index
@@ -20,7 +23,9 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1 or /posts/1.json
-  def show; end
+  def show
+    @post_history = @post.post_history
+  end
 
   # GET /posts/new
   def new
@@ -34,6 +39,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    @state_reason = "create"
     set_post_defaults
 
     respond_to do |format|
@@ -78,15 +84,17 @@ class PostsController < ApplicationController
   def draft
     @post.draft
     render save_post
- end
+  end
 
   def reject
     @post.reject
+    @state_reason = params["reason"]
     render save_post
   end
 
   def ban
     @post.ban
+    @state_reason = params["reason"]
     render save_post
   end
 
@@ -138,13 +146,21 @@ class PostsController < ApplicationController
     @post.published_at = @post.aasm_state == :published.to_s ? Time.now : nil
     @post.save
     {
-      json: { 
+      json: {
         id: @post.id.to_s,
-        current_state: I18n.t("posts.states." + @post.aasm.current_state.to_s),
+        current_state: I18n.t("posts.states.#{@post.aasm.current_state}"),
         message: I18n.t("posts.messages.post_was_successfully_updated"),
-        state_panel: (render_to_string partial: '/posts/state', locals: {post: @post}, layout: false),
-        state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: {post: @post}, layout: false)  
+        state_panel: (render_to_string partial: '/posts/state', locals: { post: @post }, layout: false),
+        state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: { post: @post }, layout: false)
       }
-    } 
+    }
+  end
+
+  def save_post_history
+    return if @post.post_history.first && @post.post_history.first.state == @post.aasm.current_state.to_s
+
+    post_history = PostHistory.create({ post: @post, user: current_user, state: @post.aasm.current_state })
+    post_history.reason = @state_reason if defined? @state_reason
+    post_history.save
   end
 end

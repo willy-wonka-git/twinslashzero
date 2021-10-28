@@ -8,7 +8,7 @@ class Ability
     can :read, Post
     can :read, PostCategory
     can [:read, :search], Tag
-  
+
     # permissions for users
     return unless user.present?
 
@@ -17,7 +17,7 @@ class Ability
     can :edit, Post, author: user, aasm_state: :draft
     can [:run, :draft, :archive], Post, author: user
     can :create, Tag
-  
+
     # permissions for administrators
     return unless user.admin?
 
