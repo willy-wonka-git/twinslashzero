@@ -24,9 +24,11 @@
         %td= post.author.nickname
         %td{ style: "white-space: nowrap" }= post.time_ago
         %td= post.tag_list
-        %td= t('posts.states.' + post.aasm_state.to_s)
+        %td{ id: "current-state-" + post.id.to_s }= t('posts.states.' + post.aasm_state.to_s)
         - if User.current_user.admin?
-          %td= render "posts/state_dropdown", post: post
+          %td#state
+            %div{ id: "state-dropdown-" + post.id.to_s }
+              = render "posts/state_dropdown", post: post
         %td
           = link_to t("edit"), edit_post_path(post) if can? :edit, post
         %td

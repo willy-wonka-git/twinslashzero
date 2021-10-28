@@ -139,9 +139,11 @@ class PostsController < ApplicationController
     @post.save
     {
       json: { 
+        id: @post.id.to_s,
         current_state: I18n.t("posts.states." + @post.aasm.current_state.to_s),
         message: I18n.t("posts.messages.post_was_successfully_updated"),
-        content: (render_to_string partial: '/posts/state', locals: {post: @post}, layout: false )  
+        state_panel: (render_to_string partial: '/posts/state', locals: {post: @post}, layout: false),
+        state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: {post: @post}, layout: false)  
       }
     } 
   end

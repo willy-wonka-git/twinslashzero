@@ -126,12 +126,18 @@ function setState(data) {
   var fadeInterval = 300;
   var message = $('#message');
 
-	$('#current-state').fadeOut(fadeInterval, function() {
+  const id = data.id
+	$('#current-state-' + id).fadeOut(fadeInterval, function() {
 	    $(this).html(data.current_state).fadeIn(fadeInterval);
 	});
 
-	$('#state').fadeOut(fadeInterval, function() {
-	    $(this).html(data.content).fadeIn(fadeInterval);
+	$('#state.state-panel').fadeOut(fadeInterval, function() {
+	    $(this).html(data.state_panel).fadeIn(fadeInterval);
+	    changeState();
+	});
+
+	$('#state-dropdown-' + id).fadeOut(1, function() {
+	    $(this).html(data.state_dropdown).fadeIn(1);
 	    changeState();
 	});
 

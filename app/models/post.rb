@@ -106,4 +106,8 @@ class Post < ApplicationRecord
   def can_edit?
     author == User.current_user
   end
+
+  def permitted_states
+    aasm.events(permitted: true).map(&:name)
+  end 
 end
