@@ -53,12 +53,14 @@ end
 users = User.order('RANDOM()').take(50)
 rand(1...10).times do
   users.each do |user|
+    state = %w[draft new approved banned published archived].sample
     post = Post.create!(
       author: user,
       category: PostCategory.order('RANDOM()').first,
       title: Faker::Lorem.sentence(word_count: 12),
       content: Faker::Lorem.sentence(word_count: 30),
-      published_at: rand(1...90).hours.ago # for test an archiving
+      aasm_state: state,
+      published_at: state == "published" ? rand(1...90).hours.ago : nil
     )
     # Add tags
     rand(1..4).times do

@@ -8,9 +8,9 @@
 
 - крон закрытие объявлений в архив после 3х дней публикации в 23:50
 - крон публикация объявлений  в полночь
-- крон удаление тегов без постов 
 
-----------------
+--------------------------------------------------
+
 групповая операция смены состояния в списке
 
 --------------------------------------------------
@@ -24,7 +24,9 @@
 = fix:
 
 error: ransack wrong work on maderate page
-ransack add search with tags
+ransack - add search with tags
+cron - delete redundant tags without posts
+
 auth social networks - register apps
 
 -----

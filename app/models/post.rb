@@ -43,7 +43,7 @@ class Post < ApplicationRecord
   end
 
   def self.not_moderated
-    where(aasm_state: [:new, :approved])
+    where(aasm_state: [:new])
   end
 
   def created
@@ -58,7 +58,7 @@ class Post < ApplicationRecord
     published_at ? time_ago_in_words(published_at) : ''
   end
 
-  def published?
+  def state_published?
     aasm_state == :published
   end
 

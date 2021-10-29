@@ -9,7 +9,7 @@
       %tr
         %th= t("created")
         %td= @post.created
-      - if @post.published?
+      - if @post.state_published?
         %tr
           %th= t("published")
           %td= @post.published_format
