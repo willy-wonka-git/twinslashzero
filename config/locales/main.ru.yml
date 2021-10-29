@@ -23,6 +23,7 @@ ru:
   search_something: Что искать?
   are_you_sure: Вы уверены?
   created_at: Создан
+  published_at: Опубликовано
   id: ID
   category: Категория
   content: Содержание

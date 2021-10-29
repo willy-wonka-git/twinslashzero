@@ -9,10 +9,10 @@
       %tr
         %th= t("created")
         %td= @post.created
-      - if @post.published
+      - if @post.published?
         %tr
           %th= t("published")
-          %td= @post.published
+          %td= @post.published_format
       %tr
         %th= t("posts.author")
         %td= link_to @post.author.nickname, @post.author

@@ -50,7 +50,7 @@ class Post < ApplicationRecord
     created_at.strftime("%D %H:%M")
   end
 
-  def published
+  def published_format
     published_at&.strftime("%D %H:%M")
   end
 
@@ -114,4 +114,28 @@ class Post < ApplicationRecord
   def post_history
     PostHistory.where(post: self).limit(10)
   end
+
+  # cron tasks 
+
+  def self.publish_approved
+    where(aasm_state: "approved").each do |post|
+      post.publish
+      post.published_at = Time.now
+      post.save
+    end  
+  end
+
+  def self.archive_published
+    published.where(["published_at <= ?", 3.days.ago]).each do |post|
+      post.archive
+      post.save
+    end  
+  end
+
+  # TODO:
+  # def self.delete_redundant_tags
+  #   # Tag.where("COUNT(...posts...) = 0").each do |tag|
+  #   #   tag.delete
+  #   # end  
+  # end
 end

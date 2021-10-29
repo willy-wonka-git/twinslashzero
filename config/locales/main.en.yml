@@ -23,6 +23,7 @@ en:
   search_something: Text for search
   are_you_sure: Are you sure?
   created_at: Created
+  published_at: Published
   id: ID
   category: Category
   content: Content
