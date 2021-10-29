@@ -115,27 +115,20 @@ class Post < ApplicationRecord
     PostHistory.where(post: self).limit(10)
   end
 
-  # cron tasks 
+  # cron tasks
 
   def self.publish_approved
     where(aasm_state: "approved").each do |post|
       post.publish
       post.published_at = Time.now
       post.save
-    end  
+    end
   end
 
   def self.archive_published
     published.where(["published_at <= ?", 3.days.ago]).each do |post|
       post.archive
       post.save
-    end  
+    end
   end
-
-  # TODO:
-  # def self.delete_redundant_tags
-  #   # Tag.where("COUNT(...posts...) = 0").each do |tag|
-  #   #   tag.delete
-  #   # end  
-  # end
 end

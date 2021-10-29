@@ -106,4 +106,3 @@ gem 'active_storage_validations'
 gem 'ransack'
 
 gem 'whenever', require: false
-

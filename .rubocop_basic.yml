@@ -207,3 +207,4 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Exclude:
     - 'app/controllers/posts_controller.rb'
+    - 'app/models/post.rb'

@@ -18,8 +18,8 @@
 
 = fix:
 
-ransack - add search with tags
-auth social networks - register apps
+- ransack - add search with tags
+- auth social networks - register apps
 
 -----
 

@@ -69,5 +69,10 @@ rand(1...10).times do
         post: post
       )
     end
+
+    # Make history of state
+    # post_history = PostHistory.create({ post: post, user: user, state: post.aasm.current_state })
+    # post_history.reason = @state_reason if defined? @state_reason
+    # post_history.save
   end
 end
