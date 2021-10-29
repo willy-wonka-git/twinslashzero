@@ -21,6 +21,7 @@
         %td= post_category.description
         - if can? :edit, post_category
           %td= link_to t("edit"), edit_post_category_path(post_category)
+        - if (can? :destroy, post_category) && post_category.posts.empty? 
           %td= link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
 
 = render "common/paging", resource: @post_categories

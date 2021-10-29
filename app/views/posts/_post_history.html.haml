@@ -2,7 +2,9 @@
 - post_history.each do |item|
   .list-group-item.border-0
     .d-flex.w-100.justify-content-between
-      = t("posts.states.history", user: item.user.nickname, state: t("posts.states." + item.state))
+      %span= item.user.nickname
+      ➜
+      %span.fw-bold= t("posts.states." + item.state)
     - if item.reason  
       %small.text-muted= item.reason
       %br

@@ -110,7 +110,6 @@ en:
       approve: Approve
       archive: Archive
       publish: Publish
-      history: "%{user} set %{state}"
     messages:
       post_was_successfully_created: Advert was successfully created.
       post_was_successfully_updated: Advert was successfully updated.
