@@ -6,21 +6,27 @@
 
 # TODO
 
-ранзак - сортировка и поиск
 групповая операция смены состояния в списке
 
-----------------
-- админ - на форме категорий кнопка удалить, если нет объявлений
-- удалять теги без постов
 ----------------
 - крон закрытие объявлений в архив после 3х дней публикации в 23:50
 - крон публикация объявлений  в полночь - rake + whenever
 - крон удаление тегов без постов sequel 
+--------------------------------------------------
+
+- seeds
 - админка
 - RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
 - Travis CI
 --------------------------------------------------
 
+= fix:
+
+error: ransack wrong work on maderate page
+ransack add search with tags
+auth social networks - register apps
+
+-----
 
 * админка https://administrate-demo.herokuapp.com/authentication https://github.com/thoughtbot/administrate
 

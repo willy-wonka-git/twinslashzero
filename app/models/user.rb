@@ -28,9 +28,10 @@ class User < ApplicationRecord
     end
   end
 
-  def posts(current_user = nil)
-    Post.published.where(author: self) if current_user != self
-    Post.where(author: self)
+  def posts
+    return Post.where(author: self) if User.current_user.admin? 
+    return Post.where(author: self) if User.current_user == self
+    Post.published.where(author: self)
   end
 
   def avatar_key

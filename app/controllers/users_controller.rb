@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def index
-    @users = User.order(:nickname).page params[:page]
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).order(:nickname).page(params[:page])
   end
 
   def show

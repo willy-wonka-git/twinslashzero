@@ -19,6 +19,8 @@ ru:
   back: Назад
   show: Смотреть
   destroy: Удалить
+  search: Искать
+  search_something: Что искать?
   are_you_sure: Вы уверены?
   created_at: Создан
   id: ID

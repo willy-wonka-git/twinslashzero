@@ -19,6 +19,8 @@ en:
   back: Back
   show: Show
   destroy: Destroy
+  search: Search
+  search_something: Text for search
   are_you_sure: Are you sure?
   created_at: Created
   id: ID

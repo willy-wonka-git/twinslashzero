@@ -1,11 +1,18 @@
+= search_form_for @q do |f|
+  .row.g-2.my-2
+    .col-sm-4
+      = f.search_field :title_or_content_cont, placeholder: t("search_something"), class: "form-control"
+    .col-sm
+      = f.submit t("search"), class: "btn btn-secondary"
+
 %table.table
   %thead
     %tr
       %th
-      %th= t("posts.title_one")
-      %th= t("posts.category")
-      %th= t("posts.author")
-      %th= t("created_at")
+      %th= sort_link(@q, :title, t("posts.title_one"))
+      %th= sort_link(@q, :category, t("posts.category"))
+      %th= sort_link(@q, :author, t("posts.author"))
+      %th= sort_link(@q, :created_at, t("created_at"))
       %th= t("tags")
       - if User.current_user.admin?
         %th

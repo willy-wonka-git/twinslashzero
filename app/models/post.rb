@@ -43,7 +43,6 @@ class Post < ApplicationRecord
   end
 
   def self.not_moderated
-    # all
     where(aasm_state: [:new, :approved])
   end
 

@@ -1,15 +1,24 @@
 = provide(:title, t("users.all_users"))
 %h1= t("users.all_users")
+
 = paginate @users, outer_window: 3, window: 1, class: "mb-2"
+
+= search_form_for @q do |f|
+  .row.g-2.my-2
+    .col-sm-4
+      = f.search_field :fullname_or_nickname_or_description_or_email_cont, placeholder: t("search_something"), class: "form-control"
+    .col-sm
+      = f.submit t("search"), class: "btn btn-secondary"
+
 %table.table
   %thead
     %tr
-      %th{:scope => "id"} #
+      %th{:scope => "id"}= sort_link(@q, :id, "ID")
       %th{:scope => "avatar"}
-      %th{:scope => "nickname"}= t("users.nickname")
-      %th{:scope => "fullname"}= t("users.fullname")
-      %th{:scope => "email"}= t("users.email")
-      %th{:scope => "role"}= t("users.role")
+      %th{:scope => "nickname"}= sort_link(@q, :nickname, t("users.nickname"))
+      %th{:scope => "fullname"}= sort_link(@q, :fullname, t("users.fullname"))
+      %th{:scope => "email"}= sort_link(@q, :email, t("users.email"))
+      %th{:scope => "role"}= sort_link(@q, :role, t("users.role"))
       %th{:scope => "description"}= t("users.description")
       %th
   %tbody

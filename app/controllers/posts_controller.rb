@@ -8,17 +8,19 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    @q = Post.ransack(params[:q])
+    posts = @q.result(distinct: true)
     if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
       @title = params[:tag]
-    else
-      @posts = Post
+      posts = posts.tagged_with(params[:tag])
     end
-    @posts = @posts.published.page params[:page]
+    @posts = posts.published.page(params[:page])
   end
 
   def moderate
-    @posts = Post.not_moderated.page params[:page]
+    @q = Post.ransack(params[:q])
+    posts = @q.result(distinct: true)
+    @posts = posts.not_moderated.page(params[:page])
   end
 
   # GET /posts/1 or /posts/1.json

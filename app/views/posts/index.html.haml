@@ -1,6 +1,6 @@
 %h1
-	= t("posts.title")
-	= @title
+  = t("posts.title")
+  = @title
 
 = render "common/add", link: new_post_path if can? :create, Post
 = render "common/paging", resource: @posts
