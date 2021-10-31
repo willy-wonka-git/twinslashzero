@@ -11,5 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PostCategoriesHelper, type: :helper do
+  it "has a title" do
+    item = PostCategory.create!(title: "My awesome title")
+    expect(item.title).to eq("My awesome title")
+  end
   pending "add some examples to (or delete) #{__FILE__}"
 end

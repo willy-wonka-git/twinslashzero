@@ -6,24 +6,25 @@
 
 # TODO
 
-
-Для хероку требуется карта (у меня нет), чтобы добавить крон-расписание. Rake-задачи не подключены
-
-
 - групповая операция смены состояния в списке
 - админка
 - RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
 - Travis CI
+- ransack - add search with tags
+- auth social networks - register apps
+
 --------------------------------------------------
 
 = fix:
 
-- ransack - add search with tags
-- auth social networks - register apps
+- complete working with images - add, clear
+- dont sort tags on edit
+- whnenever
+
+Для хероку требуется карта (у меня нет), чтобы добавить крон-расписание. Rake-задачи не подключены
 
 -----
 
 * админка https://administrate-demo.herokuapp.com/authentication https://github.com/thoughtbot/administrate
 
 * Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)
-

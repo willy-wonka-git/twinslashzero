@@ -16,7 +16,8 @@ puts 'Created "admin" (email: admin@gmail.com, password: 111111)'
 
 # Create user
 User.create(
-  nickname: "user",
+  nickname: "user100",
+  fullname: Faker::Name.name,
   role: "user",
   email: "user@gmail.com",
   password: "111111"

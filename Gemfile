@@ -57,6 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'guard-rspec', require: false
+  gem 'fuubar'
 end
 
 group :development do
@@ -71,7 +72,7 @@ gem 'jquery-rails'
 gem 'inline_svg', '~> 1.7'
 
 # jQuery based replacement for select boxes for autocompletes
-gem "select2-rails"
+gem 'select2-rails'
 
 gem 'simple_form'
 gem 'enumerize'
@@ -100,9 +101,7 @@ gem 'cancancan'
 gem 'aasm'
 
 gem 'cloudinary'
-gem "mini_magick"
+gem 'mini_magick'
 gem 'active_storage_validations'
 
 gem 'ransack'
-
-gem 'whenever', require: false
