@@ -155,9 +155,6 @@ Style/PercentLiteralDelimiters:
   Exclude:
     - 'Guardfile'
 
-Documentation:
-  Enabled: false
-
 Layout/LineLength:
   Exclude:
     - 'config/initializers/**/*'
@@ -217,3 +214,6 @@ Rails/LexicallyScopedActionFilter:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/**/*'    
+
+Style/Documentation:
+  Enabled: false

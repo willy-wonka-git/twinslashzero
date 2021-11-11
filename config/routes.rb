@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :post_categories, path: 'categories'
 
     get 'adv/moderate', to: 'posts#moderate', as: 'moderate'
+    post 'adv/action', to: 'posts#action'
     resources :posts, path: 'adv'
     scope '/adv/:id', as: 'post' do
       post 'run', to: 'posts#run', as: 'run'

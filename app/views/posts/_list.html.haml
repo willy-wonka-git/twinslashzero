@@ -1,3 +1,4 @@
+#message.alert{ role: "alert" }
 
 - if defined?(@q)
   = search_form_for @q, url: request.path do |f|
@@ -11,6 +12,8 @@
   %thead
     %tr
       %th
+      - if User.current_user.admin?
+        %th
       - if defined?(@q)
         %th= sort_link(@q, :title, t("posts.title_one"))
         %th= sort_link(@q, :category, t("posts.category"))
@@ -29,7 +32,10 @@
       %th
   %tbody
     - posts.each do |post|
-      %tr
+      %tr{"data-id" => post.id}
+        - if User.current_user.admin?
+          %td
+            %input{class: "form-check-input", type: "checkbox"}
         %td
           - if post.photos.any?
             %a{ href: cl_image_path(post.photos.first.key), target: "_blank" }

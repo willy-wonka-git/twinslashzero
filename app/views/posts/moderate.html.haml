@@ -4,6 +4,13 @@
 
 = render "common/paging", resource: @posts
 
+.row.row-cols-lg-auto.align-items-center.actions
+	%label{for: "action", class: "col-auto"}
+		= t("posts.action") + ":"
+	= select_tag :action, options_for_select([[t("select") + "...", ""], [t("posts.actions.approve"), "approve"], [t("posts.actions.reject"), "reject"], [t("posts.actions.ban"), "ban"], [t("posts.actions.delete"), "delete"]], params[:param_name]), class: "form-select form-select-sm col-auto"
+	.button{class: "btn btn-primary col-auto btn-sm ms-2", onclick: "postAction()"}
+		= t("execute")
+
 = render "posts/list", posts: @posts
 
 = render "common/paging", resource: @posts

@@ -19,6 +19,8 @@ ru:
   back: Назад
   show: Смотреть
   destroy: Удалить
+  execute: Выполнить
+  select: Выбрать
   search: Искать
   search_something: Что искать?
   are_you_sure: Вы уверены?
@@ -95,6 +97,7 @@ ru:
     category: Категория
     content: Содержание
     can_delete_or_edit_only_yours_adverts: Вы можете редактировать или удалять только свои объявления!
+    action: Действие
     categories:
       show: Категории  
       new: Новая категория
@@ -107,12 +110,14 @@ ru:
       approved: Одобрено
       published: Опубликовано
       archived: В архиве
+    actions:
       run: На модерацию
       ban: Заблокировать
       reject: Отклонить в черновик
       approve: Одобрить
       archive: Архивировать
       publish: Опубликовать
+      delete: Удалить
     messages:
       post_was_successfully_created: Объявление было успешно создано.
       post_was_successfully_updated: Объявление было успешно обновлено.

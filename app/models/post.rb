@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
   belongs_to :category, class_name: "PostCategory"
   has_many :taggings, dependent: :destroy
-  has_many :tags, through: :taggings
+  has_many :tags, through: :taggings, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
   has_many :post_history, dependent: :destroy
 

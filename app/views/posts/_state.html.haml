@@ -1,2 +1,2 @@
 - post.permitted_states.select{ |v| can? v, post }.map(&:to_s).each do |state|
-  = link_to t("posts.states." + state), send("post_#{state}_path", post), method: :post, remote: true, class: "btn btn-secondary btn-sm me-2", data: { state: state }
+  = link_to t("posts.actions." + state), send("post_#{state}_path", post), method: :post, remote: true, class: "btn btn-secondary btn-sm me-2", data: { state: state }

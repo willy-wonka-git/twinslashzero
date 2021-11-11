@@ -36,13 +36,22 @@ document.addEventListener('turbolinks:load', function() {
 
   $('#message').fadeOut(0)
 	changeState();
+
+	window.showMessage = showMessage
+	window.postAction = postAction
+
+	$('#post_tag_ids').on('select2:select', function (e) { 
+		// debugger
+	  console.log('select event');
+	});
+
 })
 
 function previewPhotos() {
   $('#post_photos').change(function(){
       $("#new-photos").html('');
       $("#current-photos").html('');
-      for (var i = 0; i < $(this)[0].files.length; i++) {
+      for (let i = 0; i < $(this)[0].files.length; i++) {
         $("#new-photos").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="200px" class="img-thumbnail"/>');
       }
   });
@@ -51,7 +60,7 @@ function previewPhotos() {
 function previewAvatar() {
   $('#user_avatar').change(function(){
       $("#avatar").html('');
-      for (var i = 0; i < $(this)[0].files.length; i++) {
+      for (let i = 0; i < $(this)[0].files.length; i++) {
         $("#avatar").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="120px" class="img-thumbnail"/>');
       }
   });
@@ -99,7 +108,7 @@ function changeState() {
   		// TODO: modal
     	// check reason for ban and reject
     	if ("reject, ban".indexOf(event.target.dataset.state) != -1) {
-				var reason = prompt("Please enter the reason");
+				let reason = prompt("Please enter the reason");
 				if (reason) {
 				  $.post({
 				    url: event.detail[1].url,
@@ -123,8 +132,7 @@ function changeState() {
 }
 
 function setState(data) {
-  var fadeInterval = 300;
-  var message = $('#message');
+  const fadeInterval = 300;
 
   const id = data.id
 	$('#current-state-' + id).fadeOut(fadeInterval, function() {
@@ -141,11 +149,68 @@ function setState(data) {
 	    changeState();
 	});
 
-	message.addClass("alert-success")
-  message.text(data.message)
+	showMessage(data.message);
+}
+
+function showMessage(text, state = 'success', ms = 2000) {
+	if (!text) return
+
+  const fadeInterval = 300;
+  let message = $('#message');
+
+	message.addClass('alert-' + state)
+  message.text(text)
 	message.fadeIn(fadeInterval)
 	setTimeout(() => {
-  	message.removeClass("alert-success")
 		message.fadeOut(fadeInterval)
-	}, 2000)
+	}, ms)
+	setTimeout(() => {
+  	message.removeClass('alert-' + state)
+	}, ms + fadeInterval)
+}
+
+function postAction() {
+	const current_action = $('select#action')[0].value
+	if (!current_action) { 
+		showMessage('Select action!', 'danger');
+		return
+	}
+
+	let reason = '';
+
+	if ("reject, ban".indexOf(current_action) != -1) {
+		reason = prompt("Please enter the reason");
+		if (!reason) { 
+			return 
+		}
+	}	
+
+	let posts = []
+	const els = $('.form-check-input[type="checkbox"]:checked');
+	els.each(function(index, el) {
+		posts.push(parseInt(el.parentElement.parentElement.dataset.id))
+	})
+
+	if (!posts.length) { 
+		showMessage('Select advs!', 'danger');
+		return
+	}
+
+  $.post({
+    url: '/adv/action',
+    data: {
+    	authenticity_token: $('[name="csrf-token"]')[0].content,
+    	type: current_action,
+    	posts: posts,
+    	reason: reason
+    }
+  })
+  .done((data) => {
+  	// TODO update list
+  	debugger
+		showMessage(data.message, data.status);
+  })
+  .fail((data) => {
+		showMessage(data.statusText, 'danger');
+  });
 }

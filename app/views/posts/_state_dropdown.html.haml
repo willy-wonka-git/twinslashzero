@@ -4,4 +4,4 @@
   %ul.dropdown-menu{"aria-labelledby" => "state-" + post.id.to_s}
     - permitted_states.each do |state|
       %li
-        = link_to t("posts.states." + state), send("post_#{state}_path", post), method: :post, remote: true, type: "button", class: "dropdown-item", data: { state: state }
+        = link_to t("posts.actions." + state), send("post_#{state}_path", post), method: :post, remote: true, type: "button", class: "dropdown-item", data: { state: state }

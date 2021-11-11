@@ -27,6 +27,7 @@ class Ability
     can :destroy, Post
     can [:reject, :ban, :approve, :publish, :archive, :draft], Post
     can :moderate, Post
+    can :action, Post
     can :manage, PostCategory
     can :manage, Tag
   end

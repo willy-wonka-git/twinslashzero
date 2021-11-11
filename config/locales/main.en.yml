@@ -19,6 +19,8 @@ en:
   back: Back
   show: Show
   destroy: Destroy
+  execute: Execute
+  select: Select
   search: Search
   search_something: Text for search
   are_you_sure: Are you sure?
@@ -95,6 +97,7 @@ en:
     category: Category
     content: Content
     can_delete_or_edit_only_yours_adverts: You can edit or delete only yours adverts!
+    action: Action
     categories:
       show: Categories
       new: New category
@@ -107,12 +110,14 @@ en:
       approved: Approved
       published: Published
       archived: Archived
+    actions:  
       run: For moderate
       ban: Block
       reject: Reject to draft
       approve: Approve
       archive: Archive
       publish: Publish
+      delete: Delete
     messages:
       post_was_successfully_created: Advert was successfully created.
       post_was_successfully_updated: Advert was successfully updated.

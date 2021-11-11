@@ -1,4 +1,8 @@
+= provide(:title, @post.title)
+
 %p#notice= notice
+
+#message.alert{ role: "alert" }
 
 .d-flex
   .me-2
@@ -37,8 +41,6 @@
 
     #state.state-panel.d-flex.my-3
       = render "posts/state", post: @post
-
-    #message.alert{ role: "alert" }
 
     - if can? :update, @post
       = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"

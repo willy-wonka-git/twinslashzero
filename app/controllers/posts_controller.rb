@@ -114,6 +114,26 @@ class PostsController < ApplicationController
     render save_post
   end
 
+  def action
+    if !params["type"]\
+       || params["posts"].empty?\
+       || !["ban", "approve", "reject", "delete"].include?(params["type"])\
+       || ["ban", "reject"].include?(params["type"]) && !params["reason"]
+      render json: { message: "Wrong parameters", statusText: "error", status: :unprocessable_entity }
+    end 
+        
+    params["posts"].each do |post_id|
+      @post = Post.find(post_id)
+      @post.send(params["type"])
+      if @post.save
+        @state_reason = params["reason"]
+        save_post_history
+      end
+    end      
+    render json: { message: I18n.t("posts.messages.post_was_successfully_updated"), statusText: "success" } unless params["type"] == "delete" 
+    render json: { message: I18n.t("posts.messages.post_was_successfully_destroyed"), statusText: "success" } if params["type"] == "delete"
+  end
+
   private
 
   def set_post_defaults
@@ -129,17 +149,18 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids,
+    # params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids,
+    #                              { photos: [] }, :photos)
+    params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] },
                                  { photos: [] }, :photos)
   end
 
   def create_new_tags
-    return unless params[:post][:tag_ids]
-
+    return unless @post.valid?
     params[:post][:tag_ids].each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")
 
-      tag = Tag.find_or_create_by(name: tag_id.sub("#(new)", ""))
+      tag = Tag.find_or_create_by(name: tag_id.sub("#(new)", "").strip)
       tag.save unless tag.id
       params[:post][:tag_ids][index] = tag.id.to_s
     end
@@ -160,6 +181,7 @@ class PostsController < ApplicationController
   end
 
   def save_post_history
+    return unless @post.id
     return if @post.post_history.first && @post.post_history.first.state == @post.aasm.current_state.to_s
 
     post_history = PostHistory.create({ post: @post, user: current_user, state: @post.aasm.current_state })
