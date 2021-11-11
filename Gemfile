@@ -55,14 +55,28 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Project gems
 
 group :development, :test do
+  gem 'rubocop'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
   gem 'rspec-rails', '~> 5.0.0'
+
   gem 'guard-rspec', require: false
   gem 'fuubar'
+  gem 'factory_bot_rails'
+  gem 'timecop'
+end
+
+group :test do
+  gem 'database_cleaner-active_record'
+  gem 'simplecov'
 end
 
 group :development do
   gem 'pry-rails'
-  gem 'rubocop-rails'
 end
 
 gem 'haml-rails', '~> 2.0'
@@ -71,7 +85,6 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'inline_svg', '~> 1.7'
 
-# jQuery based replacement for select boxes for autocompletes
 gem 'select2-rails'
 
 gem 'simple_form'
@@ -81,7 +94,6 @@ gem 'enumerize'
 gem 'kaminari'
 gem 'kaminari-i18n'
 
-# Flexible authentication based on Warden
 gem 'devise'
 gem 'devise-i18n'
 gem 'omniauth'

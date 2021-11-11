@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   end
   devise_for :users
 
-  get '/:locale' => 'welcome#index'
-  scope "(:locale)", locale: /en|ru/ do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     get '/user/:id' => 'users#show', as: 'user'
     get '/users' => 'users#index'
     resources :post_categories, path: 'categories'

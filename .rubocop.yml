@@ -1,2 +1,13 @@
+require: 
+  - rubocop-rails
+  - rubocop-rspec # or rubocop-minitest
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+
 inherit_from:
   - .rubocop_basic.yml

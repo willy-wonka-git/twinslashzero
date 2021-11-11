@@ -10,7 +10,7 @@ class Ability
     can [:read, :search], Tag
 
     # permissions for users
-    return unless user.present?
+    return if user.blank?
 
     can :create, Post
     can [:destroy, :archive], Post, author: user

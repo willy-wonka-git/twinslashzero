@@ -120,13 +120,13 @@ class Post < ApplicationRecord
   def self.publish_approved
     where(aasm_state: "approved").each do |post|
       post.publish
-      post.published_at = Time.now
+      post.published_at = Time.zone.now
       post.save
     end
   end
 
   def self.archive_published
-    published.where(["published_at <= ?", 3.days.ago]).each do |post|
+    published.where(["published_at <= ?", 3.days.ago]).find_each do |post|
       post.archive
       post.save
     end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "post_categories/new", type: :view do
-  before(:each) do
+  before do
     assign(:post_category, PostCategory.new(
                              title: "MyString",
                              description: "MyText"

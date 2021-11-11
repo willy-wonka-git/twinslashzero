@@ -25,7 +25,7 @@ every 1.day, at: '11:50 pm' do
   runner "Post.archive_published"
 end
 
-every 10.minute do
+every 10.minutes do
   runner "Post.publish_approved"
 end
 

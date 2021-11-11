@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
-      @post.published_at = Time.now
+      @post.published_at = Time.zone.now
       if @post.update(post_params)
         format.html { redirect_to @post, notice: t("posts.messages.post_was_successfully_updated") }
         format.json { render :show, status: :ok, location: @post }
@@ -119,7 +119,7 @@ class PostsController < ApplicationController
   def set_post_defaults
     @post.author = current_user
     @post.category = PostCategory.find(@post.category_id) if @post.category_id
-    @post.published_at = Time.now
+    @post.published_at = Time.zone.now
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -134,6 +134,8 @@ class PostsController < ApplicationController
   end
 
   def create_new_tags
+    return unless params[:post][:tag_ids]
+
     params[:post][:tag_ids].each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")
 
@@ -144,7 +146,7 @@ class PostsController < ApplicationController
   end
 
   def save_post
-    @post.published_at = @post.aasm_state == :published.to_s ? Time.now : nil
+    @post.published_at = @post.aasm_state == :published.to_s ? Time.zone.now : nil
     @post.save
     {
       json: {

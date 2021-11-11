@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "post_categories/show", type: :view do
-  before(:each) do
+  before do
     @post_category = assign(:post_category, PostCategory.create!(
                                               title: "Title",
                                               description: "MyText"

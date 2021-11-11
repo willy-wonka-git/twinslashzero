@@ -69,8 +69,10 @@ Layout/SpaceInsideArrayLiteralBrackets:
 # SupportedStyles: nested, compact
 Style/ClassAndModuleChildren:
   Exclude:
-    - 'test/channels/application_cable/connection_test.rb'
-    - 'test/test_helper.rb'
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/helpers/users/omniauth_callbacks_helper.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedConstants.
@@ -146,8 +148,7 @@ Metrics/BlockLength:
   Exclude:
     - 'db/schema.rb'
     - 'Guardfile'
-    - 'config/environments/**/*'    
-    - 'config/initializers/**/*'
+    - 'config/**/*'    
     - 'spec/**/*'
 
 Style/PercentLiteralDelimiters:
@@ -173,13 +174,6 @@ Style/NumericLiterals:
   Exclude:
     - 'db/schema.rb'
 
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/helpers/users/omniauth_callbacks_helper.rb'
-
 Layout/HashAlignment:
   Exclude:
     - 'config/initializers/simple_form_bootstrap.rb'
@@ -198,6 +192,7 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
+    - 'test/**/*'    
 
 Metrics/AbcSize:
   Exclude:
@@ -208,3 +203,17 @@ Metrics/ClassLength:
   Exclude:
     - 'app/controllers/posts_controller.rb'
     - 'app/models/post.rb'
+
+Rails/FilePath:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*'    
