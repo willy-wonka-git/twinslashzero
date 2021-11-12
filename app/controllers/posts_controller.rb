@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @q = Post.ransack(params[:q])
-    posts = @q.result(distinct: true)
+    posts = @q.result(distinct: true).includes(:tags)
     if params[:tag]
       @title = params[:tag]
       posts = posts.tagged_with(params[:tag])

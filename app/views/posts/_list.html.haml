@@ -12,7 +12,7 @@
   = search_form_for @q, url: request.path do |f|
     .row.g-2.my-2
       .col-sm-4
-        = f.search_field :title_or_content_cont, placeholder: t("search_something"), class: "form-control"
+        = f.search_field :title_or_content_or_tags_name_cont, placeholder: t("search_something"), class: "form-control"
       .col-sm
         = f.submit t("search"), class: "btn btn-secondary"
 

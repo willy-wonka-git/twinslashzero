@@ -6,21 +6,18 @@
 
 # TODO
 
-- ransack - add search with tags
+- rake-задачи
 - админка
-- RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
+
+- auth social networks - register apps (vk, twitter)
+- регистрация travis - запуск
 - Travis CI
-- auth social networks - register apps
 
---------------------------------------------------
+- RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
 
-= fix:
+-----
 
-- complete working with images - add, clear
-- dont sort tags on edit
 - whnenever
-
-Для хероку требуется карта (у меня нет), чтобы добавить крон-расписание. Rake-задачи не подключены
 
 -----
 
