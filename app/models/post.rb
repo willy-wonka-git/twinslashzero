@@ -19,6 +19,9 @@ class Post < ApplicationRecord
                      size: { less_than: 5.megabytes,
                              message: I18n.t("errors.messages.should_be_less_than_5mb") }
 
+  after_save :save_post_history
+
+
   def self.tagged_with(name)
     tag = Tag.find_by(name: name)
     tag ? tag.posts.published : Post.published
@@ -130,5 +133,13 @@ class Post < ApplicationRecord
       post.archive
       post.save
     end
+  end
+
+  def save_post_history
+    return if post_history.first && post_history.first.state == aasm.current_state.to_s
+
+    post_history = PostHistory.create({ post: self, user: User.current_user, state: aasm.current_state })
+    post_history.reason = self.state_reason
+    post_history.save
   end
 end

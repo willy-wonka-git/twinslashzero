@@ -6,11 +6,10 @@
 
 # TODO
 
-- групповая операция смены состояния в списке
+- ransack - add search with tags
 - админка
 - RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
 - Travis CI
-- ransack - add search with tags
 - auth social networks - register apps
 
 --------------------------------------------------

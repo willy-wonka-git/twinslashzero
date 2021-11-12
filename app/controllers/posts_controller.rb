@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :set_post,
                 only: [:show, :edit, :update, :destroy, :run, :draft, :reject, :approve, :ban, :archive, :publish]
   before_action :create_new_tags, only: [:create, :update]
-  after_action :save_post_history, only: [:create, :update, :run, :draft, :reject, :ban, :approve, :archive, :publish]
 
   # GET /posts or /posts.json
   def index
@@ -40,7 +39,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    @state_reason = "create"
+    @post.state_reason = "create"
     set_post_defaults
 
     respond_to do |format|
@@ -89,13 +88,13 @@ class PostsController < ApplicationController
 
   def reject
     @post.reject
-    @state_reason = params["reason"]
+    @post.state_reason = params["reason"]
     render save_post
   end
 
   def ban
     @post.ban
-    @state_reason = params["reason"]
+    @post.state_reason = params["reason"]
     render save_post
   end
 
@@ -125,13 +124,22 @@ class PostsController < ApplicationController
     params["posts"].each do |post_id|
       @post = Post.find(post_id)
       @post.send(params["type"])
-      if @post.save
-        @state_reason = params["reason"]
-        save_post_history
-      end
+      @post.state_reason = params["reason"]
+      @post.save
     end      
-    render json: { message: I18n.t("posts.messages.post_was_successfully_updated"), statusText: "success" } unless params["type"] == "delete" 
-    render json: { message: I18n.t("posts.messages.post_was_successfully_destroyed"), statusText: "success" } if params["type"] == "delete"
+
+    message = I18n.t("posts.messages.post_was_successfully_updated") unless params["type"] == "delete" 
+    message = I18n.t("posts.messages.post_was_successfully_destroyed") if params["type"] == "delete"
+
+    @q = Post.ransack(params[:q])
+    posts = @q.result(distinct: true)
+    @posts = posts.not_moderated.page(params[:page])
+
+    render json: { 
+      message: message, 
+      statusText: "success",
+      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts }, layout: false),
+    }
   end
 
   private
@@ -145,14 +153,12 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+    @post.state_reason = nil
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    # params.require(:post).permit(:category_id, :title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids,
-    #                              { photos: [] }, :photos)
-    params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] },
-                                 { photos: [] }, :photos)
+    params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] }, { photos: [] }, :photos)
   end
 
   def create_new_tags
@@ -175,17 +181,10 @@ class PostsController < ApplicationController
         current_state: I18n.t("posts.states.#{@post.aasm.current_state}"),
         message: I18n.t("posts.messages.post_was_successfully_updated"),
         state_panel: (render_to_string partial: '/posts/state', locals: { post: @post }, layout: false),
-        state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: { post: @post }, layout: false)
+        state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: { post: @post }, layout: false),
+        history_panel: (render_to_string partial: '/posts/post_history', locals: { post_history: @post.post_history }, layout: false),
+        actions_panel: (render_to_string partial: '/posts/post_actions', locals: { post: @post }, layout: false),
       }
     }
-  end
-
-  def save_post_history
-    return unless @post.id
-    return if @post.post_history.first && @post.post_history.first.state == @post.aasm.current_state.to_s
-
-    post_history = PostHistory.create({ post: @post, user: current_user, state: @post.aasm.current_state })
-    post_history.reason = @state_reason if defined? @state_reason
-    post_history.save
   end
 end

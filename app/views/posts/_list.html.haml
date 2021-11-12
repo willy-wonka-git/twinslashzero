@@ -1,4 +1,12 @@
-#message.alert{ role: "alert" }
+= render "common/paging", resource: posts
+
+- if User.current_user.admin?
+  .row.row-cols-lg-auto.align-items-center.actions.my-3
+    %label{for: "action", class: "col-auto"}
+      = t("posts.action") + ":"
+    = select_tag :action, options_for_select([[t("select") + "...", ""], [t("posts.actions.approve"), "approve"], [t("posts.actions.reject"), "reject"], [t("posts.actions.ban"), "ban"], [t("posts.actions.delete"), "delete"]], params[:param_name]), class: "form-select form-select-sm col-auto"
+    .button{class: "btn btn-primary col-auto btn-sm ms-2", onclick: "postAction()"}
+      = t("execute")
 
 - if defined?(@q)
   = search_form_for @q, url: request.path do |f|
@@ -54,3 +62,5 @@
           = link_to t("edit"), edit_post_path(post) if can? :edit, post
         %td
           = link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") } if can? :destroy, post
+
+= render "common/paging", resource: posts

@@ -26,8 +26,13 @@ import select2 from 'select2';
 import 'select2/dist/css/select2.css';
 
 document.addEventListener('turbolinks:load', function() {
+  window.fadeInterval = 250;
+	window.showMessage = showMessage
+	window.updateElement = updateElement
+	window.postAction = postAction
+
 	setTimeout(() => {
-		$('.app-flash').fadeOut(300);
+		$('.app-flash').fadeOut(fadeInterval);
 	}, 4000)
 
 	selectTags();
@@ -36,15 +41,6 @@ document.addEventListener('turbolinks:load', function() {
 
   $('#message').fadeOut(0)
 	changeState();
-
-	window.showMessage = showMessage
-	window.postAction = postAction
-
-	$('#post_tag_ids').on('select2:select', function (e) { 
-		// debugger
-	  console.log('select event');
-	});
-
 })
 
 function previewPhotos() {
@@ -132,22 +128,11 @@ function changeState() {
 }
 
 function setState(data) {
-  const fadeInterval = 300;
-
-  const id = data.id
-	$('#current-state-' + id).fadeOut(fadeInterval, function() {
-	    $(this).html(data.current_state).fadeIn(fadeInterval);
-	});
-
-	$('#state.state-panel').fadeOut(fadeInterval, function() {
-	    $(this).html(data.state_panel).fadeIn(fadeInterval);
-	    changeState();
-	});
-
-	$('#state-dropdown-' + id).fadeOut(1, function() {
-	    $(this).html(data.state_dropdown).fadeIn(1);
-	    changeState();
-	});
+  updateElement('#current-state-' + data.id, data.current_state)
+  updateElement('#state.state-panel', data.current_state, changeState)
+  updateElement('#state-dropdown-' + data.id, data.state_dropdown, changeState, 1)
+  updateElement('#history-panel', data.history_panel)
+  updateElement('#actions-panel', data.actions_panel)
 
 	showMessage(data.message);
 }
@@ -155,7 +140,6 @@ function setState(data) {
 function showMessage(text, state = 'success', ms = 2000) {
 	if (!text) return
 
-  const fadeInterval = 300;
   let message = $('#message');
 
 	message.addClass('alert-' + state)
@@ -206,11 +190,18 @@ function postAction() {
     }
   })
   .done((data) => {
-  	// TODO update list
-  	debugger
+  	// change table with new rendered list
+  	updateElement('#adv', data.adverts_html)
 		showMessage(data.message, data.status);
   })
   .fail((data) => {
 		showMessage(data.statusText, 'danger');
   });
+}
+
+function updateElement(selector, html, callback, ms) {
+	ms ||= fadeInterval
+	$(selector).fadeOut(ms, function() {
+	  $(this).html(html).fadeIn(ms, callback);
+	});	
 }

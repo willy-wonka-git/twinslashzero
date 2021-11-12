@@ -111,6 +111,7 @@ ru:
       published: Опубликовано
       archived: В архиве
     actions:
+      draft: Черновик
       run: На модерацию
       ban: Заблокировать
       reject: Отклонить в черновик

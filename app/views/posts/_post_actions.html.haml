@@ -1,0 +1,8 @@
+#state.state-panel.d-flex.my-3
+  = render "posts/state", post: @post
+
+- if can? :update, @post
+  = link_to t("edit"), edit_post_path(@post), class: "btn btn-primary mr-2"
+- if can? :destroy, @post
+  = link_to t("destroy"), post_path(@post), method: :delete, class: "btn btn-danger mr-2"
+= link_to t("back"), :back, class: "btn btn-secondary"
