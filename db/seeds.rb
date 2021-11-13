@@ -4,6 +4,10 @@ Tag.all.delete_all
 Post.all.delete_all
 PostCategory.all.delete_all
 User.all.delete_all
+AdminUser.all.delete_all
+
+# Create user admin for ActiveAdmin
+AdminUser.create!(email: 'admin@gmail.com', password: '111111', password_confirmation: '111111')
 
 # Create user admin
 User.create(

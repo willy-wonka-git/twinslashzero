@@ -5,7 +5,7 @@
       %span= item.user.nickname 
       %span.px-1 ➜ 
       %span.fw-bold= t("posts.states." + item.state)
-    - if item.reason  
+    - unless item.reason.to_s.strip.empty?  
       %small.text-muted= item.reason
       %br
     %small.text-muted=  t("ago", time: time_ago_in_words(item.created_at))

@@ -161,6 +161,7 @@ Layout/LineLength:
     - 'app/helpers/icon_helper.rb'
     - 'config/initializers/**/*'
     - 'db/migrate/**/*'
+    - 'app/admin/**/*'
 
 Layout/EmptyLines:
     Exclude:
@@ -190,11 +191,13 @@ Metrics/MethodLength:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
     - 'test/**/*'    
+    - 'app/controllers/posts_controller.rb'
 
 Metrics/AbcSize:
   Exclude:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
+    - 'app/controllers/posts_controller.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -217,3 +220,19 @@ RSpec/ExampleLength:
 
 Style/Documentation:
   Enabled: false
+
+Lint/Void:
+  Exclude:
+    - 'app/admin/**/*'
+
+Lint/EmptyBlock:
+  Exclude:
+    - 'app/admin/**/*'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/controllers/posts_controller.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/controllers/posts_controller.rb'

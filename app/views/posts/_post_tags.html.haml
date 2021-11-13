@@ -1,0 +1,1 @@
+%small= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t), class: "badge bg-light text-secondary" }.join(' ')

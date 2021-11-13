@@ -43,11 +43,24 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_storage_validations (0.9.5)
       rails (>= 5.2.0)
+    activeadmin (2.9.0)
+      arbre (~> 1.2, >= 1.2.1)
+      formtastic (>= 3.1, < 5.0)
+      formtastic_i18n (~> 0.4)
+      inherited_resources (~> 1.7)
+      jquery-rails (~> 4.2)
+      kaminari (~> 1.0, >= 1.2.1)
+      railties (>= 5.2, < 6.2)
+      ransack (~> 2.1, >= 2.1.1)
     activejob (6.1.4.1)
       activesupport (= 6.1.4.1)
       globalid (>= 0.3.6)
     activemodel (6.1.4.1)
       activesupport (= 6.1.4.1)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.1.4.1)
       activemodel (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -66,6 +79,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    arbre (1.4.0)
+      activesupport (>= 3.0.0, < 6.2)
+      ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
     autoprefixer-rails (10.3.3.0)
       execjs (~> 2)
@@ -112,6 +128,13 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    draper (4.0.2)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
+      ruby2_keywords
     enumerize (2.4.0)
       activesupport (>= 3.2)
     erubi (1.10.0)
@@ -145,6 +168,9 @@ GEM
     faraday-rack (1.0.0)
     ffi (1.15.4-x64-mingw32)
     formatador (0.3.0)
+    formtastic (4.0.0)
+      actionpack (>= 5.2.0)
+    formtastic_i18n (0.7.0)
     fuubar (2.5.1)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -173,6 +199,9 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    has_scope (0.8.0)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
     hashie (4.1.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
@@ -184,6 +213,11 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    inherited_resources (1.13.0)
+      actionpack (>= 5.2, < 6.2)
+      has_scope (~> 0.6)
+      railties (>= 5.2, < 6.2)
+      responders (>= 2, < 4)
     inline_svg (1.7.2)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
@@ -331,6 +365,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.1.1)
+    request_store (1.5.0)
+      rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -461,6 +497,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_storage_validations
+  activeadmin
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1.0)
   byebug
@@ -470,6 +507,7 @@ DEPENDENCIES
   database_cleaner-active_record
   devise
   devise-i18n
+  draper
   enumerize
   factory_bot_rails
   faker

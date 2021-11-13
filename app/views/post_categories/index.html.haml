@@ -1,3 +1,5 @@
+= provide(:title, t("posts.categories.show"))
+
 %h1= t("posts.categories.title")
 
 = render "common/add", link: new_post_category_path if can? :create, PostCategory
@@ -21,10 +23,12 @@
         %td= post_category.description
         %td
           - if can? :edit, post_category
-            = link_to t("edit"), edit_post_category_path(post_category)
+            = link_to edit_post_category_path(post_category) do
+              %i.bi.bi-pencil.text-info
         %td  
           - if (can? :destroy, post_category) && post_category.posts.empty? 
-            = link_to t("destroy"), post_category, method: :delete, data: { confirm: t("are_you_sure") }
+            = link_to post_category, method: :delete, data: { confirm: t("are_you_sure") } do
+              %i.bi.bi-trash.text-danger
 
 = render "common/paging", resource: @post_categories
 = render "common/add", link: new_post_category_path if can? :create, PostCategory

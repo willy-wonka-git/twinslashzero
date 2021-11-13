@@ -1,3 +1,5 @@
+= provide(:title, t("posts.moderate"))
+
 %h1
   = t("posts.moderate")
   = @title
@@ -5,4 +7,4 @@
 #message.alert{ role: "alert" }
 
 #adv
-  = render "posts/list", posts: @posts
+  = render "posts/list", posts: @posts, moderate: true

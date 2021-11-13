@@ -160,6 +160,17 @@ function postAction() {
 		return
 	}
 
+	let posts = []
+	const els = $('.form-check-input[type="checkbox"]:checked');
+	els.each(function(index, el) {
+		posts.push(parseInt(el.parentElement.parentElement.dataset.id))
+	})
+
+	if (!posts.length) { 
+		showMessage('Select adverts!', 'danger');
+		return
+	}
+
 	let reason = '';
 
 	if ("reject, ban".indexOf(current_action) != -1) {
@@ -168,17 +179,6 @@ function postAction() {
 			return 
 		}
 	}	
-
-	let posts = []
-	const els = $('.form-check-input[type="checkbox"]:checked');
-	els.each(function(index, el) {
-		posts.push(parseInt(el.parentElement.parentElement.dataset.id))
-	})
-
-	if (!posts.length) { 
-		showMessage('Select advs!', 'danger');
-		return
-	}
 
   $.post({
     url: '/adv/action',

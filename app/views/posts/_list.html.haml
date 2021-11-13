@@ -1,11 +1,14 @@
+- unless defined?(moderate)
+  - moderate = false
+
 = render "common/paging", resource: posts
 
-- if User.current_user.admin?
+- if moderate && User.current_user.admin?
   .row.row-cols-lg-auto.align-items-center.actions.my-3
-    %label{for: "action", class: "col-auto"}
+    %label{ for: "action", class: "col-auto" }
       = t("posts.action") + ":"
     = select_tag :action, options_for_select([[t("select") + "...", ""], [t("posts.actions.approve"), "approve"], [t("posts.actions.reject"), "reject"], [t("posts.actions.ban"), "ban"], [t("posts.actions.delete"), "delete"]], params[:param_name]), class: "form-select form-select-sm col-auto"
-    .button{class: "btn btn-primary col-auto btn-sm ms-2", onclick: "postAction()"}
+    .button{ class: "btn btn-primary col-auto btn-sm ms-2", onclick: "postAction()" }
       = t("execute")
 
 - if defined?(@q)
@@ -20,7 +23,7 @@
   %thead
     %tr
       %th
-      - if User.current_user.admin?
+      - if moderate && User.current_user.admin?
         %th
       - if defined?(@q)
         %th= sort_link(@q, :title, t("posts.title_one"))
@@ -40,10 +43,10 @@
       %th
   %tbody
     - posts.each do |post|
-      %tr{"data-id" => post.id}
-        - if User.current_user.admin?
+      %tr{ "data-id" => post.id }
+        - if moderate && User.current_user.admin?
           %td
-            %input{class: "form-check-input", type: "checkbox"}
+            %input{ class: "form-check-input", type: "checkbox" }
         %td
           - if post.photos.any?
             %a{ href: cl_image_path(post.photos.first.key), target: "_blank" }
@@ -52,15 +55,21 @@
         %td= post.category.title
         %td= post.author.nickname
         %td{ style: "white-space: nowrap" }= post.time_ago
-        %td= post.tag_list
+        %td{ style: "max-width: 150px" }
+          = render "posts/post_tags", post: post
         %td{ id: "current-state-" + post.id.to_s }= t('posts.states.' + post.aasm_state.to_s)
         - if User.current_user.admin?
           %td#state
             %div{ id: "state-dropdown-" + post.id.to_s }
               = render "posts/state_dropdown", post: post
         %td
-          = link_to t("edit"), edit_post_path(post) if can? :edit, post
+          - if can? :edit, post
+            = link_to edit_post_path(post) do
+              %i.bi.bi-pencil.text-info
+
         %td
-          = link_to t("destroy"), post, method: :delete, data: { confirm: t("are_you_sure") } if can? :destroy, post
+          - if can? :destroy, post
+            = link_to post_path(post), method: :delete, data: { confirm: t("are_you_sure") } do
+              %i.bi.bi-trash.text-danger
 
 = render "common/paging", resource: posts

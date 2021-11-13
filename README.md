@@ -6,13 +6,8 @@
 
 # TODO
 
-- rake-задачи
-- админка
-
-- auth social networks - register apps (vk, twitter)
 - регистрация travis - запуск
-- Travis CI
-
+- auth social networks - register apps (vk, twitter)
 - RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))
 
 -----

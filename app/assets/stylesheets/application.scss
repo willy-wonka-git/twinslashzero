@@ -31,12 +31,12 @@
 }
 
 .vr {
-	margin-left: 12px;
-	margin-right: 12px;
-	.small {
+	margin: -4px 12px;
+	opacity: 0.2;
+	&.small {
 		opacity: 0.1;
-	    height: 30px;
-	    margin-top: 5px;
+    height: 30px;
+    margin-top: 5px;
 	}
 }
 

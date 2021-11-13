@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   namespace :users do
     get 'omniauth_callbacks/github'
     get 'omniauth_callbacks/vkontakte'

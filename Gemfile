@@ -117,3 +117,6 @@ gem 'mini_magick'
 gem 'active_storage_validations'
 
 gem 'ransack'
+
+gem 'activeadmin'
+gem 'draper'

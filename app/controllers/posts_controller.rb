@@ -116,29 +116,29 @@ class PostsController < ApplicationController
   def action
     if !params["type"]\
        || params["posts"].empty?\
-       || !["ban", "approve", "reject", "delete"].include?(params["type"])\
-       || ["ban", "reject"].include?(params["type"]) && !params["reason"]
+       || %w[ban approve reject delete].exclude?(params["type"])\
+       || (%w[ban reject].include?(params["type"]) && !params["reason"])
       render json: { message: "Wrong parameters", statusText: "error", status: :unprocessable_entity }
-    end 
-        
+    end
+
     params["posts"].each do |post_id|
       @post = Post.find(post_id)
       @post.send(params["type"])
       @post.state_reason = params["reason"]
       @post.save
-    end      
+    end
 
-    message = I18n.t("posts.messages.post_was_successfully_updated") unless params["type"] == "delete" 
+    message = I18n.t("posts.messages.post_was_successfully_updated") unless params["type"] == "delete"
     message = I18n.t("posts.messages.post_was_successfully_destroyed") if params["type"] == "delete"
 
     @q = Post.ransack(params[:q])
     posts = @q.result(distinct: true)
     @posts = posts.not_moderated.page(params[:page])
 
-    render json: { 
-      message: message, 
+    render json: {
+      message: message,
       statusText: "success",
-      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts }, layout: false),
+      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts }, layout: false)
     }
   end
 
@@ -163,6 +163,7 @@ class PostsController < ApplicationController
 
   def create_new_tags
     return unless @post.valid?
+
     params[:post][:tag_ids].each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")
 
@@ -182,8 +183,9 @@ class PostsController < ApplicationController
         message: I18n.t("posts.messages.post_was_successfully_updated"),
         state_panel: (render_to_string partial: '/posts/state', locals: { post: @post }, layout: false),
         state_dropdown: (render_to_string partial: '/posts/state_dropdown', locals: { post: @post }, layout: false),
-        history_panel: (render_to_string partial: '/posts/post_history', locals: { post_history: @post.post_history }, layout: false),
-        actions_panel: (render_to_string partial: '/posts/post_actions', locals: { post: @post }, layout: false),
+        history_panel: (render_to_string partial: '/posts/post_history', locals: { post_history: @post.post_history },
+                                         layout: false),
+        actions_panel: (render_to_string partial: '/posts/post_actions', locals: { post: @post }, layout: false)
       }
     }
   end

@@ -21,7 +21,6 @@ class Post < ApplicationRecord
 
   after_save :save_post_history
 
-
   def self.tagged_with(name)
     tag = Tag.find_by(name: name)
     tag ? tag.posts.published : Post.published
@@ -114,8 +113,18 @@ class Post < ApplicationRecord
     aasm.events(permitted: true).map(&:name)
   end
 
-  def post_history
-    PostHistory.where(post: self).limit(10)
+  def post_history(limit = 10)
+    history = PostHistory.where(post: self)
+    history = history.limit(limit) if limit
+    history
+  end
+
+  def save_post_history
+    return if post_history.first && post_history.first.state == aasm.current_state.to_s
+
+    post_history = PostHistory.create({ post: self, user: User.current_user, state: aasm.current_state })
+    post_history.reason = state_reason
+    post_history.save
   end
 
   # cron tasks
@@ -133,13 +142,5 @@ class Post < ApplicationRecord
       post.archive
       post.save
     end
-  end
-
-  def save_post_history
-    return if post_history.first && post_history.first.state == aasm.current_state.to_s
-
-    post_history = PostHistory.create({ post: self, user: User.current_user, state: aasm.current_state })
-    post_history.reason = self.state_reason
-    post_history.save
   end
 end
