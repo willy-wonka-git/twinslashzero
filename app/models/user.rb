@@ -26,8 +26,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.fullname = auth.info.name
       user.nickname = auth.extra.raw_info.screen_name
-
-      filename = "vk#{auth.uid}.jpg"
       file = URI.open(auth.info.image)
       user.avatar.attach(io: file, filename: filename)      
     end
@@ -35,16 +33,14 @@ class User < ApplicationRecord
 
   def self.from_twitter_omniauth(auth)
     p auth
-    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #   user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@twitter.com'
-    #   user.password = Devise.friendly_token[0, 20]
-    #   user.fullname = auth.info.name
-    #   user.nickname = auth.extra.raw_info.screen_name
-
-    #   filename = "vk#{auth.uid}.jpg"
-    #   file = URI.open(auth.info.image)
-    #   user.avatar.attach(io: file, filename: filename)      
-    # end
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@twitter.com'
+      user.password = Devise.friendly_token[0, 20]
+      user.fullname = auth.info.name
+      user.nickname = auth.info.nickname
+      file = URI.open(auth.info.image)
+      user.avatar.attach(io: file, filename: filename)      
+    end
   end
 
   class << self
