@@ -27,7 +27,7 @@ class User < ApplicationRecord
       user.fullname = auth.info.name
       user.nickname = auth.extra.raw_info.screen_name
       file = URI.open(auth.info.image)
-      user.avatar.attach(io: file, filename: filename)      
+      user.avatar.attach(io: file, filename: "vk#{auth.uid}.jpg")      
     end
   end
 
@@ -39,7 +39,7 @@ class User < ApplicationRecord
       user.fullname = auth.info.name
       user.nickname = auth.info.nickname
       file = URI.open(auth.info.image)
-      user.avatar.attach(io: file, filename: filename)      
+      user.avatar.attach(io: file, filename: "twitter#{auth.uid}.jpg")      
     end
   end
 
