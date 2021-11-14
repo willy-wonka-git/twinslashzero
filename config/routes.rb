@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
-  namespace :users do
-    get 'omniauth_callbacks/vkontakte'
-    get 'omniauth_callbacks/twitter'
-    # get 'omniauth_callbacks/github'
-    # get 'omniauth_callbacks/facebook'
-  end
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     get '/user/:id' => 'users#show', as: 'user'

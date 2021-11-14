@@ -1,8 +1,10 @@
+require 'uri'
+
 class User < ApplicationRecord
   extend Enumerize
 
   enumerize :role, in: [:guest, :user, :admin], default: :user
-  has_many :posts, dependent: :destroy
+  has_many :posts, inverse_of: 'author', foreign_key: "author_id", dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
   validates :nickname, presence: true, length: { minimum: 5, maximum: 30 }, uniqueness: { case_sensitive: false }
@@ -13,10 +15,37 @@ class User < ApplicationRecord
                              message: I18n.t("errors.messages.should_be_less_than_5mb") }
 
   # Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable
+         :omniauthable, omniauth_providers: [:twitter, :vkontakte]
+
+  def self.from_vkontakte_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@vk.com'
+      user.password = Devise.friendly_token[0, 20]
+      user.fullname = auth.info.name
+      user.nickname = auth.extra.raw_info.screen_name
+
+      filename = "vk#{auth.uid}.jpg"
+      file = URI.open(auth.info.image)
+      user.avatar.attach(io: file, filename: filename)      
+    end
+  end
+
+  def self.from_twitter_omniauth(auth)
+    p auth
+    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #   user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@twitter.com'
+    #   user.password = Devise.friendly_token[0, 20]
+    #   user.fullname = auth.info.name
+    #   user.nickname = auth.extra.raw_info.screen_name
+
+    #   filename = "vk#{auth.uid}.jpg"
+    #   file = URI.open(auth.info.image)
+    #   user.avatar.attach(io: file, filename: filename)      
+    # end
+  end
 
   class << self
     def current_user=(user)

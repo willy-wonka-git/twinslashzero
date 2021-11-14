@@ -6,8 +6,7 @@
 
 # TODO
 
-регистрация travis - запуск  
-auth social networks - register apps (vk, twitter)  
+travis  
 RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))  
 
 ### last updates
@@ -16,6 +15,5 @@ RSpec (capybara, factory_bot, приемочные тесты turnip (брауз
 поиск постов по тегам  
 админка ActiveAdmin  
 schedule rake-задачи на хероку  
+social networks auth - vk, twitter  
 исправлены старые и внесены новые ошибки
-
-* Аутентификация через соцсети [habr](https://habr.com/ru/post/142128/) [devise](https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview) (вк, твиттер, фейсбук)

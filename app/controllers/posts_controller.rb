@@ -138,7 +138,7 @@ class PostsController < ApplicationController
     render json: {
       message: message,
       statusText: "success",
-      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts }, layout: false)
+      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts, moderate: true }, layout: false)
     }
   end
 

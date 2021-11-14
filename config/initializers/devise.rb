@@ -271,10 +271,18 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :vkontakte, '8000322', 'UmjaJFy7rPVgiREcfXvM', scope: 'user,public_repo'
-  config.omniauth :twitter, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  # config.omniauth :github, 'fb15727409bebaa7f65b', 'TODO', scope: 'user,public_repo'
-  # config.omniauth :facebook, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo' # , token_params: { parse: :json }
+  if Rails.env.production?
+    config.omniauth :vkontakte, '8000322', 'UmjaJFy7rPVgiREcfXvM', scope: 'user,public_repo'
+    config.omniauth :twitter, '22485819', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
+  elsif Rails.env.development?
+    config.omniauth :vkontakte, '8000344', 'haN2qiMRSLUYhhDABek7', scope: 'user,public_repo'
+    config.omniauth :twitter, '22485819', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
+    # API key o1xWd8AuK6xHpjUi8rLHUgYw7 
+    # bearer token AAAAAAAAAAAAAAAAAAAAADsbVwEAAAAAW%2FAKnu8NF1etreO9jldm1OHwcMw%3DgwTv9zCV70vHUE35dpsEoiWfAYI1kPbanPTdNwLH8JygQEChFW
+    
+    # config.omniauth :github, 'fb15727409bebaa7f65b', 'TODO', scope: 'user,public_repo'
+    # config.omniauth :facebook, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo' # , token_params: { parse: :json }
+  end  
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
