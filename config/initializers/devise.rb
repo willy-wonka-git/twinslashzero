@@ -276,9 +276,11 @@ Devise.setup do |config|
     config.omniauth :twitter, '22485819', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
   elsif Rails.env.development?
     config.omniauth :vkontakte, '8000344', 'haN2qiMRSLUYhhDABek7', scope: 'user,public_repo'
-    config.omniauth :twitter, '22485819', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
-    # API key o1xWd8AuK6xHpjUi8rLHUgYw7 
-    # bearer token AAAAAAAAAAAAAAAAAAAAADsbVwEAAAAAW%2FAKnu8NF1etreO9jldm1OHwcMw%3DgwTv9zCV70vHUE35dpsEoiWfAYI1kPbanPTdNwLH8JygQEChFW
+    config.omniauth :twitter, 'o1xWd8AuK6xHpjUi8rLHUgYw7', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
+    # TODO hide credentials: EDITOR="notepad --wait" bin/rails credentials:edit
+    #   config.omniauth :twitter, Rails.application.credentials.fetch((:twitter_api_public), Rails.application.credentials.fetch(:twitter_api_secret)
+    #   API key o1xWd8AuK6xHpjUi8rLHUgYw7 
+    #   bearer token AAAAAAAAAAAAAAAAAAAAADsbVwEAAAAAW%2FAKnu8NF1etreO9jldm1OHwcMw%3DgwTv9zCV70vHUE35dpsEoiWfAYI1kPbanPTdNwLH8JygQEChFW
     
     # config.omniauth :github, 'fb15727409bebaa7f65b', 'TODO', scope: 'user,public_repo'
     # config.omniauth :facebook, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo' # , token_params: { parse: :json }
