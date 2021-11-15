@@ -119,3 +119,5 @@ gem 'ransack'
 
 gem 'activeadmin'
 gem 'draper'
+
+# gem 'travis'
