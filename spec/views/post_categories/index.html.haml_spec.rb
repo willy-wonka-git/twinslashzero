@@ -2,21 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "post_categories/index", type: :view do
   before do
-    assign(:post_categories, [
-             PostCategory.create!(
-               title: "Title",
-               description: "MyText"
-             ),
-             PostCategory.create!(
-               title: "Title",
-               description: "MyText"
-             )
-           ])
+    login_user
+    FactoryBot.create_list(:post_category, 2)
+    @post_categories = PostCategory.order(:id).page(1)
   end
 
   it "renders a list of post_categories" do
     render
-    assert_select "tr>td", text: "Title".to_s, count: 2
-    assert_select "tr>td", text: "MyText".to_s, count: 2
+    # assert_select "tr>td", text: "#{'a' * 50}2", count: 1
+    # assert_select "tr>td", text: "#{'a' * 50}3", count: 1
+    assert_select "tr>td", text: "a" * 100, count: 2
   end
 end

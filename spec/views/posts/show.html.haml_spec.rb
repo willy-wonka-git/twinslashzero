@@ -2,19 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "posts/show", type: :view do
   before do
-    @post = assign(:post, Post.create!(
-                            author: "",
-                            category: "",
-                            title: "Title",
-                            content: "MyText"
-                          ))
+    login_user
+    @post = FactoryBot.create(:post)
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
-    expect(rendered).to match(//)
-    expect(rendered).to match(//)
-    expect(rendered).to match(/Title/)
-    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/a{50}/)
+    expect(rendered).to match(/a{200}/)
   end
 end

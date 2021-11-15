@@ -271,21 +271,13 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.test?
     config.omniauth :vkontakte, '8000322', 'UmjaJFy7rPVgiREcfXvM', scope: 'user,public_repo'
     config.omniauth :twitter, 'o1xWd8AuK6xHpjUi8rLHUgYw7', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
-    # TODO hide credentials: EDITOR="notepad --wait" bin/rails credentials:edit
-    #   config.omniauth :twitter, Rails.application.credentials.fetch((:twitter_api_public), Rails.application.credentials.fetch(:twitter_api_secret)
-    #   API key o1xWd8AuK6xHpjUi8rLHUgYw7 
-    #   bearer token AAAAAAAAAAAAAAAAAAAAADsbVwEAAAAAW%2FAKnu8NF1etreO9jldm1OHwcMw%3DgwTv9zCV70vHUE35dpsEoiWfAYI1kPbanPTdNwLH8JygQEChFW
   elsif Rails.env.development?
     config.omniauth :vkontakte, '8000344', 'haN2qiMRSLUYhhDABek7', scope: 'user,public_repo'
     config.omniauth :twitter, 'YZWHsStjF9Hcgpl92K3eDbO5V', 'nA3VGsR7Lu8ZVti94ersDelwzwrJcRrHTozuLmgNc28jTIhBEb', scope: 'user,public_repo'
-    # AAAAAAAAAAAAAAAAAAAAAAEdVwEAAAAA1egixX1azvryxBI5qTHm2dhmgP0%3DUSeCnjsDYZRpznfWwq75G9LENUcJ1EkPGnQ7PDgWK6C8mR6xG1
-    
-    # config.omniauth :github, 'fb15727409bebaa7f65b', 'TODO', scope: 'user,public_repo'
-    # config.omniauth :facebook, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo' # , token_params: { parse: :json }
-  end  
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

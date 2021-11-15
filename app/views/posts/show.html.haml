@@ -19,10 +19,10 @@
           %td= @post.published_format
       %tr
         %th= t("posts.author")
-        %td= link_to @post.author.nickname, @post.author
+        %td= link_to @post.author.nickname, user_path(id: @post.author.id)
       %tr
         %th= t("posts.category")
-        %td= link_to @post.category.title, @post.category
+        %td= link_to @post.category.title, post_category_path(id: @post.category.id)
       %tr
         %th= t("title")
         %td= @post.title

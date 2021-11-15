@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       @title = params[:tag]
       posts = posts.tagged_with(params[:tag])
     end
-    @posts = posts.published.page(params[:page])
+    @posts = posts.published.order(:published_at).page(params[:page])
   end
 
   def moderate
@@ -163,6 +163,7 @@ class PostsController < ApplicationController
 
   def create_new_tags
     return unless @post.valid?
+    return unless params[:post][:tag_ids]
 
     params[:post][:tag_ids].each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")

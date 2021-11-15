@@ -1,12 +1,12 @@
 -# frozen_string_literal: true
 
-= simple_form_for(@post) do |f|
+= simple_form_for(@post, url: posts_path) do |f|
   = render "common/form_errors", f: f
   .form-inputs.row.gy-2
     = f.input :category_id, label: t("category"), required: true, collection: PostCategory.all.collect {|c| [c.title, c.id]}
     = f.input :title
     = f.input :content, label: t("content")
-    = f.input :tag_ids, as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
+    = f.input :tag_ids, label: t("tag_ids"), as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
 
     - if @post.photos.any?
       #current-photos.d-flex
@@ -14,6 +14,6 @@
           %a{ href: cl_image_path(photo.key), target: "_blank" }
             = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
     #new-photos.d-flex
-    = f.input :photos, direct_upload: true, input_html: { multiple: true, class: "form-control"}
+    = f.input :photos, label: t("photos"), direct_upload: true, input_html: { multiple: true, class: "form-control"}
   .form-actions.mt-3
     = f.button :submit, t("save"), class: "btn btn-primary my-2"

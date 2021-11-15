@@ -13,6 +13,8 @@ if ENV['RAILS_ENV'] == 'test'
   # puts "required simplecov"
 end
 
+require_relative 'support/controller_macros'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -70,4 +72,10 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include ControllerMacros, type: :request
+  config.include ControllerMacros, type: :view
+  config.include ControllerMacros, type: :controller
 end

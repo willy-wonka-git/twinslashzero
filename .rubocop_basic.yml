@@ -198,6 +198,8 @@ Metrics/AbcSize:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
     - 'app/controllers/posts_controller.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/models/user.rb'
 
 Metrics/ClassLength:
   Exclude:

@@ -37,6 +37,7 @@ en:
   created: Created
   published: Published
   ago: "%{time} ago"
+  admin_panel: Control panel
   unauthorized:
     manage:
       all: "You have no access to this resource"

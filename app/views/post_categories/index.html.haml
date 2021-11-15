@@ -19,15 +19,15 @@
       %tr
         %td
           .badge.bg-secondary= post_category.posts_published.count
-        %td= link_to post_category.title, post_category
+        %td= link_to post_category.title, post_category_path(id: post_category.id)
         %td= post_category.description
         %td
           - if can? :edit, post_category
-            = link_to edit_post_category_path(post_category) do
+            = link_to edit_post_category_path(id: post_category.id) do
               %i.bi.bi-pencil.text-info
         %td  
           - if (can? :destroy, post_category) && post_category.posts.empty? 
-            = link_to post_category, method: :delete, data: { confirm: t("are_you_sure") } do
+            = link_to post_category_path(id: post_category.id), method: :delete, data: { confirm: t("are_you_sure") } do
               %i.bi.bi-trash.text-danger
 
 = render "common/paging", resource: @post_categories

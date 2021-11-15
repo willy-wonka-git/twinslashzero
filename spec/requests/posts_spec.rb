@@ -14,15 +14,17 @@ require 'rails_helper'
 
 RSpec.describe "/posts", type: :request do
 
-  # Post. As you add validations to Post, be sure to
-  # adjust the attributes here as well.
+  # let!(:user) { create(:user) }
+  # let!(:board) { create(:board, 1, user_id: user.id) }
+  # let!(:categories) { create_list(:category, 5, board_id: board.id) }
 
-  subject(:category) { PostCategory.create!(title: 'a' * 5, description: 'a' * 500) }
+  subject(:category) do
+    PostCategory.create!(title: 'a' * 5, description: 'a' * 500)
+  end
 
-  let(:user) { User.create!(nickname: 'a' * 5, email: 'user@gmail.com', role: 'user', password: '1' * 6) }
   let(:valid_attributes) do
     {
-      author: user,
+      author: User.current_user,
       category: category,
       category_id: category.id,
       title: 'a' * 50,
@@ -35,6 +37,10 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "GET /index" do
+    before do
+      login_user
+    end
+
     it "renders a successful response" do
       Post.create! valid_attributes
       get posts_url
@@ -43,6 +49,10 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "GET /show" do
+    before do
+      login_user
+    end
+
     it "renders a successful response" do
       post = Post.create! valid_attributes
       get post_url(id: post.id)
@@ -51,16 +61,22 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "GET /new" do
+    before do
+      login_user
+    end
+
     it "renders a successful response" do
-      sign_in user
       get new_post_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
+    before do
+      login_user
+    end
+
     it "render a successful response" do
-      sign_in user
       post = Post.create! valid_attributes
       get edit_post_url(id: post.id)
       expect(response).to be_successful
@@ -68,16 +84,18 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "POST /create" do
+    before do
+      login_user
+    end
+
     context "with valid parameters" do
       it "creates a new Post" do
-        sign_in user
         expect do
           post posts_url, params: { post: valid_attributes }
         end.to change(Post, :count).by(1)
       end
 
       it "redirects to the created post" do
-        sign_in user
         post posts_url, params: { post: valid_attributes }
         expect(response).to redirect_to(post_url(Post.last))
       end
@@ -100,13 +118,16 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "PATCH /update" do
+    before do
+      login_user
+    end
+
     context "with valid parameters" do
       let(:new_attributes) do
         { title: 'b' * 50 }
       end
 
       it "updates the requested post" do
-        sign_in user
         post = Post.create! valid_attributes
         patch post_url(id: post.id), params: { post: new_attributes }
         post.reload
@@ -114,7 +135,6 @@ RSpec.describe "/posts", type: :request do
       end
 
       it "redirects to the post" do
-        sign_in user
         post = Post.create! valid_attributes
         patch post_url(id: post.id), params: { post: new_attributes }
         post.reload
@@ -133,8 +153,11 @@ RSpec.describe "/posts", type: :request do
   end
 
   describe "DELETE /destroy" do
+    before do
+      login_user
+    end
+
     it "destroys the requested post" do
-      sign_in user
       post = Post.create! valid_attributes
       expect do
         delete post_url(id: post.id)
@@ -142,7 +165,6 @@ RSpec.describe "/posts", type: :request do
     end
 
     it "redirects to the posts list" do
-      sign_in user
       post = Post.create! valid_attributes
       delete post_url(id: post.id)
       expect(response).to redirect_to(posts_url)

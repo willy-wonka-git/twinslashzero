@@ -51,7 +51,7 @@
           - if post.photos.any?
             %a{ href: cl_image_path(post.photos.first.key), target: "_blank" }
               = cl_image_tag(post.photos.first.key, width: 80)
-        %td= link_to post.title, post_path(post)
+        %td= link_to post.title, post_path(id: post.id)
         %td= post.category.title
         %td= post.author.nickname
         %td{ style: "white-space: nowrap" }= post.time_ago
@@ -64,12 +64,12 @@
               = render "posts/state_dropdown", post: post
         %td
           - if can? :edit, post
-            = link_to edit_post_path(post) do
+            = link_to edit_post_path(id: post.id) do
               %i.bi.bi-pencil.text-info
 
         %td
           - if can? :destroy, post
-            = link_to post_path(post), method: :delete, data: { confirm: t("are_you_sure") } do
+            = link_to post_path(id: post.id), method: :delete, data: { confirm: t("are_you_sure") } do
               %i.bi.bi-trash.text-danger
 
 = render "common/paging", resource: posts

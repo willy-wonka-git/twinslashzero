@@ -37,6 +37,7 @@ ru:
   created: Создано
   published: Опубликовано
   ago: "%{time} назад"
+  admin_panel: Панель управления
   unauthorized:
     manage:
       all: "У вас нет доступа к этому ресурсу"

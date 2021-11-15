@@ -6,8 +6,8 @@
 
 # TODO
 
-travis  
-RSpec (capybara, factory_bot, приемочные тесты turnip (браузер))  
+RSpec (capybara, приемочные тесты turnip (браузер))  
+travis (требует время и платежные реквизиты)  
 
 ### last updates
 
@@ -16,4 +16,11 @@ RSpec (capybara, factory_bot, приемочные тесты turnip (брауз
 админка ActiveAdmin  
 schedule rake-задачи на хероку  
 social networks auth - vk, twitter  
-исправлены старые и внесены новые ошибки
+исправлены старые и добавлены новые ошибки
+
+
+### Уточнить работу и генерацию путей
+
+    # controller.extra_params = { :id => @post_category.id }
+    # render template: 'post_categories/edit', :locals => { locale: :en, @post_category => @post_category }
+    # assert_select "form[action=?][method=?]", post_categories_url(@post_category), "post" do

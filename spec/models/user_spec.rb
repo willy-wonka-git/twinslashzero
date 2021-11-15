@@ -4,14 +4,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
 
-  FactoryBot.define do
-    factory :user do
-      # nickname { "John1" }
-      email
-      password
-    end
-  end
-
   # it "memoizes the value" do
   #   # user = build(:user)
   #   # user.save!

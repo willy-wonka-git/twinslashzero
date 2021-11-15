@@ -22,24 +22,24 @@ class User < ApplicationRecord
 
   def self.from_vkontakte_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@vk.com'
+      user.email = auth.info.email || "#{auth.extra.raw_info.screen_name}@vk.com"
       user.password = Devise.friendly_token[0, 20]
       user.fullname = auth.info.name
       user.nickname = auth.extra.raw_info.screen_name
-      file = URI.open(auth.info.image)
-      user.avatar.attach(io: file, filename: "vk#{auth.uid}.jpg")      
+      file = URI.parse(auth.info.image).open
+      user.avatar.attach(io: file, filename: "vk#{auth.uid}.jpg")
     end
   end
 
   def self.from_twitter_omniauth(auth)
-    p auth
+    Rails.logger.debug auth
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email ? auth.info.email : auth.extra.raw_info.screen_name + '@twitter.com'
+      user.email = auth.info.email || "#{auth.extra.raw_info.screen_name}@twitter.com"
       user.password = Devise.friendly_token[0, 20]
       user.fullname = auth.info.name
       user.nickname = auth.info.nickname
-      file = URI.open(auth.info.image)
-      user.avatar.attach(io: file, filename: "twitter#{auth.uid}.jpg")      
+      file = URI.parse(auth.info.image).open
+      user.avatar.attach(io: file, filename: "twitter#{auth.uid}.jpg")
     end
   end
 

@@ -9,6 +9,12 @@
         %li.nav-item= link_to t("posts.categories.show"), post_categories_path, class: class_names("nav-link", { active: current_page?(post_categories_path) })
         %li.nav-item= link_to t("users.users"), users_path, class: class_names("nav-link", { active: current_page?(users_path) })
         .vr
+        - if User.current_user.admin?
+          %li.nav-item
+            = link_to "/admin", target: "_blank", class: class_names("nav-link") do
+              %i.bi.bi-gear
+              = t("admin_panel")
+          .vr
         .hstack
           - I18n.available_locales.each do |item|
             - if item != I18n.locale
