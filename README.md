@@ -10,8 +10,9 @@
 
 # TODO
 
-RSpec (capybara, turnip)  
-travis
+RSpec (capybara, turnip)   
+	- coverage  
+	- [пример](https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-rspec)
 
 ### last updates
 
@@ -20,4 +21,5 @@ travis
 админка ActiveAdmin  
 schedule rake-задачи на хероку  
 social networks auth - vk, twitter  
+travis-ci  
 исправлены старые и добавлены новые ошибки
