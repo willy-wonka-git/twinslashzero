@@ -41,8 +41,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_storage_validations (0.9.5)
-      rails (>= 5.2.0)
+    active_storage_validations (0.9.6)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activeadmin (2.9.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (>= 3.1, < 5.0)
@@ -401,7 +404,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-    rubocop (1.22.1)
+    rubocop (1.23.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -410,13 +413,13 @@ GEM
       rubocop-ast (>= 1.12.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.12.0)
+    rubocop-ast (1.13.0)
       parser (>= 3.0.1.1)
     rubocop-rails (2.12.3)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
-    rubocop-rspec (2.5.0)
+    rubocop-rspec (2.6.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
@@ -442,6 +445,8 @@ GEM
     semantic_range (3.0.0)
     sexp_processor (4.15.3)
     shellany (0.0.1)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -502,55 +507,56 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aasm
-  active_storage_validations
-  activeadmin
+  aasm (~> 5.2)
+  active_storage_validations (~> 0.9.6)
+  activeadmin (~> 2.9)
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1.0)
   byebug
-  cancancan
+  cancancan (~> 3.3)
   capybara (>= 3.26)
-  cloudinary
-  database_cleaner-active_record
-  devise
-  devise-i18n
-  draper
-  enumerize
-  factory_bot_rails
-  faker
-  fuubar
-  guard-rspec
+  cloudinary (~> 1.21)
+  database_cleaner-active_record (~> 2.0)
+  devise (~> 4.8)
+  devise-i18n (~> 1.10)
+  draper (~> 4.0)
+  enumerize (~> 2.4)
+  factory_bot_rails (~> 6.2)
+  faker (~> 2.19)
+  fuubar (~> 2.5)
+  guard-rspec (~> 4.7)
   haml-rails (~> 2.0)
   inline_svg (~> 1.7)
   jbuilder (~> 2.7)
-  jquery-rails
-  kaminari
-  kaminari-i18n
-  mini_magick
-  omniauth
-  omniauth-rails_csrf_protection
-  omniauth-twitter
-  omniauth-vkontakte
+  jquery-rails (~> 4.4)
+  kaminari (~> 1.2)
+  kaminari-i18n (~> 0.5.0)
+  mini_magick (~> 4.11)
+  omniauth (~> 2.0)
+  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth-twitter (~> 1.4)
+  omniauth-vkontakte (~> 1.7)
   pg (~> 1.1)
-  pry-rails
+  pry-rails (~> 0.3.9)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-i18n (~> 6.0.0)
-  ransack
-  rspec-core
-  rspec-expectations
-  rspec-mocks
-  rspec-rails (~> 5.0.0)
-  rubocop
-  rubocop-rails
-  rubocop-rspec
+  ransack (~> 2.4)
+  rspec-core (~> 3.10)
+  rspec-expectations (~> 3.10)
+  rspec-mocks (~> 3.10)
+  rspec-rails (~> 5.0)
+  rubocop (~> 1.23)
+  rubocop-rails (~> 2.12)
+  rubocop-rspec (~> 2.6)
   sass-rails (>= 6)
-  select2-rails
+  select2-rails (~> 4.0)
   selenium-webdriver
-  simple_form
-  simplecov
-  timecop
+  shoulda-matchers (~> 5.0)
+  simple_form (~> 5.1)
+  simplecov (~> 0.21.2)
+  timecop (~> 0.9.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

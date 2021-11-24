@@ -10,8 +10,9 @@
     %dd.col-sm-9= @user.fullname
     %dt.col-sm-3= t("users.email")
     %dd.col-sm-9= @user.email
-    %dt.col-sm-3= t("users.role")
-    %dd.col-sm-9= @user.role
+    - if User.current_user.admin?
+      %dt.col-sm-3= t("users.role")
+      %dd.col-sm-9= @user.role
     %dt.col-sm-3= t("users.description")
     %dd.col-sm-9= @user.description
 

@@ -75,7 +75,15 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include ControllerMacros, type: :model
   config.include ControllerMacros, type: :request
   config.include ControllerMacros, type: :view
   config.include ControllerMacros, type: :controller
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

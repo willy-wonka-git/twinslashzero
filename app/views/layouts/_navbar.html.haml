@@ -7,7 +7,8 @@
         - if User.current_user.admin?
           %li.nav-item= link_to t("posts.moderate"), moderate_path, class: class_names("nav-link", { active: current_page?(moderate_path) })
         %li.nav-item= link_to t("posts.categories.show"), post_categories_path, class: class_names("nav-link", { active: current_page?(post_categories_path) })
-        %li.nav-item= link_to t("users.users"), users_path, class: class_names("nav-link", { active: current_page?(users_path) })
+        - if can? :index, User
+          %li.nav-item= link_to t("users.users"), users_path, class: class_names("nav-link", { active: current_page?(users_path) })
         .vr
         - if User.current_user.admin?
           %li.nav-item

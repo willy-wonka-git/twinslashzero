@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, User
+    can :show, User
     can :read, Post
     can :read, PostCategory
     can [:read, :search], Tag
@@ -12,6 +12,7 @@ class Ability
     # permissions for users
     return if user.blank?
 
+    can :index, User
     can :create, Post
     can [:destroy, :archive], Post, author: user
     can :update, Post, author: user, aasm_state: "draft"

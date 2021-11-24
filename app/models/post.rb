@@ -14,10 +14,8 @@ class Post < ApplicationRecord
   validates :category, :title, :content, presence: true
   validates :title, length: { minimum: 5, maximum: 200 }
   validates :content, length: { minimum: 50, maximum: 2000 }
-  validates :photos, content_type: { in: %w[image/jpeg image/gif image/png],
-                                     message: I18n.t("errors.messages.must_be_valid_image_format") },
-                     size: { less_than: 5.megabytes,
-                             message: I18n.t("errors.messages.should_be_less_than_5mb") }
+  validates :photos, content_type: { in: %w[image/jpeg image/gif image/png], message: I18n.t("errors.messages.must_be_valid_image_format") },
+                     size: { less_than: 5.megabytes, message: I18n.t("errors.messages.should_be_less_than_5mb") }
 
   after_save :save_post_history
 
@@ -121,6 +119,7 @@ class Post < ApplicationRecord
 
   def save_post_history
     return if post_history.first && post_history.first.state == aasm.current_state.to_s
+    return unless User.current_user
 
     post_history = PostHistory.create({ post: self, user: User.current_user, state: aasm.current_state })
     post_history.reason = state_reason
