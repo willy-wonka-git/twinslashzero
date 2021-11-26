@@ -34,7 +34,7 @@
         %td
           = render "posts/post_tags", post: @post
     - if @post.photos.any?
-      %p
+      %p.photos
         - @post.photos.each do |photo|
           %a{ href: cl_image_path(photo.key), target: "_blank" }
             = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")

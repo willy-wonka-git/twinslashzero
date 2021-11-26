@@ -96,3 +96,4 @@ gem 'ransack', '~> 2.4'
 gem 'activeadmin', '~> 2.9'
 gem 'draper', '~> 4.0'
 
+gem 'figaro', '~> 1.2'

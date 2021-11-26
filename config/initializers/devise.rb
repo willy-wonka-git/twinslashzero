@@ -271,13 +271,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  if Rails.env.production? || Rails.env.test?
-    config.omniauth :vkontakte, '8000322', 'UmjaJFy7rPVgiREcfXvM', scope: 'user,public_repo'
-    config.omniauth :twitter, 'o1xWd8AuK6xHpjUi8rLHUgYw7', 'FoXzof2TFLupFJaRNK3RdbKyuqJS3Sng7SHRpod86IXAjlcBh3', scope: 'user,public_repo'
-  elsif Rails.env.development?
-    config.omniauth :vkontakte, '8000344', 'haN2qiMRSLUYhhDABek7', scope: 'user,public_repo'
-    config.omniauth :twitter, 'YZWHsStjF9Hcgpl92K3eDbO5V', 'nA3VGsR7Lu8ZVti94ersDelwzwrJcRrHTozuLmgNc28jTIhBEb', scope: 'user,public_repo'
-  end
+  config.omniauth :vkontakte, ENV["OMNIAUTH_VKONTAKTE_APP_ID"], ENV["OMNIAUTH_VKONTAKTE_SECRET_KEY"], scope: 'user,public_repo'
+  config.omniauth :twitter, ENV["OMNIAUTH_TWITTER_APP_ID"], ENV["OMNIAUTH_TWITTER_SECRET_KEY"], scope: 'user,public_repo'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

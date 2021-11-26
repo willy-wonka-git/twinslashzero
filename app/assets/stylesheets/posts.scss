@@ -12,9 +12,10 @@
   min-width: 200px;
 }
 
-#new-photos {
+.photos, #current-photos, #new-photos {
   .img-thumbnail {
     width: 200px;
+    margin-right: 10px;
   }
 }
 
