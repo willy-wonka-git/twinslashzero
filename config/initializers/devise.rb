@@ -317,7 +317,6 @@ Devise.setup do |config|
 end
 
 Rails.application.config.to_prepare do
-  # TODO: layout and view for edit and registration of user
   # Devise::RegistrationsController.layout proc { |controller| user_signed_in? ? "application" : "devise" }
   # Devise::SessionsController.layout proc { |controller| user_signed_in? ? "application" : "devise" }
   # And/or Sessions, Confirmations, Unlocks, Passwords

@@ -7,32 +7,23 @@
 [Demo](https://blooming-journey-21325.herokuapp.com/)
 
 # TODO
+почитать гадстайл
 
 1) config/*.yml файлы с паролями / ключами доступа API - не должны лежать в репозитории.
 2) нет тестов
 3) нужно прогнать rubocop
-    почитать гадстайл
     
 4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел  
     *?*
 
-17) после ввода логина + пароля = получил страницу системной ошибки (The change you wanted was rejected.Maybe you tried to change something you didn't have access to. If you are the application owner check the logs for more information.) с 422 кодом.
-    *
-    ```ruby
-    ActionController::InvalidAuthenticityToken in Devise::SessionsController#create
-    ```     
-    Ошибка работы devise + form_for, разбираюсь. Пока не знаю, как лечить. Если верно авторизоваться и выйти, а после ввести неверный пароль с существующим логином, то ошибка.  
-    Для лечения пока надо обновлять страницу или вводить только верный пароль*
-
 ---
 
-Василий, добрый день, направляю вам ошибки по вашему тестовому, которые надо было бы исправить. + есть рекомендация
-Я бы рекомендовал для начала выполнить вот этот тестовый проект(https://www.softcover.io/read/db8803f7/ruby_on_rails_tutorial_3rd_edition_russian/beginning) и внимательно не спеша изучить (https://guides.rubyonrails.org/).  
+- выполнить вот этот тестовый проект(https://www.softcover.io/read/db8803f7/ruby_on_rails_tutorial_3rd_edition_russian/beginning) 
+- внимательно не спеша изучить (https://guides.rubyonrails.org/).  
 
 ---
 
 # Done
-
 
 5) Gemfile - нет одного стиля, к одним гемам есть комментарии к другим - нету, нет версий у многих гемов - должны быть версии  
     *Исправил*
@@ -69,16 +60,17 @@
     *Исправил*
     
 16) когда в локализации выбрал флажек USA - отображается русский интерфейс и наоборот  
-    *? Текущая локаль не должна выводиться в меню, сделано с заделом на увеличение количества локалей  
+    *? Текущая локаль не должна выводиться в меню, сделано с заделом на увеличение количества локалей*  
     *app/views/layouts/_navbar.html.haml*
     ``` 
           - I18n.available_locales.each do |item|
             - if item != I18n.locale
               ...
     ```
-    *    
+17) после ввода логина + пароля = получил страницу системной ошибки (The change you wanted was rejected.Maybe you tried to change something you didn't have access to. If you are the application owner check the logs for more information.) с 422 кодом.  
+    *Исправил*
 
-18) при попытке сохранить обьявление получил 404 ошибку и опять системную страницу.
+18) при попытке сохранить обьявление получил 404 ошибку и опять системную страницу.  
     *Исправил*
 
 19) при попытке удалить юзера 404 ошибка  
