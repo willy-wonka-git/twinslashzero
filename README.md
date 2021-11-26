@@ -7,10 +7,9 @@
 [Demo](https://blooming-journey-21325.herokuapp.com/)
 
 # TODO
-2) нет тестов
-3) нужно прогнать rubocop
-    
-4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел  
+2) нет тестов  
+3) нужно прогнать rubocop  
+4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел   
     *?*
 ---
 - внимательно не спеша изучить (https://guides.rubyonrails.org/).  
@@ -18,7 +17,7 @@
 
 # Done
 
-1) config/*.yml файлы с паролями / ключами доступа API - не должны лежать в репозитории.
+1) config/*.yml файлы с паролями / ключами доступа API - не должны лежать в репозитории.  
     *Исправил (настройки в переменных среды - Cloudinary, posgresql, omniauth)*
 
 5) Gemfile - нет одного стиля, к одним гемам есть комментарии к другим - нету, нет версий у многих гемов - должны быть версии  
@@ -76,16 +75,5 @@
 RSpec (capybara, turnip)   
 	- coverage  
 	- [пример](https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-rspec)
-
---
-добавить кнопка удалить пользователя на странице юзера
-(проверить права и кнопки под обычным пользователем)
-
-
-- узнать как они сами делают скрытие настроек (переменные среды, файлы в гитигнор, и как разделить пуши гита и хероку),
-    
-- узнать какая основная среда разработки
-  
-- может поделятся базовыми настройками рубокопа
-    
-- simple_form_for(@post) - на ура, но для тестов надо simple_form_for(@post, url: post_path(id: @post.id)) - ломает вью  
+---
+? simple_form_for(@post) - на ура, но для тестов надо simple_form_for(@post, url: post_path(id: @post.id)) - ломает вью  
