@@ -8,7 +8,7 @@
   = f.input :email, required: true, autocomplete: "email"
   = t("devise.registrations.edit.currently_waiting_confirmation_for_email", resource.unconfirmed_email) if devise_mapping.confirmable? && resource.pending_reconfirmation?
   #avatar
-    = cl_image_tag(@user.avatar_key, width: 120, height: 120, crop: :scale, class: "img-thumbnail", style: "width: 120px")
+    = cl_image_tag(@user.avatar_key, width: 120, height: 120, crop: :scale, class: "img-thumbnail")
   = f.input :avatar, input_html: { class: "form-control" }
   = f.input :description, as: :text
 

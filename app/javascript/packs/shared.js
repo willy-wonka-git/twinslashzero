@@ -1,3 +1,4 @@
+import $ from 'jquery';
 
 function updateElement(selector, html, callback, ms) {
   ms ||= fadeInterval

@@ -3,26 +3,21 @@ class PostCategoriesController < ApplicationController
 
   before_action :set_post_category, only: [:show, :edit, :update, :destroy]
 
-  # GET /post_categories or /post_categories.json
   def index
     @post_categories = PostCategory.order(:id).page params[:page]
   end
 
-  # GET /post_categories/1 or /post_categories/1.json
   def show
     @post_category = PostCategory.find(params[:id])
     @posts = @post_category.posts.page params[:page]
   end
 
-  # GET /post_categories/new
   def new
     @post_category = PostCategory.new
   end
 
-  # GET /post_categories/1/edit
   def edit; end
 
-  # POST /post_categories or /post_categories.json
   def create
     @post_category = PostCategory.new(post_category_params)
 
@@ -37,7 +32,6 @@ class PostCategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /post_categories/1 or /post_categories/1.json
   def update
     respond_to do |format|
       if @post_category.update(post_category_params)
@@ -50,7 +44,6 @@ class PostCategoriesController < ApplicationController
     end
   end
 
-  # DELETE /post_categories/1 or /post_categories/1.json
   def destroy
     @post_category.destroy
     respond_to do |format|
@@ -61,12 +54,10 @@ class PostCategoriesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_post_category
     @post_category = PostCategory.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def post_category_params
     params.require(:post_category).permit(:title, :description)
   end

@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   enumerize :role, in: [:guest, :user, :admin], default: :user
   has_many :posts, inverse_of: 'author', foreign_key: "author_id", dependent: :destroy
+  has_many :post_history, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
   validates :nickname, presence: true, length: { minimum: 5, maximum: 30 }, uniqueness: { case_sensitive: false }

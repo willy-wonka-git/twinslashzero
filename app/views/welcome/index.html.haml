@@ -1,12 +1,11 @@
 = provide(:title, t("welcome.title"))
-.d-flex.text-center{style: "height: 70vh"}
+.text-center.welcome
   .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
     .mb-auto
     %main.px-3
       %h1= t("welcome.header_html")
       %p.lead= t("welcome.description_html")
       %p.lead
-      %a.btn-lg.btn-secondary.fw-bold.text-uppercase{:href => posts_path } 
+      %a.btn-lg.btn-secondary.fw-bold.text-uppercase{:href => posts_path }
         = t("welcome.all_adv")
     .mt-auto
-

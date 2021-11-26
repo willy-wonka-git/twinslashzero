@@ -17,24 +17,28 @@
 1) config/*.yml файлы с паролями / ключами доступа API - не должны лежать в репозитории.
 2) нет тестов
 3) нужно прогнать rubocop
-4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел
-8) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/helpers/icon_helper.rb - CSS стили должны быть в файлах стилей
-10) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/javascript/packs/application.js - тоже каша по качеству кода, детально пока-что не смотрел
-11) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L8 - почему теги удаляются вместе с постом ?
-12) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L12 - default_scope - плохая практика, потому что меняет выборку по умолчанию
-13) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - в модели поста, куча кода, который относится к тегам, а не к постам
-14) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - self.published, self.not_moderated ... - это все нужно делать через scopes
+    почитать гадстайл
+    
+4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел  
+    <small>?</small>
+
 17) после ввода логина + пароля = получил страницу системной ошибки (The change you wanted was rejected.Maybe you tried to change something you didn't have access to. If you are the application owner check the logs for more information.) с 422 кодом.
-18) при попытке сохранить обьявление получил 404 ошибку и опять системную страницу.
-19) при попытке удалить юзера 404 ошибка
+    <small>
+    ```ruby
+    ActionController::InvalidAuthenticityToken in Devise::SessionsController#create
+    ```     
+    Ошибка работы devise + form_for, разбираюсь. Пока не знаю, как лечить. Если верно авторизоваться и выйти, а после ввести неверный пароль с существующим логином, то ошибка.  
+    Для лечения пока надо обновлять страницу или вводить только верный пароль</small>
 
 ---
 
-Василий, добрый день, направляю вам ошибки по вашему тестовому, которые надо было бы исправить. + есть рекомендация    Я бы рекомендовал для начала выполнить вот этот тестовый проект(https://www.softcover.io/read/db8803f7/ruby_on_rails_tutorial_3rd_edition_russian/beginning) и внимательно не спеша изучить (https://guides.rubyonrails.org/).
+Василий, добрый день, направляю вам ошибки по вашему тестовому, которые надо было бы исправить. + есть рекомендация
+Я бы рекомендовал для начала выполнить вот этот тестовый проект(https://www.softcover.io/read/db8803f7/ruby_on_rails_tutorial_3rd_edition_russian/beginning) и внимательно не спеша изучить (https://guides.rubyonrails.org/).  
 
 ---
 
 # Done
+
 
 5) Gemfile - нет одного стиля, к одним гемам есть комментарии к другим - нету, нет версий у многих гемов - должны быть версии  
     <small>Исправил</small>
@@ -48,25 +52,57 @@
 7) https://github.com/willy-wonka-git/twinslashzero/tree/main/app/helpers - пустые файлы  
     <small>Исправил</small>
 
+8) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/helpers/icon_helper.rb - CSS стили должны быть в файлах стилей  
+    <small>Исправил</small>
 
 9) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/javascript/packs/application.js - каша по оформлению, отступы гуляют  
+    <small>Исправил</small>
+
+10) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/javascript/packs/application.js - тоже каша по качеству кода, детально пока-что не смотрел  
+    <small>Подправил</small>
+
+11) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L8 - почему теги удаляются вместе с постом ?  
+    <small>Исправил</small>
+
+12) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L12 - default_scope - плохая практика, потому что меняет выборку по умолчанию  
+    <small>Исправил</small>
+
+13) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - в модели поста, куча кода, который относится к тегам, а не к постам  
+    <small>Подправил</small>
+
+14) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - self.published, self.not_moderated ... - это все нужно делать через scopes  
     <small>Исправил</small>
 
 15) не понял почему неавторизованный юзер, может видеть список всех пользоателей с ролями?
     <small>Исправил</small>
     
 16) когда в локализации выбрал флажек USA - отображается русский интерфейс и наоборот  
-    <small>? Текущая локаль не должна выводиться  
+    <small>? Текущая локаль не должна выводиться в меню, сделано с заделом на увеличение количества локалей  
     *app/views/layouts/_navbar.html.haml*
     ``` 
           - I18n.available_locales.each do |item|
             - if item != I18n.locale
               ...
     ```
-    </small>
+    </small>    
+
+18) при попытке сохранить обьявление получил 404 ошибку и опять системную страницу.
+    <small>Исправил</small>
+
+19) при попытке удалить юзера 404 ошибка  
+    <small>Исправил</small>
     
 ---
 RSpec (capybara, turnip)   
 	- coverage  
 	- [пример](https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-rspec)
 
+--
+добавить кнопка удалить пользователя на странице юзера
+(проверить права и кнопки под обычным пользователем)
+
+
+узнать как они сами делают скрытие настроек (переменные среды, файлы в гитигнор, и как разделить пуши гита и хероку),
+узнать какая основная среда разработки
+может поделятся базовыми настройками рубокопа
+simple_form_for(@post) - на ура, но для тестов надо simple_form_for(@post, url: post_path(id: @post.id)) - ломает вью

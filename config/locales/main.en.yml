@@ -38,6 +38,7 @@ en:
   published: Published
   ago: "%{time} ago"
   admin_panel: Control panel
+  title404: The page you were looking for doesn't exist (404)
   unauthorized:
     manage:
       all: "You have no access to this resource"

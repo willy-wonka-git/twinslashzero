@@ -1,7 +1,7 @@
 -# frozen_string_literal: true
 
 .mb-2
-  = simple_form_for(@post_category, url: post_categories_path) do |f|
+  = simple_form_for(@post_category) do |f|
     = render "common/form_errors", f: f
     = f.input :title
     = f.input :description

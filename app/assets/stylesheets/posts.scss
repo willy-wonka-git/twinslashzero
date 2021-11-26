@@ -1,6 +1,22 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.adv-list {
+  .time {
+    white-space: nowrap;
+  }
+  .tags {
+    max-width: 150px;
+  }
+}
+
+.post-history-list {
+  min-width: 200px;
+}
+
+#new-photos {
+  .img-thumbnail {
+    width: 200px;
+  }
+}
 
 .select2-container, .select2-container--default.select2-container--focus .select2-selection--multiple {
   display: block !important;

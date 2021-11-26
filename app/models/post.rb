@@ -4,12 +4,10 @@ class Post < ApplicationRecord
 
   belongs_to :author, class_name: "User"
   belongs_to :category, class_name: "PostCategory"
-  has_many :taggings, dependent: :destroy
-  has_many :tags, through: :taggings, dependent: :destroy
+  has_many :taggings, dependent: :delete_all
+  has_many :tags, through: :taggings
   has_many_attached :photos, dependent: :destroy
-  has_many :post_history, dependent: :destroy
-
-  default_scope -> { order(published_at: :desc, created_at: :desc) }
+  has_many :post_history, dependent: :delete_all
 
   validates :category, :title, :content, presence: true
   validates :title, length: { minimum: 5, maximum: 200 }
@@ -19,14 +17,8 @@ class Post < ApplicationRecord
 
   after_save :save_post_history
 
-  def self.tagged_with(name)
-    tag = Tag.find_by(name: name)
-    tag ? tag.posts.published : Post.published
-  end
-
-  def self.tag_counts
-    Tag.select('tags.*, count(taggings.tag_id) as count').joins(:taggings).group('taggings.tag_id')
-  end
+  scope :published, -> { where(aasm_state: :published).order(published_at: :desc, created_at: :desc) }
+  scope :not_moderated, -> { where(aasm_state: [:new]).order(created_at: :desc) }
 
   def tag_list
     tags.map(&:name).join(', ')
@@ -36,14 +28,6 @@ class Post < ApplicationRecord
     self.tags = names.split(',').map do |n|
       Tag.where(name: n.strip).first_or_create!
     end
-  end
-
-  def self.published
-    where(aasm_state: :published)
-  end
-
-  def self.not_moderated
-    where(aasm_state: [:new])
   end
 
   def created
@@ -112,7 +96,7 @@ class Post < ApplicationRecord
   end
 
   def post_history(limit = 10)
-    history = PostHistory.where(post: self)
+    history = PostHistory.where(post: self).order(created_at: :desc)
     history = history.limit(limit) if limit
     history
   end

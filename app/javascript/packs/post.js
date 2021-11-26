@@ -1,3 +1,12 @@
+import $ from 'jquery';
+import select2 from 'select2';
+import 'select2/dist/css/select2.css';
+
+document.addEventListener('turbolinks:load', function () {
+  selectTags();
+  previewPhotos();
+  changeState();
+})
 
 function selectTags() {
   // FIX: selections do not appear in the order in which they were selected
@@ -40,7 +49,7 @@ function previewPhotos() {
     $("#new-photos").html('');
     $("#current-photos").html('');
     for (let i = 0; i < $(this)[0].files.length; i++) {
-      $("#new-photos").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" width="200px" class="img-thumbnail"/>');
+      $("#new-photos").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" class="img-thumbnail me-2"/>');
     }
   });
 }
@@ -76,7 +85,6 @@ function changeState() {
 }
 
 function setState(data) {
-  // debugger
   updateElement('#current-state-' + data.id,  data.current_state)
   updateElement('#state.state-panel',         data.current_state, changeState)
   updateElement('#state-dropdown-' + data.id, data.state_dropdown, changeState, 1)

@@ -1,3 +1,8 @@
+import $ from 'jquery';
+
+document.addEventListener('turbolinks:load', function () {
+  previewAvatar();
+})
 
 function previewAvatar() {
   $('#user_avatar').change(function () {

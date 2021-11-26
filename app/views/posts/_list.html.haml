@@ -19,7 +19,7 @@
       .col-sm
         = f.submit t("search"), class: "btn btn-secondary"
 
-%table.table
+%table.table.adv-list
   %thead
     %tr
       %th
@@ -54,8 +54,8 @@
         %td= link_to post.title, post_path(id: post.id)
         %td= post.category.title
         %td= post.author.nickname
-        %td{ style: "white-space: nowrap" }= post.time_ago
-        %td{ style: "max-width: 150px" }
+        %td.time= post.time_ago
+        %td.tags
           = render "posts/post_tags", post: post
         %td{ id: "current-state-" + post.id.to_s }= t('posts.states.' + post.aasm_state.to_s)
         - if User.current_user.admin?

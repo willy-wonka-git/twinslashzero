@@ -21,31 +21,18 @@ ActiveStorage.start()
 import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle'
 import 'popper.js/dist/esm/popper'
-import select2 from 'select2';
-import 'select2/dist/css/select2.css';
+
+window.fadeInterval   = 250;
 
 import './shared'
 import './user'
 import './post'
 
-
 // Initialization
-
 document.addEventListener('turbolinks:load', function () {
-  window.fadeInterval   = 250;
-  window.showMessage    = showMessage
-  window.updateElement  = updateElement
-  window.postAction     = postAction
-
   // Hide flash message
   setTimeout(() => {
     $('.app-flash').fadeOut(fadeInterval);
-  }, 4000)
-
+  }, 44000)
   $('#message').fadeOut(0)
-  changeState();
-
-  selectTags();
-  previewAvatar();
-  previewPhotos();
 })
