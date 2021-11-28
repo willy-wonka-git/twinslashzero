@@ -1,6 +1,6 @@
 -# frozen_string_literal: true
 
-= simple_form_for(@post) do |f|
+= simple_form_for(@post, url: url) do |f|
   = render "common/form_errors", f: f
   .form-inputs.row.gy-2
     = f.input :category_id, label: t("category"), required: true, collection: PostCategory.all.collect {|c| [c.title, c.id]}

@@ -75,5 +75,6 @@
 RSpec (capybara, turnip)   
 	- coverage  
 	- [пример](https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-rspec)
+
 ---
-? simple_form_for(@post) - на ура, но для тестов надо simple_form_for(@post, url: post_path(id: @post.id)) - ломает вью  
+Почему для rspec надо писать simple_from_for url явно

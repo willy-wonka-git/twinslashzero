@@ -5,6 +5,7 @@ class Tag < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   def self.create_new_tags(tag_ids)
+    return unless tag_ids
     tag_ids.each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")
 

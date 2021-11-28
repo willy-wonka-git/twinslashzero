@@ -2,6 +2,6 @@
 
 %h1= t("posts.new")
 
-= render 'form'
+= render 'form', url: url_for(:action => 'create', :controller => 'posts')
 
 = link_to t("back"), posts_path, class: "btn btn-secondary"

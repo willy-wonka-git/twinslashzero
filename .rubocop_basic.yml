@@ -72,7 +72,6 @@ Style/ClassAndModuleChildren:
     - 'spec/**/*'
     - 'test/**/*'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/helpers/users/omniauth_callbacks_helper.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedConstants.

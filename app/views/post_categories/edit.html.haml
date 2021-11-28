@@ -1,6 +1,6 @@
 %h1= t("posts.categories.edit")
 
-= render 'form'
+= render 'form', url: post_category_path(id: @post_category.id)
 
 = link_to t("show"), post_category_path(id: @post_category.id), class: "btn btn-secondary"
 = link_to t("back"), post_categories_path, class: "btn btn-secondary"
