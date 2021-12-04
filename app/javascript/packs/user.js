@@ -8,7 +8,7 @@ function previewAvatar() {
   $('#user_avatar').change(function () {
     $("#avatar").html('');
     for (let i = 0; i < $(this)[0].files.length; i++) {
-      $("#avatar").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" width="120px" class="img-thumbnail"/>');
+      $("#avatar").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" class="img-thumbnail"/>');
     }
   });
 }

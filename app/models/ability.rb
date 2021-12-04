@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     can :show, User
-    can :read, Post
+    can :read, Post, aasm_state: "published"
     can :read, PostCategory
     can [:read, :search], Tag
 
@@ -15,6 +15,7 @@ class Ability
     can :index, User
     can :create, Post
     can [:destroy, :archive], Post, author: user
+    can :read, Post, author: user
     can :update, Post, author: user, aasm_state: "draft"
     can [:run, :draft, :archive], Post, author: user
     can :create, Tag
@@ -27,6 +28,7 @@ class Ability
     cannot [:create, :update], Post
     can :destroy, Post
     can [:reject, :ban, :approve, :publish, :archive, :draft], Post
+    can :read, Post
     can :moderate, Post
     can :action, Post
     can :manage, PostCategory

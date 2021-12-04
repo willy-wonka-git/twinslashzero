@@ -18,7 +18,7 @@ en:
   add_comment: Add comment
   back: Back
   show: Show
-  destroy: Destroy
+  destroy: Delete
   execute: Execute
   select: Select
   search: Search
@@ -44,7 +44,7 @@ en:
       all: "You have no access to this resource"
   welcome:
     title: Advert board
-    header_html: Welcome to the our Advert&nbsp;board!
+    header_html: Welcome to our Advert&nbsp;board!
     description_html: Test work for Ruby/Rails&nbsp;developer
     all_categories: All categories
     all_adv: All adverts

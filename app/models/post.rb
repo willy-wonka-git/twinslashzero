@@ -32,7 +32,7 @@ class Post < ApplicationRecord
   end
 
   def created
-    created_at.strftime("%D %H:%M")
+    created_at.strftime("%d/%m/%Y %R")
   end
 
   def published_format

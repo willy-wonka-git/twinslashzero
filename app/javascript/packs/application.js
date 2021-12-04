@@ -33,6 +33,6 @@ document.addEventListener('turbolinks:load', function () {
   // Hide flash message
   setTimeout(() => {
     $('.app-flash').fadeOut(fadeInterval);
-  }, 44000)
+  }, 4000)
   $('#message').fadeOut(0)
 })

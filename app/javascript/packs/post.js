@@ -58,24 +58,33 @@ function changeState() {
   const links = document.querySelectorAll("#state a[data-remote]");
   links.forEach((element) => {
     element.addEventListener("ajax:beforeSend", (event, options, v) => {
-      // TODO: modal
       // Check reason for ban and reject
-      if ("reject, ban".indexOf(event.target.dataset.state) != -1) {
-        let reason = prompt("Please enter the reason");
-        if (reason) {
-          $.post({
-            url: event.detail[1].url,
-            data: {
-              authenticity_token: $('[name="csrf-token"]')[0].content,
-              reason: reason
-            }
-          })
-          .then((data) => {
-            setState(data)
-          });
-        }
-        event.preventDefault();
+      if ("reject, ban".indexOf(event.target.dataset.state) == -1) {
+        return
       }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      // TODO: modal
+      let reason = prompt("Please enter the reason");
+      if (!reason) {
+        if (reason !== null) {
+          showMessage('You must enter the reason of the action!', 'danger');
+        }
+        return
+      }
+
+      $.post({
+        url: event.detail[1].url,
+        data: {
+          authenticity_token: $('[name="csrf-token"]')[0].content,
+          reason: reason
+        }
+      })
+      .then((data) => {
+        setState(data)
+      });
     });
 
     element.addEventListener("ajax:success", (event) => {
@@ -115,6 +124,9 @@ function postAction() {
   if ("reject, ban".indexOf(current_action) != -1) {
     reason = prompt("Please enter the reason");
     if (!reason) {
+      if (reason !== null) {
+        showMessage('You must enter the reason of the action!', 'danger');
+      }
       return
     }
   }
