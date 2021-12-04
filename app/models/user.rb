@@ -54,10 +54,8 @@ class User < ApplicationRecord
     end
   end
 
-  def posts
-    return Post.where(author: self) if User.current_user.admin?
-    return Post.where(author: self) if User.current_user == self
-
+  def posts(only_published = false)
+    return Post.where(author: self) if !only_published && (User.current_user.admin? || User.current_user == self)
     Post.published.where(author: self)
   end
 

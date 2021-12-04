@@ -9,11 +9,12 @@ class Post < ApplicationRecord
   has_many_attached :photos, dependent: :destroy
   has_many :post_history, dependent: :delete_all
 
-  validates :category, :title, :content, presence: true
   validates :title, length: { minimum: 5, maximum: 200 }
   validates :content, length: { minimum: 50, maximum: 2000 }
   validates :photos, content_type: { in: %w[image/jpeg image/gif image/png], message: I18n.t("errors.messages.must_be_valid_image_format") },
                      size: { less_than: 5.megabytes, message: I18n.t("errors.messages.should_be_less_than_5mb") }
+
+  validates_presence_of :author, :category, :title, :content
 
   after_save :save_post_history
 

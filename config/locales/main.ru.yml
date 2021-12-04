@@ -87,6 +87,7 @@ ru:
     email: Email
     role: Роль
     description: Описание
+    posts_count: Объявлений
   posts:
     state: Состояние
     show: Объявления

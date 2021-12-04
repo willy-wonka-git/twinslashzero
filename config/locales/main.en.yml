@@ -87,6 +87,7 @@ en:
     email: Email
     role: Role
     description: Description
+    posts_count: Adverts
   posts:
     state: State
     show: Adverts

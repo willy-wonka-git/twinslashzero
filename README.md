@@ -7,74 +7,38 @@
 [Demo](https://blooming-journey-21325.herokuapp.com/)
 
 # TODO
-2) нет тестов  
-3) нужно прогнать rubocop  
-4) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/posts_controller.rb - прямо что-то страшное происходит, детально пока не смотрел   
-    *?*
----
-- внимательно не спеша изучить (https://guides.rubyonrails.org/).  
+2) пользователем создал обьявление и оно нигде не отображается  
+3) при отклонении обьявления, если в окно ввода причины просто жать ок, то это окно потом будет бесконечно висеть - при нажатии отмены  
+4) У админа при нажатии на control panel требует ввести логин и пароль(какой не понятно)Create user admin for ActiveAdminAdminUser.create!(email: 'admin@gmail.com', password: '111111', password_confirmation: '111111') - вот эти данные не подходят  
+5) Если при создании заполнить все поля и выбрать картинки, нажать сохранить, и при этом не пройдут валидации, то картинки потеряются  
+6) Обьявления которые на модерации - открываются по прямой ссылке любым пользователем, аналогично с draft.  
+7) https://github.com/willy-wonka-git/twinslashzero/blob/main/.rubocop_basic.yml - везде подописывал exclude с файлами - которые нужно менять, а не исключать их из линтера тут нужно убрать из exclude файлы:  
+app/controllers/users/omniauth_callbacks_controller.rb  
+app/controllers/posts_controller.rb  
+app/models/user.rb  
+app/controllers/users_controller.rb  
+и переделать их в соответствии с тем что просит rubocop  
+.idea - все что не относится к коду проекта должно быть в gitignore - в данном случае это настройки редактора  
+9) https://github.com/willy-wonka-git/twinslashzero/tree/main/test - папка осталась висеть, в ней все папки пустые, получается что смысловой нагрузки они не несет, только сбивает с толку. таких вещей не должно быть в проекте.  
+10) https://github.com/willy-wonka-git/twinslashzero/blob/main/spec/support/controller_macros.rb  
+логика двух методов фактически дублируется это можно переделать например  
+    ```ruby
+    def login_user(type = :user)    
+        user = FactoryBot.create(type)
+        sign_in user    
+        User.current_user = user
+    end
+    ```
+11) в тестах много где на прямую используются модели для создания, для всех сущностей должны использовать Factories  
+12) User.current_user= - это плохо, не должно быть глобальных состояний у модели, это тяжело отслеживать. current_user может быть только в контроллере, во все остальные места где это нужно, нужно передавать его как параметр.  
+13) добавил rake таски(https://github.com/willy-wonka-git/twinslashzero/tree/main/lib/tasks) при этом в https://github.com/willy-wonka-git/twinslashzero/blob/main/config/schedule.rb вызываешь методы модели на прямую, получается рейк таски не используются  
+14) get '/user/:id' => 'users#show', as: 'user'get '/users' => 'users#index'delete '/user/:id' => 'users#destroy'для этого же можно использовать resources - https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions  
+15) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/users/omniauth_callbacks_controller.rbметоды vkontakte и twitter очень похожие друг на друга, это дублированиеаналогично https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/user.rbfrom_vkontakte_omniauthfrom_twitter_omniauth
+
 ---
 
 # Done
 
-1) config/*.yml файлы с паролями / ключами доступа API - не должны лежать в репозитории.  
-    *Исправил (настройки в переменных среды - Cloudinary, posgresql, omniauth)*
-
-5) Gemfile - нет одного стиля, к одним гемам есть комментарии к другим - нету, нет версий у многих гемов - должны быть версии  
-    *Исправил*
-
-6) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/welcome_controller.rb - пустой файл, не понятно зачем он  
-    *Для главной страницы. В rails после 3й версии views самостоятельно не рендерится без контроллера и вываливается ошибка.     
-    [Подробнее](https://stackoverflow.com/questions/1352420/rails-view-without-a-controller/14249363)*
- 
-7) https://github.com/willy-wonka-git/twinslashzero/tree/main/app/helpers - пустые файлы  
-    *Исправил*
-
-8) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/helpers/icon_helper.rb - CSS стили должны быть в файлах стилей  
-    *Исправил*
-
-9) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/javascript/packs/application.js - каша по оформлению, отступы гуляют  
-    *Исправил*
-
-10) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/javascript/packs/application.js - тоже каша по качеству кода, детально пока-что не смотрел  
-    *Подправил*
-
-11) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L8 - почему теги удаляются вместе с постом ?  
-    *Исправил*
-
-12) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb#L12 - default_scope - плохая практика, потому что меняет выборку по умолчанию  
-    *Исправил*
-
-13) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - в модели поста, куча кода, который относится к тегам, а не к постам  
-    *Подправил*
-
-14) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/post.rb - self.published, self.not_moderated ... - это все нужно делать через scopes  
-    *Исправил*
-
-15) не понял почему неавторизованный юзер, может видеть список всех пользоателей с ролями?  
-    *Исправил*
+1) У пользователей в профиле - показывает Adverts 4 - при этом не одного обьявления не отображается  
+    *In progress*
     
-16) когда в локализации выбрал флажек USA - отображается русский интерфейс и наоборот  
-    *? Текущая локаль не должна выводиться в меню, сделано с заделом на увеличение количества локалей*  
-    *app/views/layouts/_navbar.html.haml*
-    ``` 
-          - I18n.available_locales.each do |item|
-            - if item != I18n.locale
-              ...
-    ```
-17) после ввода логина + пароля = получил страницу системной ошибки (The change you wanted was rejected.Maybe you tried to change something you didn't have access to. If you are the application owner check the logs for more information.) с 422 кодом.  
-    *Исправил*
-
-18) при попытке сохранить обьявление получил 404 ошибку и опять системную страницу.  
-    *Исправил*
-
-19) при попытке удалить юзера 404 ошибка  
-    *Исправил*
-    
----
-RSpec (capybara, turnip)   
-	- coverage  
-	- [пример](https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-rspec)
-
----
-Почему для rspec надо писать simple_from_for url явно

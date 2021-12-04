@@ -21,6 +21,7 @@
       - if User.current_user.admin?
         %th{:scope => "role"}= sort_link(@q, :role, t("users.role"))
       %th{:scope => "description"}= t("users.description")
+      %th= t("users.posts_count")
       %th
   %tbody
     - @users.each do |user|
@@ -33,6 +34,8 @@
         - if User.current_user.admin?
           %td= user.role
         %td= user.description
+        %td
+          %span.badge.bg-secondary= user.posts(only_published = true).count
         %td
           - if can? :destroy, user
             = link_to user_path(user), method: :delete, data: { confirm: t("are_you_sure") } do
