@@ -18,7 +18,6 @@ app/controllers/posts_controller.rb
 app/models/user.rb  
 app/controllers/users_controller.rb  
 и переделать их в соответствии с тем что просит rubocop  
-9) https://github.com/willy-wonka-git/twinslashzero/tree/main/test - папка осталась висеть, в ней все папки пустые, получается что смысловой нагрузки они не несет, только сбивает с толку. таких вещей не должно быть в проекте.  
 10) https://github.com/willy-wonka-git/twinslashzero/blob/main/spec/support/controller_macros.rb  
 логика двух методов фактически дублируется это можно переделать например  
     ```ruby
@@ -49,4 +48,7 @@ app/controllers/users_controller.rb
     *Исправил*
 
 8) .idea - все что не относится к коду проекта должно быть в gitignore - в данном случае это настройки редактора  
+    *Исправил*
+9) https://github.com/willy-wonka-git/twinslashzero/tree/main/test - папка осталась висеть, в ней все папки пустые, получается что смысловой нагрузки они не несет, только сбивает с толку. таких вещей не должно быть в проекте.  
+    *Исправил*
     

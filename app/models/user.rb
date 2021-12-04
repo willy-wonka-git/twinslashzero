@@ -56,7 +56,7 @@ class User < ApplicationRecord
 
   def posts(only_published = false)
     if !only_published && (User.current_user.admin? || User.current_user == self)
-      return Post.where(author: self).order(published_at: :desc, created_at: :desc)
+      return Post.where(author: self).order(created_at: :desc)
     end
     Post.published.where(author: self)
   end
