@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
-    get '/user/:id' => 'users#show', as: 'user'
-    get '/users' => 'users#index'
-    delete '/user/:id' => 'users#destroy'
+    resources :users
+    # get '/user/:id' => 'users#show', as: 'user'
+    # get '/users' => 'users#index'
+    # delete '/user/:id' => 'users#destroy'
     resources :post_categories, path: 'categories'
     get 'adv/moderate', to: 'posts#moderate', as: 'moderate'
     post 'adv/action', to: 'posts#action'

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostCategory, type: :model do
   before do
-    login_admin
+    login_user(:admin)
   end
 
   subject(:post_category) { FactoryBot.create(:post_category) }

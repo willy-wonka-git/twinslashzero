@@ -8,8 +8,6 @@
 
 # TODO
 
-0. перепроверить авторизацию твиттер в production после обновлений
-
 4) У админа при нажатии на control panel требует ввести логин и пароль(какой не понятно)Create user admin for ActiveAdminAdminUser.create!(email: 'admin@gmail.com', password: '111111', password_confirmation: '111111') - вот эти данные не подходят    
 5) Если при создании заполнить все поля и выбрать картинки, нажать сохранить, и при этом не пройдут валидации, то картинки потеряются  
 7) https://github.com/willy-wonka-git/twinslashzero/blob/main/.rubocop_basic.yml - везде подописывал exclude с файлами - которые нужно менять, а не исключать их из линтера тут нужно убрать из exclude файлы:  
@@ -18,20 +16,8 @@ app/controllers/posts_controller.rb
 app/models/user.rb  
 app/controllers/users_controller.rb  
 и переделать их в соответствии с тем что просит rubocop  
-10) https://github.com/willy-wonka-git/twinslashzero/blob/main/spec/support/controller_macros.rb  
-логика двух методов фактически дублируется это можно переделать например  
-    ```ruby
-    def login_user(type = :user)    
-        user = FactoryBot.create(type)
-        sign_in user    
-        User.current_user = user
-    end
-    ```
 11) в тестах много где на прямую используются модели для создания, для всех сущностей должны использовать Factories  
 12) User.current_user= - это плохо, не должно быть глобальных состояний у модели, это тяжело отслеживать. current_user может быть только в контроллере, во все остальные места где это нужно, нужно передавать его как параметр.  
-13) добавил rake таски(https://github.com/willy-wonka-git/twinslashzero/tree/main/lib/tasks) при этом в https://github.com/willy-wonka-git/twinslashzero/blob/main/config/schedule.rb вызываешь методы модели на прямую, получается рейк таски не используются  
-14) get '/user/:id' => 'users#show', as: 'user'get '/users' => 'users#index'delete '/user/:id' => 'users#destroy'для этого же можно использовать resources - https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions  
-15) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/users/omniauth_callbacks_controller.rbметоды vkontakte и twitter очень похожие друг на друга, это дублированиеаналогично https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/user.rbfrom_vkontakte_omniauthfrom_twitter_omniauth
 
 ---
 
@@ -51,4 +37,29 @@ app/controllers/users_controller.rb
     *Исправил*
 9) https://github.com/willy-wonka-git/twinslashzero/tree/main/test - папка осталась висеть, в ней все папки пустые, получается что смысловой нагрузки они не несет, только сбивает с толку. таких вещей не должно быть в проекте.  
     *Исправил*
+10) https://github.com/willy-wonka-git/twinslashzero/blob/main/spec/support/controller_macros.rb  
+логика двух методов фактически дублируется это можно переделать например  
+    ```ruby
+    def login_user(type = :user)    
+        user = FactoryBot.create(type)
+        sign_in user    
+        User.current_user = user
+    end
+    ```
+    *Подправил*
+
+13) добавил rake таски(https://github.com/willy-wonka-git/twinslashzero/tree/main/lib/tasks) при этом в https://github.com/willy-wonka-git/twinslashzero/blob/main/config/schedule.rb вызываешь методы модели на прямую, получается рейк таски не используются  
+    *Удалил config/schedule.rb, поскольку не используется*    
+14) get '/user/:id' => 'users#show', as: 'user'get '/users' => 'users#index'delete '/user/:id' => 'users#destroy'для этого же можно использовать resources - https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions  
+    *Исправил*
+15) https://github.com/willy-wonka-git/twinslashzero/blob/main/app/controllers/users/omniauth_callbacks_controller.rb    
+методы vkontakte и twitter очень похожие друг на друга, это дублирование  
+аналогично https://github.com/willy-wonka-git/twinslashzero/blob/main/app/models/user.rb    
+from_vkontakte_omniauthfrom_twitter_omniauth  
+    *Исправил*
+
+---
+
+0. перепроверить авторизацию твиттер в production после обновлений
+
     

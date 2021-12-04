@@ -16,7 +16,7 @@ RSpec.describe "/post_categories", type: :request do
   subject(:post_category) { FactoryBot.create(:post_category) }
 
   before do
-    login_admin
+    login_user(:admin)
   end
 
   let(:valid_attributes) do

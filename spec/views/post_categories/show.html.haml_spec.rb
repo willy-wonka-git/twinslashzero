@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "post_categories/show", type: :view do
   before do
-    login_admin
+    login_user(:admin)
     @post_category = FactoryBot.create(:post_category)
 
     login_user
