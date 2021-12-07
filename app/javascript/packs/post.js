@@ -47,7 +47,6 @@ function selectTags() {
 function previewPhotos() {
   $('#post_photos').change(function () {
     $("#new-photos").html('');
-    $("#current-photos").html('');
     for (let i = 0; i < $(this)[0].files.length; i++) {
       $("#new-photos").append('<img src="' + window.URL.createObjectURL(this.files[i]) + '" class="img-thumbnail me-2"/>');
     }
@@ -141,7 +140,7 @@ function postAction() {
     }
   })
   .done((data) => {
-    // change table with new rendered list
+    // replace table with new rendered data
     updateElement('#adv', data.adverts_html)
     showMessage(data.message, data.status);
   })

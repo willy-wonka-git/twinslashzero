@@ -3,14 +3,16 @@
     = link_to t("home"), root_path, class: "navbar-brand"
     .collapse.navbar-collapse.justify-content-end
       %ul.navbar-nav
+        - unless current_page?(new_post_path)
+          %li.nav-item.me-2= render "common/add", link: new_post_path if can? :create, Post
         %li.nav-item= link_to t("posts.show"), posts_path, class: class_names("nav-link", { active: current_page?(posts_path) })
-        - if User.current_user.admin?
+        - if admin?
           %li.nav-item= link_to t("posts.moderate"), moderate_path, class: class_names("nav-link", { active: current_page?(moderate_path) })
         %li.nav-item= link_to t("posts.categories.show"), post_categories_path, class: class_names("nav-link", { active: current_page?(post_categories_path) })
         - if can? :index, User
           %li.nav-item= link_to t("users.users"), users_path, class: class_names("nav-link", { active: current_page?(users_path) })
         .vr
-        - if User.current_user.admin?
+        - if admin?
           %li.nav-item
             = link_to "/admin", target: "_blank", class: class_names("nav-link") do
               %i.bi.bi-gear

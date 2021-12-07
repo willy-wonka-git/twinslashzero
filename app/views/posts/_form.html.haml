@@ -1,5 +1,7 @@
 -# frozen_string_literal: true
 
+-# = require 'pry'
+-# = binding.pry
 = simple_form_for(@post, url: url) do |f|
   = render "common/form_errors", f: f
   .form-inputs.row.gy-2
@@ -8,12 +10,18 @@
     = f.input :content, label: t("content")
     = f.input :tag_ids, label: t("tag_ids"), as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
 
-    - if @post.photos.any?
+    - if @post.photos.attached?
       #current-photos.d-flex
         - @post.photos.each do |photo|
           %a{ href: cl_image_path(photo.key), target: "_blank" }
             = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
+      %hr
+      .d-flex
+        - @post.photos.each do |photo|
+          %a{ href: cl_image_path(photo.key), target: "_blank", style: "max-width: 100px; max-height: 100px; overflow: hidden; margin: 5px" }
+            = photo.filename
     #new-photos.d-flex
     = f.input :photos, label: t("photos"), direct_upload: true, input_html: { multiple: true, class: "form-control"}
+
   .form-actions.mt-3
     = f.button :submit, t("save"), class: "btn btn-primary my-2"

@@ -3,7 +3,7 @@
 
 = render "common/paging", resource: posts
 
-- if moderate && User.current_user.admin?
+- if admin? && moderate
   .row.row-cols-lg-auto.align-items-center.actions.my-3
     %label{ for: "action", class: "col-auto" }
       = t("posts.action") + ":"
@@ -23,7 +23,7 @@
   %thead
     %tr
       %th
-      - if moderate && User.current_user.admin?
+      - if admin? && moderate
         %th
       - if defined?(@q)
         %th= sort_link(@q, :title, t("posts.title_one"))
@@ -37,7 +37,7 @@
         %th= t("published_at")
         %th= t("created_at")
       %th= t("tags")
-      - if User.current_user.admin?
+      - if admin?
         %th
       %th
       %th
@@ -45,7 +45,7 @@
   %tbody
     - posts.each do |post|
       %tr{ "data-id" => post.id }
-        - if moderate && User.current_user.admin?
+        - if admin? && moderate
           %td
             %input{ class: "form-check-input", type: "checkbox" }
         %td
@@ -56,11 +56,12 @@
         %td= link_to post.category.title, post_category_path(id: post.category.id)
         %td= link_to post.author.nickname, user_path(id: post.author.id)
         %td.time= post.time_ago
-        %td.time= post.created
+        - unless defined?(@q)
+          %td.time= post.created
         %td.tags
           = render "posts/post_tags", post: post
         %td{ id: "current-state-" + post.id.to_s }= t('posts.states.' + post.aasm_state.to_s)
-        - if User.current_user.admin?
+        - if admin?
           %td#state
             %div{ id: "state-dropdown-" + post.id.to_s }
               = render "posts/state_dropdown", post: post

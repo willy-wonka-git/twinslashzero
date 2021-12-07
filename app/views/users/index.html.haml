@@ -18,7 +18,7 @@
       %th{:scope => "nickname"}= sort_link(@q, :nickname, t("users.nickname"))
       %th{:scope => "fullname"}= sort_link(@q, :fullname, t("users.fullname"))
       %th{:scope => "email"}= sort_link(@q, :email, t("users.email"))
-      - if User.current_user.admin?
+      - if admin?
         %th{:scope => "role"}= sort_link(@q, :role, t("users.role"))
       %th{:scope => "description"}= t("users.description")
       %th= t("users.posts_count")
@@ -31,11 +31,11 @@
         %td= link_to user.nickname, user_path(user)
         %td= user.fullname
         %td= user.email
-        - if User.current_user.admin?
+        - if admin?
           %td= user.role
         %td= user.description
         %td
-          %span.badge.bg-secondary= user.posts(only_published = true).count
+          %span.badge.bg-secondary= Post.published.by_author(user).count
         %td
           - if can? :destroy, user
             = link_to user_path(user), method: :delete, data: { confirm: t("are_you_sure") } do

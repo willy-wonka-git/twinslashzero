@@ -1,8 +1,10 @@
 @import "bootstrap/functions";
+$success: #95e9c1;
 @import "bootstrap/variables";
-
 @import "bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
+
+
 @font-face {
   font-family: "bootstrap-icons";
   src: font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"),

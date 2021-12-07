@@ -56,6 +56,7 @@ ru:
     info:  Информация
   errors:
     messages:
+      unauthorized_access: Неавторизованный доступ!
       content_type_invalid: "имеет неверный тип контента"
       file_size_out_of_range: "размер %{file_size} за пределами допустимого"
       limit_out_of_range: "количество превышено"

@@ -56,6 +56,7 @@ en:
     info: Information
   errors:
     messages:
+      unauthorized_access: Unauthorized Access!
       content_type_invalid: "has an invalid content type"
       file_size_out_of_range: "size %{file_size} is not between required range"
       limit_out_of_range: "total number is out of range"

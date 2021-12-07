@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+
   load_and_authorize_resource
-  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token
 
   def index
     @q = User.ransack(params[:q])
@@ -9,7 +11,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
+    @posts = if admin? || current_user == @user
+               Post.by_author(@user).page(params[:page])
+             else
+               Post.published.by_author(@user).page(params[:page])
+             end
   end
 
   def destroy

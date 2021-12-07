@@ -25,5 +25,6 @@ module Twinslashzero
     config.embed_authenticity_token_in_remote_forms = true
     config.serve_static_assets = true
     config.i18n.available_locales = [:en, :ru]
+    config.active_storage.replace_on_assign_to_many = false
   end
 end

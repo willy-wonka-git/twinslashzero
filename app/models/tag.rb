@@ -6,6 +6,7 @@ class Tag < ApplicationRecord
 
   def self.create_new_tags(tag_ids)
     return unless tag_ids
+
     tag_ids.each_with_index do |tag_id, index|
       next unless tag_id.include?("#(new)")
 

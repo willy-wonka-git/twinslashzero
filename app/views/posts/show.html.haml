@@ -42,6 +42,6 @@
     #actions-panel
       = render "posts/post_actions", post: @post
 
-  - if @post.author == User.current_user || User.current_user.admin?
+  - if @post.author == current_user || admin?
     #history-panel
       = render "posts/post_history", post_history: @post_history

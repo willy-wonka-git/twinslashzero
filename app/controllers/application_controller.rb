@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     Tag.create_new_tags(params[:post][:tag_ids]) if defined? params[:post][:tag_ids]
   end
 
+  def authenticate_active_admin_user!
+    authenticate_user!
+    redirect_to root_path, notice: I18n.t("errors.messages.unauthorized_access") unless current_user.admin?
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -35,6 +40,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    User.current_user = current_user || User.new({ role: :guest })
+    Current.user = current_user
   end
 end

@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include PostHelper
+
   load_and_authorize_resource
 
   before_action :set_post,
@@ -7,10 +9,6 @@ class PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     posts = @q.result(distinct: true).includes(:tags)
-    if params[:tag]
-      @title = params[:tag]
-      posts = Tag.tagged_with(params[:tag])
-    end
     @posts = posts.published.order(:published_at).page(params[:page])
   end
 
@@ -26,7 +24,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.author = current_user
+    @post.author = Current.user
   end
 
   def edit; end
@@ -34,7 +32,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.state_reason = "create"
-    set_post_defaults
+    post_defaults(@post)
 
     respond_to do |format|
       if @post.save
@@ -69,69 +67,43 @@ class PostsController < ApplicationController
   end
 
   def run
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def draft
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def reject
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def ban
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def approve
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def publish
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def archive
-    render change_post_state(__method__)
+    render change_post_state(@post, __method__)
   end
 
   def action
-    if !params["type"]\
-       || params["posts"].empty?\
-       || %w[ban approve reject delete].exclude?(params["type"])\
-       || (%w[ban reject].include?(params["type"]) && !params["reason"])
-      render json: { message: "Wrong parameters", statusText: "error", status: :unprocessable_entity }
-    end
+    return unless group_action_valid?
 
-    params["posts"].each do |post_id|
-      @post = Post.find(post_id)
-      @post.send(params["type"])
-      @post.state_reason = params["reason"]
-      @post.save
-    end
-
-    message = I18n.t("posts.messages.post_was_successfully_updated") unless params["type"] == "delete"
-    message = I18n.t("posts.messages.post_was_successfully_destroyed") if params["type"] == "delete"
-
+    group_action
     @q = Post.ransack(params[:q])
-    posts = @q.result(distinct: true)
-    @posts = posts.not_moderated.page(params[:page])
-
-    render json: {
-      message: message,
-      statusText: "success",
-      adverts_html: (render_to_string partial: '/posts/list', locals: { posts: @posts, moderate: true }, layout: false)
-    }
+    @posts = @q.result(distinct: true).not_moderated.page(params[:page])
+    render group_action_success(params["type"], @posts)
   end
 
   private
-
-  def set_post_defaults
-    @post.author = current_user
-    @post.category = PostCategory.find(@post.category_id) if @post.category_id
-    @post.published_at = Time.zone.now
-  end
 
   def set_post
     @post = Post.find(params[:id])
@@ -140,31 +112,5 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] }, { photos: [] }, :photos)
-  end
-
-  def change_post_state(state_action)
-    @post.send(state_action)
-    @post.state_reason = params["reason"]
-    save_post
-  end
-
-  def save_post
-    @post.published_at = @post.aasm_state == :published.to_s ? Time.zone.now : nil
-    @post.save
-    return {
-      json: {
-        id: @post.id.to_s,
-        current_state: I18n.t("posts.states.#{@post.aasm.current_state}"),
-        message: I18n.t("posts.messages.post_was_successfully_updated"),
-        state_panel:    (render_to_string partial: '/posts/state',
-                                          locals: { post: @post }, layout: false),
-        state_dropdown: (render_to_string partial: '/posts/state_dropdown',
-                                          locals: { post: @post }, layout: false),
-        history_panel:  (render_to_string partial: '/posts/post_history',
-                                          locals: { post_history: @post.post_history }, layout: false),
-        actions_panel:  (render_to_string partial: '/posts/post_actions',
-                                          locals: { post: @post }, layout: false)
-      }
-    }
   end
 end

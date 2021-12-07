@@ -22,43 +22,11 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:twitter, :vkontakte]
 
   def self.from_vkontakte_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email || "#{auth.extra.raw_info.screen_name}@vk.com"
-      user.password = Devise.friendly_token[0, 20]
-      user.fullname = auth.info.name
-      user.nickname = auth.extra.raw_info.screen_name
-      file = URI.parse(auth.info.image).open
-      user.avatar.attach(io: file, filename: "vk#{auth.uid}.jpg")
-    end
+    get_user(auth, nickname: auth.extra.raw_info.screen_name)
   end
 
   def self.from_twitter_omniauth(auth)
-    Rails.logger.debug auth
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email || "#{auth.extra.raw_info.screen_name}@twitter.com"
-      user.password = Devise.friendly_token[0, 20]
-      user.fullname = auth.info.name
-      user.nickname = auth.info.nickname
-      file = URI.parse(auth.info.image).open
-      user.avatar.attach(io: file, filename: "twitter#{auth.uid}.jpg")
-    end
-  end
-
-  class << self
-    def current_user=(user)
-      Thread.current[:current_user] = user
-    end
-
-    def current_user
-      Thread.current[:current_user]
-    end
-  end
-
-  def posts(only_published = false)
-    if !only_published && (User.current_user.admin? || User.current_user == self)
-      return Post.where(author: self).order(created_at: :desc)
-    end
-    Post.published.where(author: self)
+    get_user(auth, nickname: auth.info.nickname)
   end
 
   def avatar_key
@@ -67,5 +35,24 @@ class User < ApplicationRecord
 
   def admin?
     role == :admin
+  end
+
+  def self.set_user(auth, user)
+    user.email = auth.info.email || "#{auth.extra.raw_info.screen_name}@#{auth.provider}.com"
+    user.password = Devise.friendly_token[0, 20]
+    user.fullname = auth.info.name
+  end
+
+  def self.set_user_avater(auth, user)
+    file = URI.parse(auth.info.image).open
+    user.avatar.attach(io: file, filename: "#{auth.provider}#{auth.uid}.jpg")
+  end
+
+  def self.get_user(auth, params)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      User.set_user(auth, user)
+      User.set_user_avater(auth, user)
+      user.nickname = params[:nickname]
+    end
   end
 end

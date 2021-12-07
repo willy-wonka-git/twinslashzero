@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
+  # devise_for :admin_users, {class_name: 'User'}.merge(ActiveAdmin::Devise.config)
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     resources :users
-    # get '/user/:id' => 'users#show', as: 'user'
-    # get '/users' => 'users#index'
-    # delete '/user/:id' => 'users#destroy'
     resources :post_categories, path: 'categories'
     get 'adv/moderate', to: 'posts#moderate', as: 'moderate'
     post 'adv/action', to: 'posts#action'
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
       post 'publish', to: 'posts#publish', as: 'publish'
     end
     get 'tags/search', to: 'tags#search'
-    get 'tags/:tag', to: 'posts#index', as: :tag
+    get 'tags/:tag', to: 'tags#index', as: :tag
     root 'welcome#index'
   end
 end

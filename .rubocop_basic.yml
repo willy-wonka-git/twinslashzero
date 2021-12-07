@@ -71,17 +71,11 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/application_record.rb'
-    - 'config/application.rb'
+  Enabled: false
 
 # Offense count: 45
 # Cop supports --auto-correct.
@@ -190,19 +184,14 @@ Metrics/MethodLength:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
     - 'test/**/*'    
-    - 'app/controllers/posts_controller.rb'
 
 Metrics/AbcSize:
   Exclude:
     - 'db/migrate/**/*'
     - 'app/models/ability.rb'
-    - 'app/controllers/posts_controller.rb'
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-    - 'app/models/user.rb'
 
 Metrics/ClassLength:
   Exclude:
-    - 'app/controllers/posts_controller.rb'
     - 'app/models/post.rb'
 
 Rails/FilePath:
@@ -211,16 +200,9 @@ Rails/FilePath:
 RSpec/MultipleExpectations:
   Enabled: false
 
-Rails/LexicallyScopedActionFilter:
-  Exclude:
-    - 'app/controllers/users_controller.rb'
-
 RSpec/ExampleLength:
   Exclude:
     - 'spec/**/*'    
-
-Style/Documentation:
-  Enabled: false
 
 Lint/Void:
   Exclude:
@@ -229,11 +211,3 @@ Lint/Void:
 Lint/EmptyBlock:
   Exclude:
     - 'app/admin/**/*'
-
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'app/controllers/posts_controller.rb'
-
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/controllers/posts_controller.rb'
