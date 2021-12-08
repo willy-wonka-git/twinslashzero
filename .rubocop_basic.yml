@@ -211,3 +211,7 @@ Lint/Void:
 Lint/EmptyBlock:
   Exclude:
     - 'app/admin/**/*'
+
+Style/MixinUsage:
+  Exclude:
+    - 'app/admin/admin_users.rb'
