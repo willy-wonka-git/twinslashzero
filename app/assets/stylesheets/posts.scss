@@ -15,6 +15,7 @@
 .photos, #current-photos, #new-photos {
   .img-thumbnail {
     width: 200px;
+    height: fit-content;
     margin-right: 10px;
   }
 }

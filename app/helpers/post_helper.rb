@@ -4,20 +4,20 @@ module PostHelper
     post.category = PostCategory.find(post.category_id) if post.category_id
   end
 
-  def group_action_valid?
-    valid = !(action_type_valid?(params["type"]) && params["posts"].empty?)
+  def group_action_valid?(params)
+    valid = !(action_type_valid?(params, params["type"]) && params["posts"].empty?)
     render json: { message: "Wrong parameters", statusText: "error", status: :unprocessable_entity } unless valid
     valid
   end
 
-  def action_valid?(type, post)
+  def action_valid?(params, post, type)
     can_invalid = !can?(params["type"], post)
-    !(action_type_valid?(type) && can_invalid)
+    !(action_type_valid?(params, type) && can_invalid)
   end
 
   private
 
-  def action_type_valid?(type)
+  def action_type_valid?(params, type)
     reason_invalid = (%w[ban reject].include?(type) && !params["reason"])
     type && !(%w[ban approve reject delete].exclude?(type) || reason_invalid)
   end
@@ -41,8 +41,8 @@ module PostHelper
     } }
   end
 
-  def change_post_state(post, state_action)
-    unless action_valid?(state_action, post)
+  def change_post_state(params, post, state_action)
+    unless action_valid?(params, post, state_action)
       return render json: { message: "Wrong parameters", statusText: "error", status: :unprocessable_entity }
     end
 
@@ -51,7 +51,7 @@ module PostHelper
     save_render_post_after_action(post)
   end
 
-  def group_action
+  def group_action(params)
     params["posts"].each do |post_id|
       post = Post.find(post_id)
       post.state_reason = params["reason"]
@@ -67,5 +67,9 @@ module PostHelper
       adverts_html: (render_to_string partial: '/posts/list', locals: { posts: posts, moderate: true },
                                       layout: false)
     } }
+  end
+
+  def remove_photos?(params)
+    params[:post] && params[:post][:remove_photos] == "1"
   end
 end

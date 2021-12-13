@@ -25,9 +25,12 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.author = Current.user
+    @post.cache_photos(init: true)
   end
 
-  def edit; end
+  def edit
+    @post.cache_photos(params: params, init: true)
+  end
 
   def create
     @post = Post.new(post_params)
@@ -46,15 +49,14 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post.photos.purge if remove_photos?(params)
     respond_to do |format|
-      @post.published_at = Time.zone.now
       if @post.update(post_params)
         format.html { redirect_to @post, notice: t("posts.messages.post_was_successfully_updated") }
-        format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+      @post.cache_photos(params: params)
     end
   end
 
@@ -67,37 +69,37 @@ class PostsController < ApplicationController
   end
 
   def run
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def draft
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def reject
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def ban
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def approve
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def publish
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def archive
-    render change_post_state(@post, __method__)
+    render change_post_state(params, @post, __method__)
   end
 
   def action
-    return unless group_action_valid?
+    return unless group_action_valid?(params)
 
-    group_action
+    group_action(params)
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true).not_moderated.page(params[:page])
     render group_action_success(params["type"], @posts)
@@ -111,6 +113,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] }, { photos: [] }, :photos)
+    params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] },
+                                 { photos: [] }, { photos_cache: [] }, :remove_photos)
   end
 end

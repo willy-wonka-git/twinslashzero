@@ -8,6 +8,7 @@
 //= require popper
 //= require bootstrap
 //= require select2
+//= require activestorage
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

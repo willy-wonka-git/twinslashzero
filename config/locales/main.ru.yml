@@ -102,6 +102,10 @@ ru:
     content: Содержание
     can_delete_or_edit_only_yours_adverts: Вы можете редактировать или удалять только свои объявления!
     action: Действие
+    photos_added: Изображений добавлено
+    remove_photos:
+      one: Удалить изображение
+      other: Удалить %{count} изображений(-ия)
     categories:
       show: Категории  
       new: Новая категория

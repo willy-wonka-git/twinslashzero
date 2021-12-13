@@ -2,6 +2,9 @@ class Post < ApplicationRecord
   include ApplicationHelper
   include ActionView::Helpers::DateHelper
   include AASM
+  include PostPhotosCacheHelper
+
+  attr_accessor :remove_photos, :photos_cache
 
   belongs_to :author, class_name: "User"
   belongs_to :category, class_name: "PostCategory"
@@ -120,10 +123,18 @@ class Post < ApplicationRecord
     self.published_at = aasm_state == :published.to_s ? Time.zone.now : nil
   end
 
+  def cache_photos(params: nil, init: false)
+    init_photo_cache(self, params, init)
+    return unless params
+
+    save_photo_cache(self, params) unless valid?
+    attach_photo_cache(self) if valid?
+  end
+
   # cron tasks
 
   def self.publish_approved
-    where(aasm_state: "approved").each do |post|
+    where(aasm_state: "approved").find_each do |post|
       post.publish
       post.published_at = Time.zone.now
       post.save

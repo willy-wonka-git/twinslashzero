@@ -41,5 +41,6 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     Current.user = current_user
+    Current.photos_cache = Rails.root.join("public", "uploads", current_user.id.to_s).to_s if current_user
   end
 end
