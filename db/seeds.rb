@@ -19,7 +19,7 @@ puts 'Created "admin" (email: admin@gmail.com, password: 111111)'
 # Login
 Current.user = User.find_by(nickname: :admin)
 
-puts "Create categories..."
+puts "Creating categories..."
 12.times do
   PostCategory.create(
     title: Faker::Hobby.activity,
@@ -35,7 +35,7 @@ puts "Create tags..."
 end
 puts "Done."
 
-puts "Create users..."
+puts "Creating users..."
 80.times do
   User.create(
     nickname: Faker::Internet.user_name,
@@ -48,7 +48,7 @@ puts "Create users..."
 end
 puts "Done."
 
-puts "Create posts"
+puts "Creating posts..."
 users = User.order('RANDOM()').where(role: :user).take(50)
 rand(1...10).times do
   users.each do |user|
@@ -73,7 +73,7 @@ rand(1...10).times do
 
     # TODO Add images
 
-    # TODO Add post history
+    # TODO Generate post history
 
     # post_history = PostHistory.create({ post: post, user: user, state: post.aasm.current_state })
     # post_history.reason = @state_reason if defined? @state_reason
