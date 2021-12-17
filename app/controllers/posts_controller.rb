@@ -34,18 +34,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.state_reason = "create"
     post_defaults(@post)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: t("posts.messages.post_was_successfully_created") }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    create_post(@post)
   end
 
   def update
@@ -115,5 +106,18 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:category_id, :title, :content, :tag_list, { tag_ids: [] },
                                  { photos: [] }, { photos_cache: [] }, :remove_photos)
+  end
+
+  def create_post(post)
+    respond_to do |format|
+      if post.save
+        format.html { redirect_to post, notice: t("posts.messages.post_was_successfully_created") }
+        format.json { render :show, status: :created, location: post }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: post.errors, status: :unprocessable_entity }
+      end
+      post.cache_photos(params: params)
+    end
   end
 end

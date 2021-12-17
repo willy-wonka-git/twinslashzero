@@ -87,7 +87,6 @@ gem 'cancancan', '~> 3.3'
 
 gem 'aasm', '~> 5.2'
 
-gem 'carrierwave', '~> 2.0'
 gem 'cloudinary', '~> 1.21'
 gem 'mini_magick', '~> 4.11'
 gem 'active_storage_validations', '~> 0.9.6'

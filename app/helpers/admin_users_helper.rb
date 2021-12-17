@@ -18,4 +18,12 @@ module AdminUsersHelper
     user.save
     user
   end
+
+  def delete_admin_user
+    admin_user = AdminUser.find_by(id: params[:id])
+    return false if !admin_user || admin_user.email == current_user.email || admin_user.email == "admin@gmail.com"
+
+    user = User.find_by(email: admin_user.email)
+    user.destroy if admin_user.destroy && user
+  end
 end

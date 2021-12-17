@@ -1,48 +1,41 @@
 # Clear database
 Tagging.all.delete_all
 Tag.all.delete_all
+PostHistory.all.delete_all
 Post.all.delete_all
 PostCategory.all.delete_all
 User.all.delete_all
 AdminUser.all.delete_all
 
-# Create user admin for ActiveAdmin
 AdminUser.create!(email: 'admin@gmail.com', password: '111111', password_confirmation: '111111')
-
-# Create user admin
 User.create(
-  nickname: "admin",
-  role: "admin",
-  email: "admin@gmail.com",
-  password: "111111"
+    nickname: "admin",
+    role: "admin",
+    email: "admin@gmail.com",
+    password: "111111"
 )
 puts 'Created "admin" (email: admin@gmail.com, password: 111111)'
 
-# Create user
-User.create(
-  nickname: "user100",
-  fullname: Faker::Name.name,
-  role: "user",
-  email: "user@gmail.com",
-  password: "111111"
-)
-puts 'Created "user" (email: user@gmail.com, password: 111111)'
+# Login
+Current.user = User.find_by(nickname: :admin)
 
-# Create categories
+puts "Create categories..."
 12.times do
   PostCategory.create(
     title: Faker::Hobby.activity,
     description: Faker::Lorem.paragraph
   )
 end
+puts "Done."
 
-# Create tags
+puts "Create tags..."
 20.times do
   Tag.create(name: Faker::Superhero.power)
   Tag.create(name: Faker::Food.fruits)
 end
+puts "Done."
 
-# Create users
+puts "Create users..."
 80.times do
   User.create(
     nickname: Faker::Internet.user_name,
@@ -53,11 +46,13 @@ end
     description: Faker::Lorem.paragraph
   )
 end
+puts "Done."
 
-# Create posts
-users = User.order('RANDOM()').take(50)
+puts "Create posts"
+users = User.order('RANDOM()').where(role: :user).take(50)
 rand(1...10).times do
   users.each do |user|
+    Current.user = user
     state = %w[draft new approved banned published archived].sample
     post = Post.create!(
       author: user,
@@ -67,17 +62,22 @@ rand(1...10).times do
       aasm_state: state,
       published_at: state == "published" ? rand(1...90).hours.ago : nil
     )
+
     # Add tags
-    rand(1..4).times do
+    rand(1..5).times do
       Tagging.create!(
         tag: Tag.order('RANDOM()').first,
         post: post
       )
     end
 
-    # Make history of state
+    # TODO Add images
+
+    # TODO Add post history
+
     # post_history = PostHistory.create({ post: post, user: user, state: post.aasm.current_state })
     # post_history.reason = @state_reason if defined? @state_reason
     # post_history.save
   end
 end
+puts "Done."

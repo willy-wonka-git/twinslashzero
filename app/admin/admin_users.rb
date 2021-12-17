@@ -34,9 +34,14 @@ ActiveAdmin.register AdminUser do
     redirect_to admin_admin_user_path(id: admin_user.id) if create_user
   end
 
+  destroy = proc do
+    redirect_to admin_admin_users_path if delete_admin_user
+  end
+
   member_action :create, method: :post, &create_or_edit
   member_action :update, method: :put, &create_or_edit
-  # member_action :delete, method: :delete, &destroy
-  # # TODO or change AdminUser to User
+  member_action :destroy, method: :delete, &destroy
+
+  # TODO: or change AdminUser to User
   # http://dan.doezema.com/2012/02/how-to-implement-a-single-user-model-with-rails-activeadmin-and-devise/
 end

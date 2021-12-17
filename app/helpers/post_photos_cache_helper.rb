@@ -43,7 +43,7 @@ module PostPhotosCacheHelper
   end
 
   def add_photo_cache(post, filename)
-    post.photos_cache << "/#{['uploads', Current.user.id.to_s, filename].join('/')}"
+    post.photos_cache << "/#{['uploads', Current.user.id.to_s, 'photos', filename].join('/')}"
   end
 
   def remove_photos?(params)

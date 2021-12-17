@@ -143,6 +143,7 @@ Metrics/BlockLength:
     - 'Guardfile'
     - 'config/**/*'    
     - 'spec/**/*'
+    - 'app/admin/admin_users.rb'
 
 Style/PercentLiteralDelimiters:
   Exclude:

@@ -1,5 +1,6 @@
 module PostHelper
   def post_defaults(post)
+    post.state_reason = "create" unless post.id
     post.author = current_user
     post.category = PostCategory.find(post.category_id) if post.category_id
   end

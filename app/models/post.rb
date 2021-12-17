@@ -136,7 +136,6 @@ class Post < ApplicationRecord
   def self.publish_approved
     where(aasm_state: "approved").find_each do |post|
       post.publish
-      post.published_at = Time.zone.now
       post.save
     end
   end
