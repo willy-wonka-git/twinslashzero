@@ -15,3 +15,10 @@ task publish_approved: :environment do
   Post.publish_approved
   puts "Done."
 end
+
+desc "Delete posts image cache every 15 minutes"
+task delete_post_cache: :environment do
+  puts "Updating feed: delete posts cache..."
+  ImageCache.delete_old_cache
+  puts "Done."
+end
