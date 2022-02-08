@@ -1,56 +1,90 @@
 module PostPhotosCacheHelper
-  def init_photo_cache(post, params, init)
-    dir = Current.photos_cache
-    FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+  include Rails.application.routes.url_helpers
 
-    if init || remove_photos?(params)
-      delete_files(dir)
-      return
+  def cache_init(post, init)
+    if init
+      clear_cache(post, post.author)
+      post.photos.each do |photo|
+        create_photo_cache(post, photo.key)
+      end
     end
+    post.photos_cache = ImageCache.where(post: post, user: post.author).all
+  end
 
-    cache_files = Dir["#{dir}/*"]
-    post.photos_cache = []
-    cache_files.each do |file|
-      add_photo_cache(post, File.basename(file))
+  def cache_add(post, params)
+    images = []
+    errors = []
+    params.each do |k, v|
+      next unless k[0, 5] == 'photo' || images.size == 10
+
+      key = save_file(v, errors)
+      next unless key
+
+      create_photo_cache(post, key)
+      images << key
+    end
+    { images: images, errors: errors }
+  end
+
+  def save_file(file, errors)
+    return unless file_valid(file, errors)
+
+    filename = new_cache_filename(File.extname(file.original_filename))
+    FileUtils.copy(file.tempfile.path, File.join(Current.photos_cache, filename))
+    "/#{['uploads', Current.user.id.to_s, 'photos', filename].join('/')}"
+  end
+
+  def cache_delete(post, user, key = null)
+    filter = { post: post, user: user }
+    filter[:key] = key if key
+    ImageCache.where(filter).destroy_all
+    :success
+  end
+
+  def cache_save(post, new_post)
+    remove_deleted_attachments(post) unless new_post
+    create_new_attachments(post, new_post)
+    clear_cache(new_post ? nil : post, post.author)
+  end
+
+  def clear_cache(post, user)
+    ImageCache.where(post: post, user: user).destroy_all
+  end
+
+  def remove_deleted_attachments(post)
+    post.photos.each do |photo|
+      photo.purge unless ImageCache.find_by(post: post, user: post.author, key: photo.key)
     end
   end
 
-  def attach_photo_cache(post)
-    return unless post.photos_cache
+  def create_new_attachments(post, new_post)
+    ImageCache.where(post: new_post ? nil : post, user: post.author).each do |cache|
+      next if cache.attachment?
 
-    dir = Current.photos_cache
-    post.photos_cache.each do |photo|
-      post.photos.attach(io: File.open(File.join(dir, File.basename(photo))), filename: File.basename(photo))
-    end
-    delete_files(dir)
-  end
-
-  def save_photo_cache(post, params)
-    photos = params[:post][:photos]
-    return unless photos
-
-    dir = Current.photos_cache
-    photos.each.with_index do |photo, i|
-      filename = new_cache_filename(post.photos_cache.count, i + 1, File.extname(photo.original_filename))
-      FileUtils.copy(photo.tempfile.path, File.join(dir, filename))
-      add_photo_cache(post, filename)
+      filename = File.basename(cache.key)
+      post.photos.attach(io: File.open(File.join(Current.photos_cache, filename)), filename: filename)
     end
   end
 
-  def new_cache_filename(start_index, index, extention)
-    prefix = start_index + index
-    prefix.to_s + rand(36**8).to_s(36) + extention
+  def file_valid(file, errors)
+    err_count = errors.size
+    size = File.size(file.tempfile.path)
+    type = file.content_type
+
+    errors << "#{file.original_filename} invalid type." if %w[image/jpeg image/jpg image/png image/gif].exclude?(type)
+    errors << "#{file.original_filename} invalid size." if size.zero? || size > 2**20
+    errors.size == err_count
   end
 
-  def add_photo_cache(post, filename)
-    post.photos_cache << "/#{['uploads', Current.user.id.to_s, 'photos', filename].join('/')}"
+  def new_cache_filename(extention)
+    "cache_#{rand(36**8).to_s(36)}#{extention}"
   end
 
-  def remove_photos?(params)
-    params[:post] && params[:post][:remove_photos] == "1"
-  end
-
-  def delete_files(dir)
-    FileUtils.rm_rf(Dir["#{dir}/*"]) if dir && Dir.exist?(dir)
+  def create_photo_cache(post, key)
+    image_cache = ImageCache.create
+    image_cache.post = post
+    image_cache.user = post.author
+    image_cache.key = key
+    image_cache.save
   end
 end

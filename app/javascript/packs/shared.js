@@ -12,7 +12,7 @@ function showMessage(text, state = 'success', ms = 2000) {
 
   let message = $('#message');
   message.addClass('alert-' + state)
-  message.text(text)
+  message.html(text)
   message.fadeIn(fadeInterval)
 
   setTimeout(() => {

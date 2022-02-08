@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   include AASM
   include PostPhotosCacheHelper
 
-  attr_accessor :remove_photos, :photos_cache
+  attr_accessor :photos_cache
 
   belongs_to :author, class_name: "User"
   belongs_to :category, class_name: "PostCategory"
@@ -123,12 +123,24 @@ class Post < ApplicationRecord
     self.published_at = aasm_state == :published.to_s ? Time.zone.now : nil
   end
 
-  def cache_photos(params: nil, init: false)
-    init_photo_cache(self, params, init)
-    return unless params
+  def cache_photos
+    cache_init(self, true)
+  end
 
-    save_photo_cache(self, params) unless valid?
-    attach_photo_cache(self) if valid?
+  def save_photos(new_post: false)
+    cache_save(self, new_post) if valid?
+    cache_init(self, false) unless valid?
+  end
+
+  def photo_handler(params: nil)
+    result = cache_add(self, params) if params[:operation] == "add_files"
+    result = cache_delete(self, author, params[:image_key]) if %w[delete delete_all].include?(params[:operation])
+    { json: {
+      message: "OK",
+      statusText: "success",
+      operation: params[:operation],
+      result: result
+    } }
   end
 
   # cron tasks

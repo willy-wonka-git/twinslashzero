@@ -106,6 +106,10 @@ en:
     remove_photos:
       one: Remove photo
       other: Remove %{count} photos
+    photos:
+      add: Add images...
+      remove_all: Remove all
+      upload_info: Drag photos here to attach them
     categories:
       show: Categories
       new: New category

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :post_categories, path: 'categories'
     get 'adv/moderate', to: 'posts#moderate', as: 'moderate'
     post 'adv/action', to: 'posts#action'
+    post 'adv/new/image/:operation', to: 'posts#new_post_image', as: 'new_post_image'
     resources :posts, path: 'adv'
     scope '/adv/:id', as: 'post' do
       post 'run', to: 'posts#run', as: 'run'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
       post 'approve', to: 'posts#approve', as: 'approve'
       post 'archive', to: 'posts#archive', as: 'archive'
       post 'publish', to: 'posts#publish', as: 'publish'
+      post 'image/:operation', to: 'posts#image', as: 'image'
     end
     get 'tags/search', to: 'tags#search'
     get 'tags/:tag', to: 'tags#index', as: :tag

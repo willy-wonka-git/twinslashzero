@@ -1,4 +1,7 @@
 -# frozen_string_literal: true
+
+#message.alert{ role: "alert" }
+
 = simple_form_for(@post, url: url) do |f|
   = render "common/form_errors", f: f
   .form-inputs.row.gy-2
@@ -6,23 +9,22 @@
     = f.input :title
     = f.input :content, label: t("content")
     = f.input :tag_ids, label: t("tag_ids"), as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
-    .d-flex
-      #current-photos
-        - if @post.photos.attached?
-          - @post.photos.each do |photo|
-            - if photo.id
-              %a{ href: cl_image_path(photo.key), target: "_blank" }
-                = cl_image_tag(photo.key, width: 200, height: 200, class: "img-thumbnail")
-        - if @post.photos_cache
-          - @post.photos_cache.each do |photo|
-            = image_tag(photo, width: 200, height: 200, class: "img-thumbnail")
-    - if @post.photos.any?
-      %br
-      .form-group
-        %div.form-check
-          = f.input :remove_photos, as: :boolean, label: t("posts.remove_photos", count: @post.photos.count)
-    #new-photos.d-flex
-    = f.input :photos, label: t("photos"), direct_upload: true, input_html: { multiple: true, class: "form-control"}
+    .form-group
+      #photos
+        .text-info
+          = t("posts.photos.upload_info")
+        .overlay
+          .spinner.spinner-border{ class: "text-light align-middle", role: "status" }
+        - @post.photos_cache.each do |photo|
+          .photo{ "data-key": photo.key }
+            - image_url = photo.attachment? ? cl_image_path(photo.key) : photo.key
+            .img-thumbnail{dataKey: photo.key, style: "background-image: url(#{image_url})"}
+              %button{ type: "button", class: "btn btn-light btn-close", ariaLabel: "Close" }
+
+    .form-group
+      %button{ id: "remove_photos", type: "button", class: "btn btn-danger" }
+        = t("posts.photos.remove_all")
+    = f.input :photos, label: t("posts.photos.add"), direct_upload: true, input_html: { multiple: true, class: "form-control" }
 
 
   .form-actions.mt-3

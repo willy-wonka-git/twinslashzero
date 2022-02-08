@@ -45,5 +45,6 @@ class ApplicationController < ActionController::Base
 
     Current.photos_cache = File.join(Rails.root.join("public", "uploads", current_user.id.to_s),
                                      "photos")
+    FileUtils.mkdir_p(Current.photos_cache) unless Dir.exist?(Current.photos_cache)
   end
 end
